@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -12,49 +13,52 @@
         android:padding="15dp">
 
         <LinearLayout
-            android:id="@+id/from_station"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorConcepLight">
+            android:layout_height="40dp"
+            android:background="@color/colorConcepLight"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/icons8_marker_filled_50" />
+                android:src="@drawable/icons8_marker_filled_50"
+                />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/edtFromStation"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:fontFamily="@string/font_name"
-                android:text="Da Nang"
+                android:hint="From Station"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:layout_marginTop="10dp"
-            android:background="@color/colorConcepLight">
+            android:background="@color/colorConcepLight"
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icons8_marker_filled_50" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <EditText
+                android:id="@+id/edtToStation"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:fontFamily="@string/font_name"
-                android:text="Da Nang"
+                android:hint="To Station"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
@@ -67,12 +71,12 @@
             <LinearLayout
             android:id="@+id/llDate"
             android:layout_width="180dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             android:background="@color/colorConcepLight"
             android:clickable="true"   >
             <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icons8_planner_filled_50"
@@ -84,7 +88,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
-                android:fontFamily="@string/font_name"
                 android:text="Date"
                 android:textColor="@android:color/white"
                 android:textSize="20sp"
@@ -92,6 +95,7 @@
 
         </LinearLayout>
             <TextView
+                android:id="@+id/txtSingle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Single"
@@ -109,6 +113,7 @@
                 android:layout_gravity="center_vertical"
                 />
             <TextView
+                android:id="@+id/txtReturn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Return"
@@ -119,9 +124,10 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btnShowShow_Train"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/colorConcepLight"
+            android:layout_height="70dp"
+            android:background="@color/colorButton"
             android:layout_marginTop="20dp"
             android:text="SHOW TRAINS"
             android:textColor="@android:color/white"

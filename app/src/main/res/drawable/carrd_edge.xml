@@ -10,22 +10,22 @@
 
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->
     <stroke
-        android:width="3dp"
-        android:color="#ffffff" >
+        android:width="4dp"
+        android:color="@color/colorButton" >
     </stroke>
 
-    <!-- các thuộc tính căn chỉnh-->
-    <!--<padding-->
-        <!--android:left="10dp"-->
-        <!--android:top="10dp"-->
-        <!--android:right="10dp"-->
-        <!--android:bottom="10dp" >-->
-    <!--</padding>-->
+     <!--các thuộc tính căn chỉnh-->
+    <padding
+    android:left="15dp"
+    android:top="15dp"
+    android:right="15dp"
+    android:bottom="15dp" >
+    </padding>
 
 
     <!-- và đây là bán kính đường tròn ở 4 góc -->
     <corners
-        android:radius="10dp" >
+        android:radius="20dp" >
     </corners>
 
 </shape>

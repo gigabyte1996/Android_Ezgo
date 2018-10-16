@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:minHeight="?actionBarSize"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@android:color/white"
+        app:tabIndicatorColor="@color/colorDarkerGray"
         app:tabIndicatorHeight="4dp"
         app:tabBackground="@color/colorConcept"
         app:tabMode="fixed">

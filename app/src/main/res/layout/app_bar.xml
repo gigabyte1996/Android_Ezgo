@@ -10,4 +10,5 @@
     app:layout_scrollFlags="scroll|enterAlways"
     android:layout_centerHorizontal="true"
     app:theme="@style/MyToolbarTheme"
-    app:title="FIND TRAINS"/>
+    app:title="FIND TRAINS"
+    app:titleTextColor="@android:color/white"/>

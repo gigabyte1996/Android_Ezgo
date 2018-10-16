@@ -12,13 +12,16 @@
         >
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".view.activity.main.MainScreenActivity">
+
+        </activity>
+        <activity android:name=".view.activity.booking.FindTrainsActivity"></activity>
+        <activity android:name=".fragment.seat.ShowTrainFragment.SeatFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.booking.FindTrainsActivity"></activity>
     </application>
 
 </manifest>

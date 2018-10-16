@@ -4,8 +4,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorConcept">#FFF94949</color>
+    <color name="colorConcept">#dc5601</color>
     <color name="colorBackground">#f0eef4</color>
-    <color name="colorConcepLight">#f77b7b</color>
-
+    <color name="colorConcepLight">#ef9257</color>
+    <color name="colorButton">#f57a2b</color>
+    <color name="colorButtonBlue">#448fc2</color>
 </resources>
