@@ -7,4 +7,12 @@ public class Constants {
         public static final String EMPTY ="#FFFFFF";
         public static final String TRADING = "#CFBC05";
     }
+    public class SeatStatus{
+        public static final int PICKING = 0;
+        public static final int RESERVED = 2;
+        public static final int EMPTY = 3;
+        public static final int TRADING = 4;
+
+
+    }
 }

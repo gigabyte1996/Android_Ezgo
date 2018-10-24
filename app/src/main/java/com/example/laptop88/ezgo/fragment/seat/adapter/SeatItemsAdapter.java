@@ -46,11 +46,11 @@ public class SeatItemsAdapter extends BaseAdapter {
         final Seat seat =(Seat) this.getItem(i);
 
         TextView seatNumber = view.findViewById(R.id.seat_number);
-        
+
         seatNumber.setText(seat.getSeatNumber());
         seatNumber.setBackgroundColor(Color.parseColor(setColor(seat.getSeatStatus())));
         seatNumber.setClickable(setClickable(seat.getSeatStatus()));
-        
+
         return view;
     }
 

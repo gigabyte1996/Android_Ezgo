@@ -1,13 +1,22 @@
 package com.example.laptop88.ezgo.response;
 
 public class Seat {
+    private String seatID;
     private int seatNumber;
     private int seatStatus;
-    private boolean isClick;
 
-    public Seat(int seatNumber, int seatStatus) {
+    public Seat(String seatID ,int seatNumber, int seatStatus) {
+        this.seatID = seatID;
         this.seatNumber = seatNumber;
         this.seatStatus = seatStatus;
+    }
+
+    public String getSeatID() {
+        return seatID;
+    }
+
+    public void setSeatID(String seatID) {
+        this.seatID = seatID;
     }
 
     public int getSeatNumber() {

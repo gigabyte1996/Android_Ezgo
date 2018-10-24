@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.laptop88.ezgo">
 
     <application
@@ -9,13 +10,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        >
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".view.activity.main.MainScreenActivity">
 
         </activity>
         <activity android:name=".view.activity.booking.FindTrainsActivity"></activity>
-        <activity android:name=".fragment.seat.ShowTrainFragment.SeatFragment">
+        <activity android:name=".fragment.Steamer.ShowSteamerDiagram.SteamerFragment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
