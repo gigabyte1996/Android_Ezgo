@@ -1,6 +1,8 @@
 package com.example.laptop88.ezgo.response;
 
-public class Seat {
+import java.io.Serializable;
+
+public class Seat implements Serializable {
     private String seatID;
     private int seatNumber;
     private int seatStatus;

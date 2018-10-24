@@ -70,14 +70,14 @@ public class SteamerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 seatLeft += 1;
             }
         }
-        ((MyViewHolder) viewHolder).steamerNumber.setText(steamerList.get(position).getSteamerNumber());
+//        ((MyViewHolder) viewHolder).steamerNumber.setText(steamerList.get(position).getSteamerNumber());
 
-        if (seatLeft == 0){
-            ((MyViewHolder)viewHolder).cardView.setClickable(false);
-            ((MyViewHolder)viewHolder).cardView.setCardBackgroundColor(Color.RED);
-        } else {
-            ((MyViewHolder) viewHolder).cardView.setClickable(true);
-        }
+//        if (seatLeft == 0){
+//            ((MyViewHolder)viewHolder).cardView.setClickable(false);
+//            ((MyViewHolder)viewHolder).cardView.setCardBackgroundColor(Color.RED);
+//        } else {
+//            ((MyViewHolder) viewHolder).cardView.setClickable(true);
+//        }
         ((MyViewHolder) viewHolder).itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

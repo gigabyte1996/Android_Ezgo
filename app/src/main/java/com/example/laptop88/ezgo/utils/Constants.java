@@ -9,9 +9,9 @@ public class Constants {
     }
     public class SeatStatus{
         public static final int PICKING = 0;
-        public static final int RESERVED = 2;
-        public static final int EMPTY = 3;
-        public static final int TRADING = 4;
+        public static final int RESERVED = 1;
+        public static final int EMPTY = 2;
+        public static final int TRADING = 3;
 
 
     }

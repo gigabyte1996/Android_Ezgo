@@ -2,9 +2,10 @@ package com.example.laptop88.ezgo.response;
 
 import com.example.laptop88.ezgo.fragment.seat.ShowTrainFragment.SeatModel;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Steamer {
+public class Steamer implements Serializable {
     private String id;
     private int steamerNumber;
     private boolean inAvailable;
@@ -15,10 +16,10 @@ public class Steamer {
     }
 
 
-    public Steamer(String id, int steamerNumber, boolean inAvailable, List<Seat> seatList) {
+    public Steamer(String id, int steamerNumber, List<Seat> seatList) {
         this.id = id;
         this.steamerNumber = steamerNumber;
-        this.inAvailable = inAvailable;
+//        this.inAvailable = inAvailable;
         this.seatList = seatList;
     }
 
