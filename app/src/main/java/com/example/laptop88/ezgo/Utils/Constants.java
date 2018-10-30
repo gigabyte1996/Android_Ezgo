@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.utils;
+package com.example.laptop88.ezgo.Utils;
 
 public class Constants {
     public class SeatStatusColor{

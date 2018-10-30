@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.Seat;
-import com.example.laptop88.ezgo.utils.Constants;
+import com.example.laptop88.ezgo.Utils.Constants;
 
 import java.util.List;
 

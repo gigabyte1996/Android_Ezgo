@@ -1,33 +1,20 @@
 package com.example.laptop88.ezgo.fragment.Steamer.Adapter;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridLayout;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.fragment.Steamer.ShowSteamerDiagram.onSteamerClickListener;
-import com.example.laptop88.ezgo.fragment.seat.ShowTrainFragment.SeatFragment;
-import com.example.laptop88.ezgo.fragment.seat.adapter.SeatItemsAdapter;
-import com.example.laptop88.ezgo.response.Seat;
 import com.example.laptop88.ezgo.response.Steamer;
-import com.example.laptop88.ezgo.utils.Constants;
-import com.example.laptop88.ezgo.view.activity.booking.FindTrainsActivity;
+import com.example.laptop88.ezgo.Utils.Constants;
 
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.OnClick;
 
 public class SteamerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 

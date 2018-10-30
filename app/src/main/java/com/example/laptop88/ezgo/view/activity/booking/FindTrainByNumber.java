@@ -13,6 +13,4 @@ public class FindTrainByNumber extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.find_train_by_number, container, false);
     }
-
-
 }
