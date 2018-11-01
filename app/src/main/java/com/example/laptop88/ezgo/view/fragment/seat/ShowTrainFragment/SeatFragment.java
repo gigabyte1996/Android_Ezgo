@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.fragment.seat.ShowTrainFragment;
+package com.example.laptop88.ezgo.view.fragment.seat.ShowTrainFragment;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;

@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.fragment.Steamer.ShowSteamerDiagram;
+package com.example.laptop88.ezgo.view.fragment.Steamer.ShowSteamerDiagram;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +12,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
-import com.example.laptop88.ezgo.fragment.Steamer.Adapter.SteamerAdapter;
-import com.example.laptop88.ezgo.fragment.seat.adapter.SeatAdapter;
+import com.example.laptop88.ezgo.view.fragment.Steamer.Adapter.SteamerAdapter;
+import com.example.laptop88.ezgo.view.fragment.seat.adapter.SeatAdapter;
 import com.example.laptop88.ezgo.response.Seat;
 import com.example.laptop88.ezgo.response.Steamer;
 import com.example.laptop88.ezgo.Utils.Constants;

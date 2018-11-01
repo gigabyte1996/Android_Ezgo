@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.fragment.seat.adapter;
+package com.example.laptop88.ezgo.view.fragment.seat.adapter;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
-import com.example.laptop88.ezgo.fragment.Steamer.ShowSteamerDiagram.onSeatClickListener;
+import com.example.laptop88.ezgo.view.fragment.Steamer.ShowSteamerDiagram.onSeatClickListener;
 import com.example.laptop88.ezgo.response.Seat;
 import com.example.laptop88.ezgo.Utils.Constants;
 

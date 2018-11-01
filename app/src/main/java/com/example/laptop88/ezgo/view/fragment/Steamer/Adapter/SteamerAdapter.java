@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.fragment.Steamer.Adapter;
+package com.example.laptop88.ezgo.view.fragment.Steamer.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
-import com.example.laptop88.ezgo.fragment.Steamer.ShowSteamerDiagram.onSteamerClickListener;
+import com.example.laptop88.ezgo.view.fragment.Steamer.ShowSteamerDiagram.onSteamerClickListener;
 import com.example.laptop88.ezgo.response.Steamer;
 import com.example.laptop88.ezgo.Utils.Constants;
 
@@ -22,7 +22,7 @@ public class SteamerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private List<Steamer> steamerList;
     private onSteamerClickListener onSteamerClickListener;
 
-    public SteamerAdapter(Context context, List<Steamer> steamerList, com.example.laptop88.ezgo.fragment.Steamer.ShowSteamerDiagram.onSteamerClickListener onSteamerClickListener) {
+    public SteamerAdapter(Context context, List<Steamer> steamerList, com.example.laptop88.ezgo.view.fragment.Steamer.ShowSteamerDiagram.onSteamerClickListener onSteamerClickListener) {
         this.context = context;
         this.steamerList = steamerList;
     }

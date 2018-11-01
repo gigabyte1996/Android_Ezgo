@@ -4,8 +4,12 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +33,7 @@ import butterknife.OnTextChanged;
 import butterknife.Unbinder;
 
 
-public class FindTrainByStationgi extends Fragment {
+public class FindTrainByStationFragement extends Fragment {
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
     public static final String BUNDLE = "bundel";
@@ -39,7 +43,7 @@ public class FindTrainByStationgi extends Fragment {
     private TextView txtDate;
     private LinearLayout llDate;
 
-    public FindTrainByStationActivity() {
+    public FindTrainByStationFragement() {
     }
 
 //    @Override
@@ -47,7 +51,12 @@ public class FindTrainByStationgi extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-//    @BindView((R.id.edtFromStation))
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    //    @BindView((R.id.edtFromStation))
 //    EditText edtFromStation;
 //
 //    @BindView(R.id.edtToStation)
@@ -195,5 +204,33 @@ public class FindTrainByStationgi extends Fragment {
 //        System.out.println("button click");
 //        startActivity(intent);
 //    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        EditText editTextNumberOfTicket = this.getActivity().findViewById(R.id.edtNumberOfTicket);
+        editTextNumberOfTicket.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (getActivity() instanceof FindTrainsActivity) {
+                    ((FindTrainsActivity)getActivity()).synchronizeTabData(s.toString());
+                }
+//
+//                if (getActivity() instanceof ListStationActivity) {
+//                    ((ListStationActivity)getActivity()).UpdateListView(s.toString());
+//                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
+    }
 }
 

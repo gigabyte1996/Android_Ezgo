@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import com.example.laptop88.ezgo.R;
-import com.example.laptop88.ezgo.view.activity.booking.FindTrainByStationActivity;
+import com.example.laptop88.ezgo.view.activity.booking.FindTrainByStationFragement;
 
 /**
  * Created by Welcome on 8/28/2016.
@@ -18,13 +18,13 @@ public class ShowListTrainActivity extends AppCompatActivity {
                 setContentView(R.layout.list_trains);
                 Intent intent = getIntent();
                 if (intent != null) {
-                        Bundle bundle = intent.getBundleExtra(FindTrainByStationActivity.BUNDLE);
+                        Bundle bundle = intent.getBundleExtra(FindTrainByStationFragement.BUNDLE);
                         if (bundle != null) {
-                                System.out.println("Vy HO Title: " +bundle.getString(FindTrainByStationActivity.TITLE));
-                                System.out.println("Vy HO description: " +bundle.getString(FindTrainByStationActivity.DESCRIPTION));
+                                System.out.println("Vy HO Title: " +bundle.getString(FindTrainByStationFragement.TITLE));
+                                System.out.println("Vy HO description: " +bundle.getString(FindTrainByStationFragement.DESCRIPTION));
                         } else {
-                                System.out.println("CON QUY VY Title" + intent.getStringExtra(FindTrainByStationActivity.TITLE));
-                                System.out.println("CON QUY VY DESCRIPTION" + intent.getStringExtra(FindTrainByStationActivity.DESCRIPTION));
+                                System.out.println("CON QUY VY Title" + intent.getStringExtra(FindTrainByStationFragement.TITLE));
+                                System.out.println("CON QUY VY DESCRIPTION" + intent.getStringExtra(FindTrainByStationFragement.DESCRIPTION));
                         }
                 }
         }

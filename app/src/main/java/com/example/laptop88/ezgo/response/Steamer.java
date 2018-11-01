@@ -1,6 +1,6 @@
 package com.example.laptop88.ezgo.response;
 
-import com.example.laptop88.ezgo.fragment.seat.ShowTrainFragment.SeatModel;
+import com.example.laptop88.ezgo.view.fragment.seat.ShowTrainFragment.SeatModel;
 
 import java.io.Serializable;
 import java.util.List;

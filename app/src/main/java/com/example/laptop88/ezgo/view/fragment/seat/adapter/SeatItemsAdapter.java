@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.fragment.seat.adapter;
+package com.example.laptop88.ezgo.view.fragment.seat.adapter;
 
 import android.content.Context;
 import android.graphics.Color;

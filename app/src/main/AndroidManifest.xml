@@ -20,7 +20,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.booking.FindTrainsActivity"></activity>
-        <activity android:name=".fragment.Steamer.ShowSteamerDiagram.SteamerFragment">
+        <activity android:name=".view.fragment.Steamer.ShowSteamerDiagram.SteamerFragment">
 
         </activity>
         <activity android:name=".view.activity.ShowListTrain.ShowListTrainActivity">
