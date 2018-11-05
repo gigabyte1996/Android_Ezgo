@@ -45,7 +45,25 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Show trains with pantry car only"
+            android:text="Show trains with pantry car"
+            android:textSize="15sp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            />
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icons8_unchecked_checkbox_50"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Show trains with air condition"
             android:textSize="15sp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
@@ -94,10 +112,5 @@
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"/>
         </RelativeLayout>
-
-
-
     </GridLayout>
-
-
 </LinearLayout>

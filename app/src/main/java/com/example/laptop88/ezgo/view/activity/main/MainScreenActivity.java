@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.view.activity.booking.FindTrainsActivity;

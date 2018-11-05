@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation.FindTrainByStationFragement;
 
 public class FindTrainsActivity extends AppCompatActivity {
     private TabAdapter tabAdapter;

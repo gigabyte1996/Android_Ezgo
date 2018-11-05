@@ -13,7 +13,7 @@ public class FindTrainByNumber extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         this.getActivity().setTitle("Find train - By Station");
-        return inflater.inflate(R.layout.find_train_by_number, container, false);
+        return inflater.inflate(R.layout.fragment_find_train_by_number, container, false);
     }
 
     public void setTicketNumber(String ticketNumber) {
