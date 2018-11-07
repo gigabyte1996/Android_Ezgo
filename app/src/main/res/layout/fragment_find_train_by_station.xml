@@ -139,7 +139,36 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:clickable="false"
-                android:text="Date"
+                android:text="Departure date"
+                android:textColor="@android:color/white"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/llReturnDate"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/colorConcepLight"
+            android:clickable="true"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:clickable="false"
+                android:src="@drawable/icons8_planner_filled_50" />
+
+            <TextView
+                android:id="@+id/txtReturnDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:clickable="false"
+                android:text="Return date"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
@@ -158,6 +187,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerListTrainSchedule"
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
 

@@ -2,6 +2,7 @@ package com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -39,9 +40,9 @@ import butterknife.OnTextChanged;
 
 
 public class FindTrainByStationFragement extends Fragment implements FindTrainByStationFragmentView{
-    public static final String TITLE = "title";
-    public static final String DESCRIPTION = "description";
-    public static final String BUNDLE = "bundel";
+//    public static final String TITLE = "title";
+//    public static final String DESCRIPTION = "description";
+//    public static final String BUNDLE = "bundel";
 
 //    private EditText edtNumberOfSeat;
 ////    private LinearLayout llDate;
@@ -87,6 +88,9 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     @BindView(R.id.txtReturn)
     TextView txtReturn;
 
+    @BindView((R.id.llReturnDate))
+    LinearLayout llReturnDate;
+
 //    @BindView(R.id.numberOfSeat)
 //    EditText edtNumberOfSeat;
 
@@ -108,8 +112,8 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
         return view;
     }
 //    public  void senndDataByBundle(){
-        //Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
-
+//        Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
+//
 //        Intent intent = new Intent(ActivityA.this,ActivityB.class);
 //        Bundle bundle = new Bundle();
 //        bundle.putString(TITLE,edtTitle.getText().toString());
@@ -117,6 +121,7 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //        intent.putExtra(BUNDLE,bundle);
 //        startActivity(intent);
 //    }
+
 
     @OnClick(R.id.btnShow_Train)
     public void onClick()
@@ -152,6 +157,22 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
                 break;
         }
 
+    }
+
+    @OnClick({R.id.txtSingle, R.id.txtReturn})
+    public void getTypeOfSchedule(View view){
+        switch (view.getId()){
+            case R.id.txtSingle:{
+                txtSingle.setTextColor(Color.WHITE);
+                txtReturn.setTextColor((getResources().getColor(R.color.colorConcepLight)));
+                llReturnDate.setVisibility(View.GONE);
+            }
+            case R.id.txtReturn:{
+                txtReturn.setTextColor(Color.WHITE);
+                txtSingle.setTextColor((getResources().getColor(R.color.colorConcepLight)));
+                llReturnDate.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @OnTextChanged({R.id.edtFromStation, R.id.edtToStation})

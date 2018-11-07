@@ -12,5 +12,11 @@
         <item name="colorControlNormal">@android:color/white</item>
         <item name="titleTextColor">@android:color/white</item>
     </style>
+    <!-- Using custom theme for Navigation Drawer -->
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!-- Using custom theme for Navigation Drawer -->
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 
 </resources>

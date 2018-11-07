@@ -62,7 +62,7 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
 
         Bundle bundle = new Bundle();
         TrainSchedule trainSchedule = new TrainSchedule(trainScheduleID, trainName, jouneyName, departureTime, arrivalTime, firstStation, lastStation, trainID);
-        bundle.putSerializable("trainSchedule", trainSchedule);
+        //bundle.putSerializable("trainSchedule", trainSchedule);
 //        holder.line.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
