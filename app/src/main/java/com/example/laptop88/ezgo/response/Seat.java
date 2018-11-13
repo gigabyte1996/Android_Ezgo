@@ -1,23 +1,40 @@
 package com.example.laptop88.ezgo.response;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Seat implements Serializable {
-    private String seatID;
+    @SerializedName("seatID")
+    @Expose
+    private int seatID;
+
+    @SerializedName("seatNumber")
+    @Expose
     private int seatNumber;
+
+    @SerializedName("seatType")
+    @Expose
+    private int seatType;
+
+    @SerializedName("seatStatus")
+    @Expose
     private int seatStatus;
 
-    public Seat(String seatID ,int seatNumber, int seatStatus) {
+
+    public Seat(int seatID, int seatNumber, int seatType, int seatStatus) {
         this.seatID = seatID;
         this.seatNumber = seatNumber;
+        this.seatType = seatType;
         this.seatStatus = seatStatus;
     }
 
-    public String getSeatID() {
+    public int getSeatID() {
         return seatID;
     }
 
-    public void setSeatID(String seatID) {
+    public void setSeatID(int seatID) {
         this.seatID = seatID;
     }
 
@@ -27,6 +44,14 @@ public class Seat implements Serializable {
 
     public void setSeatNumber(int seatNumber) {
         this.seatNumber = seatNumber;
+    }
+
+    public int getSeatType() {
+        return seatType;
+    }
+
+    public void setSeatType(int seatType) {
+        this.seatType = seatType;
     }
 
     public int getSeatStatus() {

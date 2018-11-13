@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.view.activity.booking;
+package com.example.laptop88.ezgo.view.activity.booking1;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

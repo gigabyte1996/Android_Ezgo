@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:padding="10dp"
     android:orientation="vertical"
-    android:background="@drawable/customborder"
+    android:background="@android:color/white"
+    android:layout_marginBottom="5dp"
     >
 
     <LinearLayout
@@ -101,12 +102,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:id="@+id/ticketDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ticket Detail"
             android:textColor="@color/colorConcept"
-            android:textSize="15sp"
-            />
+            android:textSize="15sp"/>
     </LinearLayout>
 
 

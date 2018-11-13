@@ -2,12 +2,15 @@ package com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation;
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -25,9 +28,12 @@ import android.widget.Toast;
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainSchedule;
-import com.example.laptop88.ezgo.view.activity.booking.FindTrainsActivity;
+import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
+import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
 import com.example.laptop88.ezgo.view.fragment.Train.adapter.RecyclerViewItemTrainScheduleAdapter;
+import com.example.laptop88.ezgo.view.fragment.Train.showTrainScheduleFragment.ShowTrainScheduleFragment;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,9 +46,9 @@ import butterknife.OnTextChanged;
 
 
 public class FindTrainByStationFragement extends Fragment implements FindTrainByStationFragmentView{
-//    public static final String TITLE = "title";
-//    public static final String DESCRIPTION = "description";
-//    public static final String BUNDLE = "bundel";
+    public static final String TITLE = "title";
+    public static final String DESCRIPTION = "description";
+    public static final String BUNDLE = "bundel";
 
 //    private EditText edtNumberOfSeat;
 ////    private LinearLayout llDate;
@@ -256,17 +262,51 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
             showToast("We couldn’t find any train");
         }else {
             trainSchedules.addAll(trainScheduleList);
+//            Intent intent = new  Intent(getActivity().getBaseContext(), BookingActivity.class);
+//            intent.putExtra("trainSchedule",(Serializable)trainSchedules);
+//            startActivity(intent);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("trainSchedule", (Serializable) trainSchedules);
+            ShowTrainScheduleFragment mFragment = new ShowTrainScheduleFragment();
+            mFragment.setArguments(bundle);
+            pushFragment(PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
+
         }
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        mRcvAdapter = new RecyclerViewItemTrainScheduleAdapter(getActivity(), fragmentManager, trainSchedules);
+//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//        mRcvAdapter = new RecyclerViewItemTrainScheduleAdapter(getActivity(), fragmentManager, trainSchedules);
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        layoutManager.setOrientation(LinearLayout.VERTICAL);
+//
+//        recyclerListTrainSchedule.setLayoutManager(layoutManager);
+//        recyclerListTrainSchedule.setAdapter(mRcvAdapter);
+//
+//        showToast("Success");
+//        Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
+//        intent.putParcelableArrayListExtra("train", trainSchedules)
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        layoutManager.setOrientation(LinearLayout.VERTICAL);
-
-        recyclerListTrainSchedule.setLayoutManager(layoutManager);
-        recyclerListTrainSchedule.setAdapter(mRcvAdapter);
-
-        showToast("Success");
+    }
+    public void pushFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
+        try {
+            FragmentManager manager = getActivity().getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            if (type == PushFrgType.REPLACE) {
+                ft.replace(mContainerId, fragment, tag);
+                ft.disallowAddToBackStack();
+                ft.commitAllowingStateLoss();
+            } else if (type == PushFrgType.ADD) {
+                ft.add(mContainerId, fragment, tag);
+                ft.disallowAddToBackStack();
+                ft.commit();
+            }
+            manager.executePendingTransactions();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+    }
+        public enum PushFrgType {
+        REPLACE, ADD
     }
 
     @Override

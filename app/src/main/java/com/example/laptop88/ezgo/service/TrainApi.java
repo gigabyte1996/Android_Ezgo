@@ -1,5 +1,6 @@
 package com.example.laptop88.ezgo.service;
 
+import com.example.laptop88.ezgo.response.TrainDetailResponse;
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainScheduleResponse;
 
@@ -11,5 +12,8 @@ public interface TrainApi {
 
     @POST("/api/train/search")
     Call<TrainScheduleResponse> searchTrain(@Body TrainRequest requestTrain);
+
+    @POST("/api/train/diagram")
+    Call<TrainDetailResponse> getTrainDiagrambyTrainId(@Body String trainID);
 
 }

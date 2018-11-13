@@ -22,13 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.booking.FindTrainsActivity"></activity>
-        <activity android:name=".view.fragment.Steamer.ShowSteamerDiagram.SteamerFragment">
+        <activity android:name=".view.activity.booking1.FindTrainsActivity"></activity>
+        <activity android:name=".view.fragment.Steamer.ShowListSteamersDiagram.SteamerFragment">
 
         </activity>
-        <activity android:name=".view.activity.ShowListTrain.ShowListTrainActivity">
-
-        </activity>
+        <activity android:name=".view.activity.ShowListTrain.ShowListTrainActivity"></activity>
+        <activity android:name=".view.activity.booking.BookingActivity"></activity>
     </application>
 
 </manifest>

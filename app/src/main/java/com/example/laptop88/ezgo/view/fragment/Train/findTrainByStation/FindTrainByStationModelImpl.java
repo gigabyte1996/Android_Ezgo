@@ -1,5 +1,7 @@
 package com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation;
 
+import android.content.Intent;
+
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainScheduleResponse;
 import com.example.laptop88.ezgo.service.ApplicationApi;
@@ -32,6 +34,7 @@ public class FindTrainByStationModelImpl implements FindTrainByStationModel {
                 switch (code) {
                     case 0:
                         mFindTrainByStationFragmentPresenter.searchTrainSuccess(trainScheduleResponse.getTrainSchedules());
+
                         break;
                     default:
                         mFindTrainByStationFragmentPresenter.searchTrainFalse();

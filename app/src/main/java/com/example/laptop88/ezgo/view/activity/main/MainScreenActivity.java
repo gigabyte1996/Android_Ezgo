@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.laptop88.ezgo.R;
-import com.example.laptop88.ezgo.view.activity.booking.FindTrainsActivity;
+import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.view.fragment.Steamer.ShowSteamerDiagram;
+package com.example.laptop88.ezgo.view.fragment.Steamer.ShowListSteamersDiagram;
 
 import com.example.laptop88.ezgo.response.Steamer;
 

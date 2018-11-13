@@ -1,9 +1,12 @@
 package com.example.laptop88.ezgo.view.fragment.Train.adapter;
 
+import android.support.annotation.IdRes;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +14,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.TrainSchedule;
+import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
+import com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment.ShowTrainDiagramFragment;
+
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,7 +48,7 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewItemTrainScheduleAdapter.RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull RecyclerViewItemTrainScheduleAdapter.RecyclerViewHolder holder, final int position) {
         final String trainScheduleID = data.get(position).getTrainScheduleID();
         final String trainName = data.get(position).getTrainName();
         final String jouneyName = data.get(position).getJouneyName();
@@ -50,6 +57,7 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
         final String firstStation = data.get(position).getFirstStation();
         final String lastStation = data.get(position).getLastStation();
         final String trainID = data.get(position).getTrainID();
+
 
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         final String departuteTimeSt = formatter.format(departureTime);
@@ -60,16 +68,23 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
         holder.txtDepatureTime.setText(departuteTimeSt);
         holder.txtArrivalTime.setText(arrivalTimeSt);
 
-        Bundle bundle = new Bundle();
-        TrainSchedule trainSchedule = new TrainSchedule(trainScheduleID, trainName, jouneyName, departureTime, arrivalTime, firstStation, lastStation, trainID);
-        //bundle.putSerializable("trainSchedule", trainSchedule);
-//        holder.line.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FindTrainByStationFragement mFragement = new FindTrainByStationFragement();
-//
-//            }
-//        });
+        holder.ticketDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, String.valueOf(data.get(position).getTrainID()), Toast.LENGTH_LONG).show();
+            }
+        });
+        holder.line.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
+                Bundle bundle = new Bundle();
+                //bundle.putSerializable("trainID", trainID);
+                bundle.putString("trainID", trainID);
+                mFragment.setArguments(bundle);
+                pushFragment(BookingActivity.PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
+            }
+        });
     }
 
     @Override
@@ -84,6 +99,7 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
         ImageView imgPantryCar;
         TextView txtDepatureTime;
         TextView txtArrivalTime;
+        TextView ticketDetail;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
@@ -93,7 +109,26 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
             imgPantryCar = itemView.findViewById(R.id.imgPantryCar);
             txtDepatureTime = itemView.findViewById(R.id.txtDepartureTime);
             txtArrivalTime = itemView.findViewById(R.id.txtArrivalTime);
+            ticketDetail = itemView.findViewById(R.id.ticketDetail);
 
+        }
+    }
+    public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
+        try {
+            FragmentTransaction ft = mFragmentManager.beginTransaction();
+            ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            if (type == BookingActivity.PushFrgType.REPLACE) {
+                ft.replace(mContainerId, fragment, tag);
+                ft.addToBackStack(fragment.getTag());
+                ft.commitAllowingStateLoss();
+            } else if (type == BookingActivity.PushFrgType.ADD) {
+                ft.add(mContainerId, fragment, tag);
+                ft.addToBackStack(fragment.getTag());
+                ft.commit();
+            }
+            mFragmentManager.executePendingTransactions();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.view.activity.booking;
+package com.example.laptop88.ezgo.view.activity.booking1;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

@@ -1,34 +1,50 @@
 package com.example.laptop88.ezgo.response;
 
-import com.example.laptop88.ezgo.view.fragment.seat.ShowTrainFragment.SeatModel;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.List;
 
 public class Steamer implements Serializable {
-    private String id;
+    @SerializedName("steamerID")
+    @Expose
+    private String steamerID;
+
+    @SerializedName("steamerNumber")
+    @Expose
     private int steamerNumber;
-    private boolean inAvailable;
+
+    @SerializedName("steamerType")
+    @Expose
+    private int  steamerType;
+
+    @SerializedName("airCondition")
+    @Expose
+    private boolean airCondition;
+
+    @SerializedName("seatList")
+    @Expose
     private List<Seat> seatList;
 
     public Steamer() {
 
     }
 
-
-    public Steamer(String id, int steamerNumber, List<Seat> seatList) {
-        this.id = id;
+    public Steamer(String steamerID, int steamerNumber, int steamerType, boolean airCondition, List<Seat> seatList) {
+        this.steamerID = steamerID;
         this.steamerNumber = steamerNumber;
-//        this.inAvailable = inAvailable;
+        this.steamerType = steamerType;
+        this.airCondition = airCondition;
         this.seatList = seatList;
     }
 
-    public String getId() {
-        return id;
+    public String getSteamerID() {
+        return steamerID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setSteamerID(String steamerID) {
+        this.steamerID = steamerID;
     }
 
     public int getSteamerNumber() {
@@ -39,12 +55,20 @@ public class Steamer implements Serializable {
         this.steamerNumber = steamerNumber;
     }
 
-    public boolean isInAvailable() {
-        return inAvailable;
+    public int getSteamerType() {
+        return steamerType;
     }
 
-    public void setInAvailable(boolean inAvailable) {
-        this.inAvailable = inAvailable;
+    public void setSteamerType(int steamerType) {
+        this.steamerType = steamerType;
+    }
+
+    public boolean isAirCondition() {
+        return airCondition;
+    }
+
+    public void setAirCondition(boolean airCondition) {
+        this.airCondition = airCondition;
     }
 
     public List<Seat> getSeatList() {
