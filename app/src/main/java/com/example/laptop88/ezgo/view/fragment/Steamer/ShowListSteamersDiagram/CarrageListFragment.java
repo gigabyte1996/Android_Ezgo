@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.Steamer;
-import com.example.laptop88.ezgo.view.fragment.Steamer.Adapter.RecyclerViewSteamerItemAdapter;
+import com.example.laptop88.ezgo.view.fragment.Train.adapter.RecyclerViewSteamerItemAdapter;
 
 import java.util.List;
 

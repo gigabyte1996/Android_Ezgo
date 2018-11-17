@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -74,15 +75,14 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
                 Toast.makeText(mContext, String.valueOf(data.get(position).getTrainID()), Toast.LENGTH_LONG).show();
             }
         });
-        holder.line.setOnClickListener(new View.OnClickListener() {
+        holder.btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
                 Bundle bundle = new Bundle();
-                //bundle.putSerializable("trainID", trainID);
-                bundle.putString("trainID", trainID);
+                bundle.putString("trainID", String.valueOf(data.get(position).getTrainID()));
                 mFragment.setArguments(bundle);
-                pushFragment(BookingActivity.PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
+                pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
             }
         });
     }
@@ -93,17 +93,17 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
     }
 
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        LinearLayout line;
         TextView txtTrainName;
         TextView txtJouneyName;
         ImageView imgPantryCar;
         TextView txtDepatureTime;
         TextView txtArrivalTime;
         TextView ticketDetail;
+        Button btnBooking;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-            line = itemView.findViewById(R.id.line);
+            btnBooking = itemView.findViewById(R.id.btnBoooking);
             txtTrainName = itemView.findViewById(R.id.txtTrainName);
             txtJouneyName = itemView.findViewById(R.id.txtjouneyName);
             imgPantryCar = itemView.findViewById(R.id.imgPantryCar);

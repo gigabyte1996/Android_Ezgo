@@ -23,17 +23,17 @@ public class TrainDetailResponse {
 
     @SerializedName("steamerList")
     @Expose
-    private List<Steamer> trainSchedules;
+    private List<Steamer> steamerList;
 
     public TrainDetailResponse() {
     }
 
-    public TrainDetailResponse(Message error, String trainID, String trainName, int trainType, List<Steamer> trainSchedules) {
+    public TrainDetailResponse(Message error, String trainID, String trainName, int trainType, List<Steamer> steamerList) {
         this.error = error;
         this.trainID = trainID;
         this.trainName = trainName;
         this.trainType = trainType;
-        this.trainSchedules = trainSchedules;
+        this.steamerList = steamerList;
     }
 
     public Message getError() {
@@ -68,11 +68,11 @@ public class TrainDetailResponse {
         this.trainType = trainType;
     }
 
-    public List<Steamer> getTrainSchedules() {
-        return trainSchedules;
+    public List<Steamer> getSteamerList() {
+        return steamerList;
     }
 
-    public void setTrainSchedules(List<Steamer> trainSchedules) {
-        this.trainSchedules = trainSchedules;
+    public void setSteamerList(List<Steamer> steamerList) {
+        this.steamerList = steamerList;
     }
 }

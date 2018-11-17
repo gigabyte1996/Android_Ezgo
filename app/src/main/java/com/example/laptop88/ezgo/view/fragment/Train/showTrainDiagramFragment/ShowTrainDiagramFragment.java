@@ -7,22 +7,29 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.response.Steamer;
 import com.example.laptop88.ezgo.response.Train;
 import com.example.laptop88.ezgo.response.TrainDetailResponse;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.fragment.Steamer.ShowListSteamersDiagram.CarrageListFragment;
+import com.example.laptop88.ezgo.view.fragment.Train.adapter.RecyclerViewSteamerItemAdapter;
 import com.example.laptop88.ezgo.view.fragment.Train.showTrainScheduleFragment.ShowTrainScheduleFragmentView;
 import com.example.laptop88.ezgo.view.fragment.seat.SeatDiagram.SeatDiagramFragment;
 
 import java.io.Serializable;
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShowTrainDiagramFragment extends Fragment implements ShowTrainDiagramFragmentView, OnClickCarrageListener {
@@ -30,17 +37,31 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainDiagr
     private ShowTrainDiagramPresenterImpl showTrainDiagramPresenterImpl;
     private ProgressDialog mProgressDialog;
     private TrainDetailResponse train;
+    private RecyclerViewSteamerItemAdapter mRcvAdapter;
 
     private SeatDiagramFragment mSeatDiagramFragment;
     private CarrageListFragment mCarrageListFragment;
+
+    @BindView(R.id.recyclerListCarrage)
+    RecyclerView recyclerListCarrage;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_train_diagram, container, false);
         ButterKnife.bind(this, view);
+        String trainID = getArguments().getString("trainID");
         showTrainDiagramPresenterImpl = new ShowTrainDiagramPresenterImpl(this);
-        showTrainDiagramPresenterImpl.getTrainDiagramByTrainID(train.getTrainID());
+        showTrainDiagramPresenterImpl.getTrainDiagramByTrainID(trainID);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        mRcvAdapter = new RecyclerViewSteamerItemAdapter(getActivity(), fragmentManager, train.getSteamerList());
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        layoutManager.setOrientation(LinearLayout.VERTICAL);
+        recyclerListCarrage.setLayoutManager(layoutManager);
+        recyclerListCarrage.setAdapter(mRcvAdapter);
+
+        showToast("Success");
         return view;
     }
 
@@ -77,18 +98,22 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainDiagr
     @Override
     public void showTrainDiagram(TrainDetailResponse trainDetailResponse) {
         train = new TrainDetailResponse();
-        if (train == null){
-            showToast("Can not fint the train diagram");
+        if (train == null) {
+            showToast("Can not find the train diagram");
+        } else {
+            train = trainDetailResponse;
+            Log.d("list", train.toString());
         }
-        else train = trainDetailResponse;
-//        Intent intent = new  Intent(getActivity().getBaseContext(), BookingActivity.class);
-//        intent.putExtra("trainDetail",(Serializable)train);
-//        startActivity(intent);
     }
+
 
     @Override
     public void handleCarrageSelected(String carrageId) {
         mSeatDiagramFragment.updateView(carrageId);
         mCarrageListFragment.updateView(carrageId);
     }
+
+interface handleCarrageListener {
+    void showListCarrage(List<Steamer> steamerList);
+}
 }

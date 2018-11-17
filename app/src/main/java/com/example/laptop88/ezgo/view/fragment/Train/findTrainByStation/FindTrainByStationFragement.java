@@ -262,14 +262,14 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
             showToast("We couldn’t find any train");
         }else {
             trainSchedules.addAll(trainScheduleList);
-//            Intent intent = new  Intent(getActivity().getBaseContext(), BookingActivity.class);
-//            intent.putExtra("trainSchedule",(Serializable)trainSchedules);
-//            startActivity(intent);
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("trainSchedule", (Serializable) trainSchedules);
-            ShowTrainScheduleFragment mFragment = new ShowTrainScheduleFragment();
-            mFragment.setArguments(bundle);
-            pushFragment(PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
+            Intent intent = new  Intent(getActivity().getBaseContext(), BookingActivity.class);
+            intent.putExtra("trainSchedule",(Serializable)trainSchedules);
+            startActivity(intent);
+//            Bundle bundle = new Bundle();
+//            bundle.putSerializable("trainSchedule", (Serializable) trainSchedules);
+//            ShowTrainScheduleFragment mFragment = new ShowTrainScheduleFragment();
+//            mFragment.setArguments(bundle);
+//            pushFragment(PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
 
         }
 //        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();

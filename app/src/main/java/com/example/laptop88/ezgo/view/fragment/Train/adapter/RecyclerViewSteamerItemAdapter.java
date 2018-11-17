@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.view.fragment.Steamer.Adapter;
+package com.example.laptop88.ezgo.view.fragment.Train.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -18,7 +18,6 @@ import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.Steamer;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.fragment.Steamer.ShowListSteamersDiagram.CarrageListFragment;
-import com.example.laptop88.ezgo.view.fragment.seat.SeatDiagram.SeatDiagramFragment;
 
 import java.util.ArrayList;
 import java.util.List;

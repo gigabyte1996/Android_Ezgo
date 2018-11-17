@@ -31,41 +31,41 @@ public class BookingActivity extends AppCompatActivity implements BookingActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_booking);
         ButterKnife.bind(this);
-//        Intent intent = getIntent();
-//        trainSchedules = new ArrayList<>();
-//        trainSchedules = (List<TrainSchedule>) intent.getSerializableExtra("trainSchedule");
-//        Log.d("success", trainSchedules.toString());
-//        Fragment mFragment = new ShowTrainScheduleFragment();
-//        pushFragment(PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container, trainSchedules);
+        Intent intent = getIntent();
+        trainSchedules = new ArrayList<>();
+        trainSchedules = (List<TrainSchedule>) intent.getSerializableExtra("trainSchedule");
+        Log.d("success", trainSchedules.toString());
+        Fragment mFragment = new ShowTrainScheduleFragment();
+        pushFragment(PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container, trainSchedules);
 
     }
-//
-//    public void pushFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId, List<TrainSchedule> trainSchedules) {
-//        try {
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("trainSchedule", (Serializable) trainSchedules);
-//            fragment.setArguments(bundle);
-//            FragmentManager manager = getSupportFragmentManager();
-//            FragmentTransaction ft = manager.beginTransaction();
-//            ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-//            if (type == PushFrgType.REPLACE) {
-//                ft.replace(mContainerId, fragment, tag);
-//                ft.disallowAddToBackStack();
-//                ft.commitAllowingStateLoss();
-//            } else if (type == PushFrgType.ADD) {
-//                ft.add(mContainerId, fragment, tag);
-//                ft.disallowAddToBackStack();
-//                ft.commit();
-//            }
-//            manager.executePendingTransactions();
-//        } catch (IllegalStateException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public enum PushFrgType {
-//        REPLACE, ADD
-//    }
+
+    public void pushFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId, List<TrainSchedule> trainSchedules) {
+        try {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("trainSchedule", (Serializable) trainSchedules);
+            fragment.setArguments(bundle);
+            FragmentManager manager = getSupportFragmentManager();
+            FragmentTransaction ft = manager.beginTransaction();
+            ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
+            if (type == PushFrgType.REPLACE) {
+                ft.replace(mContainerId, fragment, tag);
+                ft.disallowAddToBackStack();
+                ft.commitAllowingStateLoss();
+            } else if (type == PushFrgType.ADD) {
+                ft.add(mContainerId, fragment, tag);
+                ft.disallowAddToBackStack();
+                ft.commit();
+            }
+            manager.executePendingTransactions();
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public enum PushFrgType {
+        REPLACE, ADD
+    }
 
     public void updateSeatBookingView(String carrageId) {
         mShowTrainDiagramFragment.handleCarrageSelected(carrageId);

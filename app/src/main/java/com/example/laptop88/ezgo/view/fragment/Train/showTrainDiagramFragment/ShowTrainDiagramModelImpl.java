@@ -28,7 +28,10 @@ public class ShowTrainDiagramModelImpl implements ShowTrainDiagramModel {
             public void onResponse(Call<TrainDetailResponse> call, Response<TrainDetailResponse> response) {
 //                TrainScheduleResponse trainScheduleResponse = response.body();
                 TrainDetailResponse trainDetailResponse = response.body();
-                int code = Integer.parseInt(trainDetailResponse.getError().getCode());
+                int code = 0;
+                if (trainDetailResponse != null) {
+                    code = Integer.parseInt(trainDetailResponse.getError().getCode());
+                }
                 switch (code) {
                     case 0:
                         mShowTrainDiagramFragmentPresenter.getTrainDiagramByTrainIDSuccess(trainDetailResponse);
