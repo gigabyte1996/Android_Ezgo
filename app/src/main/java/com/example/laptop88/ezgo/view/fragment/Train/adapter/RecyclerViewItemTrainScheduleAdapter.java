@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,13 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
     private Context mContext;
     private FragmentManager mFragmentManager;
     private List<TrainSchedule> data = new ArrayList<>();
+    private GetTrainID getTrainID;
 
-    public RecyclerViewItemTrainScheduleAdapter(Context mContext, FragmentManager mFragmentManager, List<TrainSchedule> data) {
+    public RecyclerViewItemTrainScheduleAdapter(Context mContext, FragmentManager mFragmentManager, List<TrainSchedule> data, GetTrainID getTrainID) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.data = data;
+        this.getTrainID = getTrainID;
     }
 
     @NonNull
@@ -78,11 +81,16 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
         holder.btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("trainID", String.valueOf(data.get(position).getTrainID()));
-                mFragment.setArguments(bundle);
-                pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
+                getTrainID.onClickTrainScheduleListener(String.valueOf(data.get(position).getTrainID()));
+                Log.d("position", String.valueOf(position) + data.get(position).getTrainID() );
+
+
+//                ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
+//                Bundle bundle = new Bundle();
+//                bundle.putString("trainID", String.valueOf(data.get(position).getTrainID()));
+//                mFragment.setArguments(bundle);
+//                pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
+
             }
         });
     }
@@ -130,5 +138,8 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
+    }
+    public interface GetTrainID{
+        void onClickTrainScheduleListener(String trainID);
     }
 }

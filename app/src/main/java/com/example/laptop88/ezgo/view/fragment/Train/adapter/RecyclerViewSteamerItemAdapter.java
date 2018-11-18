@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -45,7 +46,7 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
     public void onBindViewHolder(@NonNull RecyclerViewSteamerItemAdapter.RecyclerViewHolder holder, int position) {
         final int steamerNumber = mSteamers.get(position).getSteamerNumber();
         final String carrageID = mSteamers.get(position).getSteamerID();
-        holder.txtSteamerNumber.setText(steamerNumber);
+        holder.txtSteamerNumber.setText(String.valueOf(steamerNumber));
         holder.item.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -67,6 +68,7 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView txtSteamerNumber;
         RelativeLayout item;
+        Button btnBooking;
         public RecyclerViewHolder(View itemView) {
             super(itemView);
             txtSteamerNumber =(TextView) itemView.findViewById(R.id.steamer_number);

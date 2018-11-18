@@ -32,11 +32,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ShowTrainDiagramFragment extends Fragment implements ShowTrainDiagramFragmentView, OnClickCarrageListener {
+public class ShowTrainDiagramFragment extends Fragment  {
 
-    private ShowTrainDiagramPresenterImpl showTrainDiagramPresenterImpl;
     private ProgressDialog mProgressDialog;
-    private TrainDetailResponse train;
+    private TrainDetailResponse trainDetailResponse;
     private RecyclerViewSteamerItemAdapter mRcvAdapter;
 
     private SeatDiagramFragment mSeatDiagramFragment;
@@ -50,18 +49,23 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainDiagr
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_train_diagram, container, false);
         ButterKnife.bind(this, view);
-        String trainID = getArguments().getString("trainID");
-        showTrainDiagramPresenterImpl = new ShowTrainDiagramPresenterImpl(this);
-        showTrainDiagramPresenterImpl.getTrainDiagramByTrainID(trainID);
+        Bundle bundle = this.getArguments();
+        trainDetailResponse = new TrainDetailResponse();
+        trainDetailResponse = (TrainDetailResponse) bundle.getSerializable("trainDetailResponse");
+//        Log.d("listCarrage", trainDetailResponse.getSteamerList().toString());
+//        showTrainDiagramPresenterImpl = new ShowTrainDiagramPresenterImpl(this);
+//        showTrainDiagramPresenterImpl.getTrainDiagramByTrainID(trainDetailResponse.getTrainID());
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        mRcvAdapter = new RecyclerViewSteamerItemAdapter(getActivity(), fragmentManager, train.getSteamerList());
+
+        mRcvAdapter = new RecyclerViewSteamerItemAdapter(getActivity(), fragmentManager, trainDetailResponse.getSteamerList());
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayout.VERTICAL);
         recyclerListCarrage.setLayoutManager(layoutManager);
         recyclerListCarrage.setAdapter(mRcvAdapter);
 
-        showToast("Success");
+//        showToast("Success");
         return view;
     }
 
@@ -78,40 +82,40 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainDiagr
         return mProgressDialog;
     }
 
-    @Override
-    public void showToast(String msg) {
-        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
-    }
+//    @Override
+//    public void showToast(String msg) {
+//        Toast.makeText(getActivity(), msg, Toast.LENGTH_LONG).show();
+//    }
+//
+//    @Override
+//    public void showProgressDialog() {
+//        ProgressDialog progressDialog = initProgressDialog();
+//        progressDialog.show();
+//    }
+//
+//    @Override
+//    public void closeProgressDialog() {
+//        if (mProgressDialog.isShowing())
+//            mProgressDialog.dismiss();
+//    }
 
-    @Override
-    public void showProgressDialog() {
-        ProgressDialog progressDialog = initProgressDialog();
-        progressDialog.show();
-    }
-
-    @Override
-    public void closeProgressDialog() {
-        if (mProgressDialog.isShowing())
-            mProgressDialog.dismiss();
-    }
-
-    @Override
-    public void showTrainDiagram(TrainDetailResponse trainDetailResponse) {
-        train = new TrainDetailResponse();
-        if (train == null) {
-            showToast("Can not find the train diagram");
-        } else {
-            train = trainDetailResponse;
-            Log.d("list", train.toString());
-        }
-    }
+//    @Override
+//    public void showTrainDiagram(TrainDetailResponse trainDetailResponse) {
+//        train = new TrainDetailResponse();
+//        if (train == null) {
+//            showToast("Can not find the train diagram");
+//        } else {
+//            train = trainDetailResponse;
+//            Log.d("list", train.toString());
+//        }
+//    }
 
 
-    @Override
-    public void handleCarrageSelected(String carrageId) {
-        mSeatDiagramFragment.updateView(carrageId);
-        mCarrageListFragment.updateView(carrageId);
-    }
+//    @Override
+//    public void handleCarrageSelected(String carrageId) {
+//        mSeatDiagramFragment.updateView(carrageId);
+//        mCarrageListFragment.updateView(carrageId);
+//    }
 
 interface handleCarrageListener {
     void showListCarrage(List<Steamer> steamerList);

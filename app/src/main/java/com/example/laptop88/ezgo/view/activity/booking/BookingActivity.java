@@ -67,9 +67,9 @@ public class BookingActivity extends AppCompatActivity implements BookingActivit
         REPLACE, ADD
     }
 
-    public void updateSeatBookingView(String carrageId) {
-        mShowTrainDiagramFragment.handleCarrageSelected(carrageId);
-    }
+//    public void updateSeatBookingView(String carrageId) {
+//        mShowTrainDiagramFragment.handleCarrageSelected(carrageId);
+//    }
 
 
 }

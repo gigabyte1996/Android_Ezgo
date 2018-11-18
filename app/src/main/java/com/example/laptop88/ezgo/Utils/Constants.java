@@ -1,7 +1,7 @@
 package com.example.laptop88.ezgo.Utils;
 
 public class Constants {
-    public static String BASE_URL = "http://192.168.11.104:8080";
+    public static String BASE_URL = "http://192.168.0.105:8080";
 
     public class SeatStatusColor{
         public static final String PICKING = "#35950C";
@@ -14,8 +14,6 @@ public class Constants {
         public static final int RESERVED = 1;
         public static final int EMPTY = 2;
         public static final int TRADING = 3;
-
-
     }
 
     public class HTTPCodeResponse {
