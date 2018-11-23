@@ -1,27 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <RelativeLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/train_diagram_container"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
+
+        <Spinner
+            android:id="@+id/spnDepatureOrReturn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerListCarrage"
-                android:layout_width="70dp"
-                android:layout_height="450dp">
-            </android.support.v7.widget.RecyclerView>
-            <FrameLayout
-                android:layout_width="280dp"
-                android:layout_height="450dp"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="10dp">
-            </FrameLayout>
-        </LinearLayout>
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-</android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rcvListCarrage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rcvSeatDiagram">
+
+                </android.support.v7.widget.RecyclerView>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
+

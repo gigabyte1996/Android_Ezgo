@@ -4,7 +4,6 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,13 +28,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<RecyclerViewItemTrainScheduleAdapter.RecyclerViewHolder> {
+public class ItemTrainScheduleAdapter extends RecyclerView.Adapter<ItemTrainScheduleAdapter.RecyclerViewHolder> {
     private Context mContext;
     private FragmentManager mFragmentManager;
     private List<TrainSchedule> data = new ArrayList<>();
     private GetTrainID getTrainID;
 
-    public RecyclerViewItemTrainScheduleAdapter(Context mContext, FragmentManager mFragmentManager, List<TrainSchedule> data, GetTrainID getTrainID) {
+
+    public ItemTrainScheduleAdapter(Context mContext, FragmentManager mFragmentManager, List<TrainSchedule> data, GetTrainID getTrainID) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.data = data;
@@ -52,7 +51,7 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewItemTrainScheduleAdapter.RecyclerViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ItemTrainScheduleAdapter.RecyclerViewHolder holder, final int position) {
         final String trainScheduleID = data.get(position).getTrainScheduleID();
         final String trainName = data.get(position).getTrainName();
         final String jouneyName = data.get(position).getJouneyName();
@@ -82,9 +81,7 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
             @Override
             public void onClick(View view) {
                 getTrainID.onClickTrainScheduleListener(String.valueOf(data.get(position).getTrainID()));
-                Log.d("position", String.valueOf(position) + data.get(position).getTrainID() );
-
-
+                Log.d("position", String.valueOf(position) + data.get(position).getTrainID());
 //                ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
 //                Bundle bundle = new Bundle();
 //                bundle.putString("trainID", String.valueOf(data.get(position).getTrainID()));
@@ -118,7 +115,6 @@ public class RecyclerViewItemTrainScheduleAdapter extends RecyclerView.Adapter<R
             txtDepatureTime = itemView.findViewById(R.id.txtDepartureTime);
             txtArrivalTime = itemView.findViewById(R.id.txtArrivalTime);
             ticketDetail = itemView.findViewById(R.id.ticketDetail);
-
         }
     }
     public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {

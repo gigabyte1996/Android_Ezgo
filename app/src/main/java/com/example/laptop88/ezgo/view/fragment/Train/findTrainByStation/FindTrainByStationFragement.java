@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,8 +29,7 @@ import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainSchedule;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
-import com.example.laptop88.ezgo.view.fragment.Train.adapter.RecyclerViewItemTrainScheduleAdapter;
-import com.example.laptop88.ezgo.view.fragment.Train.showTrainScheduleFragment.ShowTrainScheduleFragment;
+import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemTrainScheduleAdapter;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -101,10 +99,10 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //    EditText edtNumberOfSeat;
 
     @Nullable
-    @BindView(R.id.recyclerListTrainSchedule)
+    @BindView(R.id.rcvListTrainSchedule)
     RecyclerView recyclerListTrainSchedule;
 
-    RecyclerViewItemTrainScheduleAdapter mRcvAdapter;
+    ItemTrainScheduleAdapter mRcvAdapter;
     List<TrainSchedule> trainSchedules;
 
 
@@ -132,6 +130,10 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     @OnClick(R.id.btnShow_Train)
     public void onClick()
     {
+        if (edtFromStation==null||edtToStation==null||txtDate==null){
+            btnShowTrain.setClickable(false);
+            btnShowTrain.setBackgroundColor(getResources().getColor(R.color.colorConcepLight));
+        }
         TrainRequest trainRequest = new TrainRequest();
         trainRequest.setFromStation(edtFromStation.getText().toString());
         trainRequest.setToStation(edtToStation.getText().toString());
@@ -265,48 +267,9 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
             Intent intent = new  Intent(getActivity().getBaseContext(), BookingActivity.class);
             intent.putExtra("trainSchedule",(Serializable)trainSchedules);
             startActivity(intent);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("trainSchedule", (Serializable) trainSchedules);
-//            ShowTrainScheduleFragment mFragment = new ShowTrainScheduleFragment();
-//            mFragment.setArguments(bundle);
-//            pushFragment(PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
-
         }
-//        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-//        mRcvAdapter = new RecyclerViewItemTrainScheduleAdapter(getActivity(), fragmentManager, trainSchedules);
-//
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-//        layoutManager.setOrientation(LinearLayout.VERTICAL);
-//
-//        recyclerListTrainSchedule.setLayoutManager(layoutManager);
-//        recyclerListTrainSchedule.setAdapter(mRcvAdapter);
-//
-//        showToast("Success");
-//        Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
-//        intent.putParcelableArrayListExtra("train", trainSchedules)
 
-    }
-    public void pushFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
-        try {
-            FragmentManager manager = getActivity().getSupportFragmentManager();
-            FragmentTransaction ft = manager.beginTransaction();
-            ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-            if (type == PushFrgType.REPLACE) {
-                ft.replace(mContainerId, fragment, tag);
-                ft.disallowAddToBackStack();
-                ft.commitAllowingStateLoss();
-            } else if (type == PushFrgType.ADD) {
-                ft.add(mContainerId, fragment, tag);
-                ft.disallowAddToBackStack();
-                ft.commit();
-            }
-            manager.executePendingTransactions();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
-    }
-        public enum PushFrgType {
-        REPLACE, ADD
+
     }
 
     @Override

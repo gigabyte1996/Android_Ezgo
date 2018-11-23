@@ -2,20 +2,57 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_seat"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="15dp">
+    android:layout_height="wrap_content">
+
     <LinearLayout
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:gravity="center">
-        <TextView
-            android:id="@+id/seat_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1"
-            android:textColor="#000"
-            android:textSize="40sp"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/Seatwall"
+            android:visibility="gone"/>
+
+        <LinearLayout
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@color/SeatEmpty"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/bed"
+                android:layout_width="20dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/seat_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="#000"
+                android:textSize="10sp" />
+
+            <View
+                android:id="@+id/seat"
+                android:layout_width="20dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="5dp"
+                android:background="@android:color/white"
+                android:visibility="visible"
+
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@color/Seatwall"
+            android:visibility="gone"/>
+
     </LinearLayout>
 
 

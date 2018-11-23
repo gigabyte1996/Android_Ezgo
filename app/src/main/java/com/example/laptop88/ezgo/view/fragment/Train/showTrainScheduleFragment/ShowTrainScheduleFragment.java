@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -22,7 +21,7 @@ import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.TrainDetailResponse;
 import com.example.laptop88.ezgo.response.TrainSchedule;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
-import com.example.laptop88.ezgo.view.fragment.Train.adapter.RecyclerViewItemTrainScheduleAdapter;
+import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemTrainScheduleAdapter;
 import com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment.ShowTrainDiagramFragment;
 
 
@@ -31,22 +30,19 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-public class ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentView, RecyclerViewItemTrainScheduleAdapter.GetTrainID {
+public class ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentView, ItemTrainScheduleAdapter.GetTrainID {
     private ProgressDialog mProgressDialog;
     private ShowTrainScheduleFragmentPresenter mShowTrainScheduleFragmentPresenter;
     private ShowTrainScheduleFragmentPresenterImpl mShowTrainScheduleFragmentPresenterImpl;
     private FragmentManager mFragmentManager;
 
     @Nullable
-    @BindView(R.id.recyclerListTrainSchedule)
-    RecyclerView recyclerListTrainSchedule;
+    @BindView(R.id.rcvListTrainSchedule)
+    RecyclerView rcvListTrainSchedule;
 
-    @BindView(R.id.btnTest)
-    Button btnTest;
 
-    private RecyclerViewItemTrainScheduleAdapter mRcvAdapter;
+    private ItemTrainScheduleAdapter mRcvAdapter;
     private List<TrainSchedule> trainSchedules;
 
     public ShowTrainScheduleFragment() {
@@ -61,27 +57,18 @@ public class ShowTrainScheduleFragment extends Fragment implements ShowTrainSche
         trainSchedules = (List<TrainSchedule>) bundle.getSerializable("trainSchedule");
         Log.d("aaaaaaaaaaa", trainSchedules.toString());
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        mRcvAdapter = new RecyclerViewItemTrainScheduleAdapter(getActivity(), fragmentManager, trainSchedules, this);
+        mRcvAdapter = new ItemTrainScheduleAdapter(getActivity(), fragmentManager, trainSchedules, this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayout.VERTICAL);
 
-        recyclerListTrainSchedule.setLayoutManager(layoutManager);
-        recyclerListTrainSchedule.setAdapter(mRcvAdapter);
+        rcvListTrainSchedule.setLayoutManager(layoutManager);
+        rcvListTrainSchedule.setAdapter(mRcvAdapter);
 
         showToast("Success");
         return view;
     }
 
-    @OnClick({R.id.btnTest})
-    public  void  onClick(View view){
-        switch (view.getId()){
-            case R.id.btnTest:
-                mShowTrainScheduleFragmentPresenterImpl = new ShowTrainScheduleFragmentPresenterImpl(this);
-                mShowTrainScheduleFragmentPresenterImpl.getTrainDiagramByTrainID("T1");
-                break;
-        }
-    }
 
 
     @Override

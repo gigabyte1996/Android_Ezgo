@@ -16,22 +16,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.response.Seat;
 import com.example.laptop88.ezgo.response.Steamer;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.fragment.Steamer.ShowListSteamersDiagram.CarrageListFragment;
+import com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment.ShowTrainDiagramFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<RecyclerViewSteamerItemAdapter.RecyclerViewHolder> {
+public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.RecyclerViewHolder> {
     private Context mContext;
     private FragmentManager mFragmentManager;
     private List<Steamer> mSteamers = new ArrayList<>();
+    private ShowTrainDiagramFragment showTrainDiagramFragment;
+    private List<Seat> mSeats = new ArrayList<>();
 
-    public RecyclerViewSteamerItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Steamer> mSteamers) {
+    public SteamerItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Steamer> mSteamers, ShowTrainDiagramFragment showTrainDiagramFragment) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mSteamers = mSteamers;
+        this.showTrainDiagramFragment = showTrainDiagramFragment;
     }
 
     @NonNull
@@ -43,7 +48,7 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewSteamerItemAdapter.RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SteamerItemAdapter.RecyclerViewHolder holder, final int position) {
         final int steamerNumber = mSteamers.get(position).getSteamerNumber();
         final String carrageID = mSteamers.get(position).getSteamerID();
         holder.txtSteamerNumber.setText(String.valueOf(steamerNumber));
@@ -51,10 +56,9 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
             @Override
             public void onClick(View view) {
                 CarrageListFragment mFragment = new CarrageListFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("carrageID",carrageID);
-                mFragment.setArguments(bundle);
-                pushFragment(BookingActivity.PushFrgType.ADD, mFragment, mFragment.getTag(), R.id.home_container);
+                mSeats = mSteamers.get(position).getSeatList();
+                Seat seat = new Seat(1,1,1,1);
+                showTrainDiagramFragment.transferDataToAdapter(mSeats);
             }
         });
 
@@ -64,7 +68,6 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
     public int getItemCount() {
         return mSteamers.size();
     }
-
     public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView txtSteamerNumber;
         RelativeLayout item;
@@ -73,9 +76,13 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
             super(itemView);
             txtSteamerNumber =(TextView) itemView.findViewById(R.id.steamer_number);
             item = (RelativeLayout) itemView.findViewById(R.id.steamer_item);
-
+            btnBooking=(Button) itemView.findViewById(R.id.btnBoooking);
         }
+    }
 
+    public void updateCarrageList(Steamer steamer) {
+        mSteamers.add(steamer);
+        notifyDataSetChanged();
     }
 
     public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
@@ -96,4 +103,7 @@ public class RecyclerViewSteamerItemAdapter extends RecyclerView.Adapter<Recycle
             e.printStackTrace();
         }
     }
+//    public interface handleCarrageItem{
+//        void onClickItemCarrageListener(String carrageID);
+//    }
 }

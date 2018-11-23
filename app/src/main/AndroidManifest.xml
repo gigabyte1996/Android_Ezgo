@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".view.EzgoApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".view.activity.main.MainScreenActivity">
@@ -23,9 +24,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.activity.booking1.FindTrainsActivity"></activity>
-        <activity android:name=".view.fragment.Steamer.ShowListSteamersDiagram.SteamerFragment">
+        <!--&lt;!&ndash;<activity android:name=".view.fragment.Steamer.ShowListSteamersDiagram.SteamerFragment">&ndash;&gt;-->
 
-        </activity>
+        <!--</activity>-->
         <activity android:name=".view.activity.ShowListTrain.ShowListTrainActivity"></activity>
         <activity android:name=".view.activity.booking.BookingActivity"></activity>
     </application>

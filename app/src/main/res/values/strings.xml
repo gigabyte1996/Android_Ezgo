@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Ezgo</string>
     <string name="font_name">Tahoma</string>
+    <string-array name="planets_array">
+        <item>Departure</item>
+        <item>Return</item>
+    </string-array>
 </resources>
+

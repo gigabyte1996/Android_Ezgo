@@ -4,12 +4,20 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorConcept">#ba4c05</color>
+
+
+    <color name="colorConcept">#5d1049</color>
     <color name="colorBackground">#f0eef4</color>
-    <color name="colorConcepLight">#ef9257</color>
+    <color name="colorConcepLight">#720d5d</color>
     <color name="colorButton">#f57a2b</color>
     <color name="colorButtonBlue">#448fc2</color>
-    <color name="colorBackgroundGray">#898787</color>
+    <color name="colorBackgroundGray">#d7cece</color>
     <color name="ColorDarkGray">#6c6c6c</color>
+    <color name="Seatwall">#481769</color>
+
+    <color name="SeatEmpty">#ffffff</color>
+    <color name="SeatPicking">#40fa46</color>
+    <color name="SeatReserve">#f43939</color>
+    <color name="SeatTrading">#5a26de</color>
 
 </resources>
