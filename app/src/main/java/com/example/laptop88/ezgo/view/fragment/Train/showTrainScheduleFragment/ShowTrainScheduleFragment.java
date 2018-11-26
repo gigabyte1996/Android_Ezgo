@@ -31,7 +31,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentView, ItemTrainScheduleAdapter.GetTrainID {
+public class
+ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentView, ItemTrainScheduleAdapter.GetTrainID {
     private ProgressDialog mProgressDialog;
     private ShowTrainScheduleFragmentPresenter mShowTrainScheduleFragmentPresenter;
     private ShowTrainScheduleFragmentPresenterImpl mShowTrainScheduleFragmentPresenterImpl;

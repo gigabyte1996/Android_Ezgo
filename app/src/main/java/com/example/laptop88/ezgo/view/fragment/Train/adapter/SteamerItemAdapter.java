@@ -55,7 +55,6 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
         holder.item.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                CarrageListFragment mFragment = new CarrageListFragment();
                 mSeats = mSteamers.get(position).getSeatList();
                 Seat seat = new Seat(1,1,1,1);
                 showTrainDiagramFragment.transferDataToAdapter(mSeats);
@@ -84,6 +83,7 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
         mSteamers.add(steamer);
         notifyDataSetChanged();
     }
+
 
     public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
         try {

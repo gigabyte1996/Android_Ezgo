@@ -1,6 +1,7 @@
 package com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,14 +23,18 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainSchedule;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
+import com.example.laptop88.ezgo.view.activity.main.MainScreenActivity;
+import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemStationAdapter;
 import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemTrainScheduleAdapter;
 
 import java.io.Serializable;
@@ -51,8 +57,10 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //    private EditText edtNumberOfSeat;
 ////    private LinearLayout llDate;
     private ProgressDialog mProgressDialog;
-
+    private Bundle bundle;
+    private List<Station> stations;
     private FindTrainByStationFragmentPresenterImpl findTrainByStationFragmentPresenter;
+    private ItemStationAdapter mItemStationAdapter;
 
 
     public FindTrainByStationFragement() {
@@ -61,6 +69,7 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
@@ -68,11 +77,17 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
         super.onResume();
     }
 
-    @BindView((R.id.edtFromStation))
-    EditText edtFromStation;
+//    @BindView((R.id.edtFromStation))
+//    EditText edtFromStation;
+//
+//    @BindView(R.id.edtToStation)
+//    EditText edtToStation;
 
-    @BindView(R.id.edtToStation)
-    EditText edtToStation;
+    @BindView(R.id.llFromStation)
+    LinearLayout llFromStation;
+
+    @BindView(R.id.llToStation)
+    LinearLayout llToStation;
 
     @BindView(R.id.edtNumberOfTicket)
     EditText edtNumberOfSeat;
@@ -104,6 +119,7 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 
     ItemTrainScheduleAdapter mRcvAdapter;
     List<TrainSchedule> trainSchedules;
+//    List<Station> stations;
 
 
 
@@ -113,7 +129,12 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
         edtNumberOfSeat = (EditText) view.findViewById(R.id.numberOfSeat);
         llDate = (LinearLayout) view.findViewById(R.id.llDate);
         ButterKnife.bind(this, view);
+        stations = new ArrayList<>();
+        bundle = this.getArguments();
+        stations = (List<Station>) bundle.getSerializable("station");
+        Log.d("AAAAAAAAAAAAAAAAA", stations.get(2).getStationName());
         return view;
+
     }
 //    public  void senndDataByBundle(){
 //        Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
@@ -126,18 +147,31 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //        startActivity(intent);
 //    }
 
+    @OnClick(R.id.llToStation)
+    public void onClick(View view){
+//        setPopUpAdapter();// lỗi này của mi nè
+
+    }
+
 
     @OnClick(R.id.btnShow_Train)
     public void onClick()
+
     {
-        if (edtFromStation==null||edtToStation==null||txtDate==null){
-            btnShowTrain.setClickable(false);
-            btnShowTrain.setBackgroundColor(getResources().getColor(R.color.colorConcepLight));
-        }
+//        if (edtFromStation==null||edtToStation==null||txtDate==null){
+//            btnShowTrain.setClickable(false);
+//            btnShowTrain.setBackgroundColor(getResources().getColor(R.color.colorConcepLight));
+//        }
+//        TrainRequest trainRequest = new TrainRequest();
+//        trainRequest.setFromStation(edtFromStation.getText().toString());
+//        trainRequest.setToStation(edtToStation.getText().toString());
+//        trainRequest.setDepartureTime(txtDate.getText().toString());
+//        findTrainByStationFragmentPresenter = new FindTrainByStationFragmentPresenterImpl(this);
+//        findTrainByStationFragmentPresenter.searchTrain(trainRequest);
         TrainRequest trainRequest = new TrainRequest();
-        trainRequest.setFromStation(edtFromStation.getText().toString());
-        trainRequest.setToStation(edtToStation.getText().toString());
-        trainRequest.setDepartureTime(txtDate.getText().toString());
+        trainRequest.setFromStation("Da Nang");
+        trainRequest.setToStation("Ha Noi");
+        trainRequest.setDepartureTime("2018-11-18");
         findTrainByStationFragmentPresenter = new FindTrainByStationFragmentPresenterImpl(this);
         findTrainByStationFragmentPresenter.searchTrain(trainRequest);
     }
@@ -183,19 +217,29 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
         }
     }
 
-    @OnTextChanged({R.id.edtFromStation, R.id.edtToStation})
-    protected void onTextChanged() {
+//    @OnTextChanged({R.id.edtFromStation, R.id.edtToStation})
+//    protected void onTextChanged() {
+//
+//        String fromStation = edtFromStation.getText().toString().trim();
+//        String toStation = edtToStation.getText().toString().trim();
+//      //  int numberOfSeat = Integer.parseInt(edtNumberOfSeat.getText().toString().trim());
+//
+//
+//        if (fromStation.isEmpty() || toStation.isEmpty()) {
+//            btnShowTrain.setEnabled(false);
+//        } else {
+//            btnShowTrain.setEnabled(true);
+//        }
+//    }
 
-        String fromStation = edtFromStation.getText().toString().trim();
-        String toStation = edtToStation.getText().toString().trim();
-      //  int numberOfSeat = Integer.parseInt(edtNumberOfSeat.getText().toString().trim());
-
-
-        if (fromStation.isEmpty() || toStation.isEmpty()) {
-            btnShowTrain.setEnabled(false);
-        } else {
-            btnShowTrain.setEnabled(true);
-        }
+    public void setPopUpAdapter(List<Station> stationList){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.setTitle("Station");
+        ListView listStation = (ListView) dialog.findViewById(R.id.listStation);
+        mItemStationAdapter = new ItemStationAdapter(getActivity(),R.layout.custom_dialog,stationList);
+        listStation.setAdapter(mItemStationAdapter);
+        dialog.show();
     }
 
 //    @OnClick({R.id.txtSingle, R.id.txtReturn})

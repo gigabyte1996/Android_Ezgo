@@ -24,8 +24,7 @@ import java.util.List;
 public class SeatItemAdapter extends RecyclerView.Adapter<SeatItemAdapter.RecyclerViewHolder> {
     private Context mContext;
     private FragmentManager mFragmentManager;
-    private List<Seat> mSeats = new ArrayList<>();
-
+    private List<Seat> mSeats ;
     public SeatItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Seat> mSeats) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
@@ -36,19 +35,21 @@ public class SeatItemAdapter extends RecyclerView.Adapter<SeatItemAdapter.Recycl
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_steamer, parent, false);
+        View view = inflater.inflate(R.layout.item_seat, parent, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final SeatItemAdapter.RecyclerViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final RecyclerViewHolder holder, int position) {
         final int seatNumber = mSeats.get(position).getSeatNumber();
         final int seatID = mSeats.get(position).getSeatID();
         final int seatType = mSeats.get(position).getSeatType();
         final int seatStatus = mSeats.get(position).getSeatStatus();
         final Seat seat = mSeats.get(position);
+
+
         holder.txtSeatNumber.setText(String.valueOf(seatNumber));
-        holder.item.setOnClickListener(new View.OnClickListener(){
+     /*   holder.item.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 for (Seat seat : mSeats){
@@ -79,8 +80,9 @@ public class SeatItemAdapter extends RecyclerView.Adapter<SeatItemAdapter.Recycl
                             break;
                     }
                 }
+
             }
-        });
+        });*/
     }
 
     @Override
@@ -88,22 +90,19 @@ public class SeatItemAdapter extends RecyclerView.Adapter<SeatItemAdapter.Recycl
         return mSeats.size();
     }
 
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
-        View seat;
-        View bed;
-        CardView cardView;
-        TextView txtSeatNumber;
-        LinearLayout item;
-        public RecyclerViewHolder(View itemView) {
-            super(itemView);
-            txtSeatNumber =(TextView) itemView.findViewById(R.id.seat_number);
-            item = (LinearLayout) itemView.findViewById(R.id.item_seat);
-            cardView = itemView.findViewById(R.id.item_seat);
-            seat = itemView.findViewById(R.id.seat);
-            bed = itemView.findViewById(R.id.bed);
+     class RecyclerViewHolder extends RecyclerView.ViewHolder {
+            TextView txtSeatNumber;
 
-        }
+         public RecyclerViewHolder(View itemView) {
+             super(itemView);
+             txtSeatNumber = (TextView)itemView.findViewById(R.id.seat_number);
+         }
+     }
+     public void updateList(List<Seat> newList)
+     {
+         this.mSeats=newList;
+         notifyDataSetChanged();
 
-    }
+     }
 
 }

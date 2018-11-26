@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,12 +36,16 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static android.content.ContentValues.TAG;
+
 public class ShowTrainDiagramFragment extends Fragment  {
 
     private ProgressDialog mProgressDialog;
     private TrainDetailResponse trainDetailResponse;
     private SteamerItemAdapter mRcvCarrageAdapter;
-    private SeatItemAdapter mRcvSeatAdapter;
+    private SeatItemAdapter mRcvSeatAdapter=null;
+    private List<Seat> mListSeat;
+    GridLayoutManager gridLayoutManager;
 
 
     @BindView(R.id.rcvListCarrage)
@@ -62,6 +67,7 @@ public class ShowTrainDiagramFragment extends Fragment  {
 //        handleSpinner();
         initialOnCreateCarrageRcvAdapter();
 //        initialOnCreateSeatRcvAdapter();
+
         return view;
     }
 
@@ -77,15 +83,28 @@ public class ShowTrainDiagramFragment extends Fragment  {
         rcvListCarrage.setLayoutManager(layoutManager);
         rcvListCarrage.setAdapter(mRcvCarrageAdapter);
 
+        //set list ban dau
+        mListSeat = trainDetailResponse.getSteamerList().get(0).getSeatList();
+        mRcvSeatAdapter = new SeatItemAdapter(getContext(), fragmentManager, mListSeat);
+        gridLayoutManager = new GridLayoutManager(getContext(), 4);
+        rcvSeatDiagram.setLayoutManager(gridLayoutManager);
+        rcvSeatDiagram.setAdapter(mRcvSeatAdapter);
+
+
+
 
     }
 
     public void transferDataToAdapter(List<Seat> seatList){
 //        List<Seat> seats = new ArrayList<>();
 //        seats.add(seat);
-        mRcvSeatAdapter = new SeatItemAdapter(getActivity(), fragmentManager, seatList);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 4);
-        rcvSeatDiagram.setLayoutManager(gridLayoutManager);
+        Log.d(TAG, "transferDataToAdapter: "+ seatList.size());
+
+        if( seatList.size()>0) {
+            mRcvSeatAdapter.updateList(seatList);
+        }
+        else Toast.makeText(getActivity(), "Không có ghế", Toast.LENGTH_SHORT).show();
+
     }
 
 
