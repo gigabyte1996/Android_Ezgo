@@ -1,9 +1,13 @@
 package com.example.laptop88.ezgo.view.activity.main;
 
 
+import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.StationResponse;
 import com.example.laptop88.ezgo.service.ApplicationApi;
 import com.example.laptop88.ezgo.service.StationApi;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,21 +27,20 @@ public class MainScreenActivityModelImpl implements MainScreenActivityModel {
 
     @Override
     public void getStation() {
-        Call<StationResponse> call = mApplicationApi.getClient().create(StationApi.class).getListStation();
-        call.enqueue(new Callback<StationResponse>() {
+       mApplicationApi.getClient().create(StationApi.class).getListStation().enqueue(new Callback<StationResponse>() {
             @Override
             public void onResponse(Call<StationResponse> call, Response<StationResponse> response) {
-//                StationResponse stationResponse = response.body();
-//                int code = Integer.parseInt(stationResponse.getError().getCode());
-//                switch (code) {
-//                    case 0:
-//                        mMainScreenActivityPresenter.getStationSuccess(stationResponse.getStations());
-//
-//                        break;
-//                    default:
-//                        mMainScreenActivityPresenter.getStationFalse();
-//                        break;
-//                }
+                if(response.isSuccessful()) {
+                    StationResponse stationResponse = response.body();
+                    List<Station> list = new ArrayList<>();
+                    list = stationResponse.getStations();
+                    mMainScreenActivityPresenter.getStationSuccess(list);
+                }
+                else {
+
+                        mMainScreenActivityPresenter.getStationFalse();
+
+                }
             }
 
             @Override

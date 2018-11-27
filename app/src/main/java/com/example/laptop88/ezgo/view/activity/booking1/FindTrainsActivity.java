@@ -26,26 +26,26 @@ public class FindTrainsActivity extends AppCompatActivity {
     private ViewPagerAdapter adapter;
 
     @Override
-    public void onCreate( Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_train);
 //        initializeFragments();
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-//        addFragmentsToTabLayout();
+        addFragmentsToTabLayout();
         Intent intent = getIntent();
         stations = new ArrayList<>();
         stations = (List<Station>) intent.getSerializableExtra("station");
         Log.d("success", stations.get(1).getStationName());
-//        transferDataToTab(stations);
+        transferDataToTab(stations);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("station" ,(Serializable) stations);
+        bundle.putSerializable("station", (Serializable) stations);
         FindTrainByStationFragement frg = new FindTrainByStationFragement();
-        FindTrainByNumber  frg1 = new FindTrainByNumber();
+        FindTrainByNumber frg1 = new FindTrainByNumber();
 
         frg.setArguments(bundle);
         frg1.setArguments(bundle);
-        adapter.addFrag(frg,"BY STATION");
-        adapter.addFrag(frg1,"BY NUMBER");
+        adapter.addFrag(frg, "BY STATION");
+        adapter.addFrag(frg1, "BY NUMBER");
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         viewPager.setAdapter(adapter);
@@ -61,13 +61,13 @@ public class FindTrainsActivity extends AppCompatActivity {
 //    }
 
     private void addFragmentsToTabLayout() {
-//        viewPager = (ViewPager) findViewById(R.id.viewPager);
-//        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-//        tabAdapter = new TabAdapter(getSupportFragmentManager());
-//        tabAdapter.addFragment(this.findTrainByStationFragement, "BY NUMBER");
-//        tabAdapter.addFragment(this.findTrainByNumberFragment, "BY STATION");
-//        viewPager.setAdapter(tabAdapter);
-//        tabLayout.setupWithViewPager(viewPager);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabAdapter = new TabAdapter(getSupportFragmentManager());
+        tabAdapter.addFragment(this.findTrainByStationFragement, "BY NUMBER");
+        tabAdapter.addFragment(this.findTrainByNumberFragment, "BY STATION");
+        viewPager.setAdapter(tabAdapter);
+        tabLayout.setupWithViewPager(viewPager);
 
     }
 
@@ -96,7 +96,7 @@ public class FindTrainsActivity extends AppCompatActivity {
 
 
     public void setAppBarTitle(String newTitle) {
-        Toolbar appToolBar = (Toolbar)this.findViewById(R.id.toolbar);
+        Toolbar appToolBar = (Toolbar) this.findViewById(R.id.toolbar);
         appToolBar.setTitle(newTitle);
     }
 
@@ -104,8 +104,9 @@ public class FindTrainsActivity extends AppCompatActivity {
 //        this.getSupportFragmentManager().findFragmentById(R.).setTicketNumber(synchronizedTicketNumber);
         this.findTrainByNumberFragment.setTicketNumber(synchronizedTicketNumber);
     }
-    public void transferDataToTab(List<Station> stationList){
-        this.findTrainByStationFragement.setPopUpAdapter(stationList);
+
+    public void transferDataToTab(List<Station> stationList) {
+//        this.findTrainByStationFragement.setPopUpAdapter(stationList);
 
     }
 

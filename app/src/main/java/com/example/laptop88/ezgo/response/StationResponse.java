@@ -3,14 +3,15 @@ package com.example.laptop88.ezgo.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class StationResponse {
-    @SerializedName("error")
+public class StationResponse implements Serializable {
+    @SerializedName("messageResponse")
     @Expose
     private Message error;
 
-    @SerializedName("trainSchedules")
+    @SerializedName("stationList")
     @Expose
     private List<Station> stations;
 

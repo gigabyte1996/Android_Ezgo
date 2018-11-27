@@ -49,12 +49,12 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 
-public class FindTrainByStationFragement extends Fragment implements FindTrainByStationFragmentView{
+public class FindTrainByStationFragement extends Fragment implements FindTrainByStationFragmentView {
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
     public static final String BUNDLE = "bundel";
 
-//    private EditText edtNumberOfSeat;
+    //    private EditText edtNumberOfSeat;
 ////    private LinearLayout llDate;
     private ProgressDialog mProgressDialog;
     private Bundle bundle;
@@ -122,19 +122,31 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //    List<Station> stations;
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_find_train_by_station, container, false);
         edtNumberOfSeat = (EditText) view.findViewById(R.id.numberOfSeat);
         llDate = (LinearLayout) view.findViewById(R.id.llDate);
         ButterKnife.bind(this, view);
-        stations = new ArrayList<>();
-        bundle = this.getArguments();
-        stations = (List<Station>) bundle.getSerializable("station");
-        Log.d("AAAAAAAAAAAAAAAAA", stations.get(2).getStationName());
+//        stations = new ArrayList<>();
+//        bundle = this.getArguments();
+//        stations = (List<Station>) bundle.getSerializable("station");
+//        Log.d("AAAAAAAAAAAAAAAAA", stations.get(2).getStationName());
         return view;
 
+    }
+
+
+    public void setPopUpAdapter() {
+        bundle = this.getArguments();
+        stations = (List<Station>) bundle.getSerializable("station");
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.custom_dialog);
+        dialog.setTitle("Station");
+        ListView listStation = (ListView) dialog.findViewById(R.id.listStation);
+        mItemStationAdapter = new ItemStationAdapter(getActivity(), R.layout.custom_dialog, stations);
+        listStation.setAdapter(mItemStationAdapter);
+        dialog.show();
     }
 //    public  void senndDataByBundle(){
 //        Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
@@ -148,16 +160,14 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //    }
 
     @OnClick(R.id.llToStation)
-    public void onClick(View view){
-//        setPopUpAdapter();// lỗi này của mi nè
+    public void onClickToStation() {
+        setPopUpAdapter();
 
     }
 
 
     @OnClick(R.id.btnShow_Train)
-    public void onClick()
-
-    {
+    public void onClick(){
 //        if (edtFromStation==null||edtToStation==null||txtDate==null){
 //            btnShowTrain.setClickable(false);
 //            btnShowTrain.setBackgroundColor(getResources().getColor(R.color.colorConcepLight));
@@ -188,7 +198,7 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
                 DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        calendar.set(year,month,day);
+                        calendar.set(year, month, day);
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         txtDate.setText(simpleDateFormat.format(calendar.getTime()));
                         System.out.println(simpleDateFormat.format(calendar.getTime()));
@@ -202,14 +212,14 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     }
 
     @OnClick({R.id.txtSingle, R.id.txtReturn})
-    public void getTypeOfSchedule(View view){
-        switch (view.getId()){
-            case R.id.txtSingle:{
+    public void getTypeOfSchedule(View view) {
+        switch (view.getId()) {
+            case R.id.txtSingle: {
                 txtSingle.setTextColor(Color.WHITE);
                 txtReturn.setTextColor((getResources().getColor(R.color.colorConcepLight)));
                 llReturnDate.setVisibility(View.GONE);
             }
-            case R.id.txtReturn:{
+            case R.id.txtReturn: {
                 txtReturn.setTextColor(Color.WHITE);
                 txtSingle.setTextColor((getResources().getColor(R.color.colorConcepLight)));
                 llReturnDate.setVisibility(View.VISIBLE);
@@ -232,15 +242,6 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 //        }
 //    }
 
-    public void setPopUpAdapter(List<Station> stationList){
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.custom_dialog);
-        dialog.setTitle("Station");
-        ListView listStation = (ListView) dialog.findViewById(R.id.listStation);
-        mItemStationAdapter = new ItemStationAdapter(getActivity(),R.layout.custom_dialog,stationList);
-        listStation.setAdapter(mItemStationAdapter);
-        dialog.show();
-    }
 
 //    @OnClick({R.id.txtSingle, R.id.txtReturn})
 //    public void getTypeOfSchedule(TextView textView) {
@@ -281,7 +282,7 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
             @Override
             public void afterTextChanged(Editable s) {
                 if (getActivity() instanceof FindTrainsActivity) {
-                    ((FindTrainsActivity)getActivity()).synchronizeTabData(s.toString());
+                    ((FindTrainsActivity) getActivity()).synchronizeTabData(s.toString());
                 }
 //
 //                if (getActivity() instanceof ListStationActivity) {
@@ -304,12 +305,12 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     public void showTrain(List<TrainSchedule> trainScheduleList) {
         trainSchedules = new ArrayList<>();
 
-        if (trainScheduleList == null){
+        if (trainScheduleList == null) {
             showToast("We couldn’t find any train");
-        }else {
+        } else {
             trainSchedules.addAll(trainScheduleList);
-            Intent intent = new  Intent(getActivity().getBaseContext(), BookingActivity.class);
-            intent.putExtra("trainSchedule",(Serializable)trainSchedules);
+            Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
+            intent.putExtra("trainSchedule", (Serializable) trainSchedules);
             startActivity(intent);
         }
 
@@ -322,7 +323,7 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     }
 
 
-    public ProgressDialog initProgressDialog(){
+    public ProgressDialog initProgressDialog() {
         if (mProgressDialog == null) {
             mProgressDialog = new ProgressDialog(getActivity());
         }

@@ -9,5 +9,5 @@ public interface MainScreenActivityView {
     void showToast(String msg);
     void showProgressDialog();
     void closeProgressDialog();
-//    void getStation(List<Station> stations);
+    void getStation(List<Station> stations);
 }

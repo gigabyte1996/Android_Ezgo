@@ -28,7 +28,6 @@ public class ItemStationAdapter extends ArrayAdapter {
     public Station getItem(int position) {
         return stations.get(position);
     }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;

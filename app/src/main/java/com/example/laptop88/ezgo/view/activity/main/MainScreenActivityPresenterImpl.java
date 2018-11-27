@@ -11,28 +11,30 @@ public class MainScreenActivityPresenterImpl implements MainScreenActivityPresen
     private MainScreenActivityView mMainScreenActivityView;
 
     public MainScreenActivityPresenterImpl(MainScreenActivityView mMainScreenActivityView) {
-        mMainScreenActivityView = mMainScreenActivityView;
+        this.mMainScreenActivityView = mMainScreenActivityView;
         mMainScreenActivityModel = new MainScreenActivityModelImpl(this);
     }
 
-//    @Override
-//    public void getStation() {
-////        mMainScreenActivityView.showProgressDialog();
-////        mMainScreenActivityModel.getStation();
-//
-//    }
+    @Override
+    public void getStation() {
+
+        mMainScreenActivityView.showProgressDialog();
+        mMainScreenActivityModel.getStation();
+
+    }
 
     @Override
     public void getStationSuccess(List<Station> stations) {
+
         mMainScreenActivityView.closeProgressDialog();
-//        mMainScreenActivityView.getStation(stations);
+        mMainScreenActivityView.getStation(stations);
 
     }
 
     @Override
     public void getStationFalse() {
         mMainScreenActivityView.closeProgressDialog();
-        mMainScreenActivityView.showToast("FAlSE");
+        mMainScreenActivityView.showToast("hihi");
 
     }
 }

@@ -24,7 +24,7 @@ import butterknife.OnClick;
 public class MainScreenActivity extends AppCompatActivity implements MainScreenActivityView {
     private MainScreenActivityPresenter mainScreenActivityPresenter;
     private List<Station> stationList;
-    private ProgressDialog mProgressDialog;
+    ProgressDialog mProgressDialog;
 
     @BindView(R.id.booking)
     LinearLayout llBooking;
@@ -34,25 +34,26 @@ public class MainScreenActivity extends AppCompatActivity implements MainScreenA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_screen);
         ButterKnife.bind(this);
+        mProgressDialog = new ProgressDialog(this);
     }
     @OnClick({R.id.booking})
     public  void  onClick(View view){
         switch (view.getId()){
             case R.id.booking:
-//                mainScreenActivityPresenter = new MainScreenActivityPresenterImpl(this);
-//                mainScreenActivityPresenter.getStation();
-                Station station = new Station("1", "Da Nang");
-                Station station1 = new Station("2", "Ha Noi");
-                Station station2 = new Station("3", "HCM");
-                Station station3 = new Station("4", "Hue");
-                List<Station> stations = new ArrayList<>();
-                stations.add(station);
-                stations.add(station1);
-                stations.add(station2);
-                stations.add(station3);
-                Intent intent = new Intent(this, FindTrainsActivity.class);
-                intent.putExtra("station",(Serializable) stations);
-                startActivity(intent);
+                mainScreenActivityPresenter = new MainScreenActivityPresenterImpl(this);
+                mainScreenActivityPresenter.getStation();
+//                Station station = new Station("1", "Da Nang");
+//                Station station1 = new Station("2", "Ha Noi");
+//                Station station2 = new Station("3", "HCM");
+//                Station station3 = new Station("4", "Hue");
+//                List<Station> stations = new ArrayList<>();
+//                stations.add(station);
+//                stations.add(station1);
+//                stations.add(station2);
+//                stations.add(station3);
+//                Intent intent = new Intent(this, FindTrainsActivity.class);
+//                intent.putExtra("station",(Serializable) stations);
+//                startActivity(intent);
                 break;
         }
     }
@@ -74,30 +75,34 @@ public class MainScreenActivity extends AppCompatActivity implements MainScreenA
 
     @Override
     public void showProgressDialog() {
-        ProgressDialog progressDialog = initProgressDialog();
-        progressDialog.show();
+
+        mProgressDialog.setMessage("loading");
+        mProgressDialog.show();
     }
 
     @Override
     public void closeProgressDialog() {
-        if (mProgressDialog.isShowing())
+
             mProgressDialog.dismiss();
     }
 
-//    @Override
-//    public void getStation(List<Station> stations) {
-//        stationList = new ArrayList<>();
-//        if (stations.size()==0){
-//                showToast("False");
-//        }else {
+    @Override
+    public void getStation(List<Station> stations) {
+        Toast.makeText(MainScreenActivity.this, ""+stations.size(), Toast.LENGTH_SHORT).show();
+
 //            stationList.addAll(stations);
 //            Intent intent = new  Intent(this, FindTrainsActivity.class);
 //            Bundle bundle = new Bundle();
 //            bundle.putSerializable("stations",(Serializable) stations);
 //            intent.putExtra("bundle", bundle);
 //            startActivity(intent);
-//        }
-//    }
-}
+            Intent intent = new Intent(this, FindTrainsActivity.class);
+            intent.putExtra("station",(Serializable) stations);
+            startActivity(intent);
+        }
+    }
+
+
+
 
 
