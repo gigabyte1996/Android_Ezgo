@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.Station;
+import com.example.laptop88.ezgo.response.Ticket;
 import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
 
 import java.io.Serializable;
@@ -25,6 +26,7 @@ public class MainScreenActivity extends AppCompatActivity implements MainScreenA
     private MainScreenActivityPresenter mainScreenActivityPresenter;
     private List<Station> stationList;
     ProgressDialog mProgressDialog;
+    public List<Ticket> shoppingCart;
 
     @BindView(R.id.booking)
     LinearLayout llBooking;
@@ -42,18 +44,6 @@ public class MainScreenActivity extends AppCompatActivity implements MainScreenA
             case R.id.booking:
                 mainScreenActivityPresenter = new MainScreenActivityPresenterImpl(this);
                 mainScreenActivityPresenter.getStation();
-//                Station station = new Station("1", "Da Nang");
-//                Station station1 = new Station("2", "Ha Noi");
-//                Station station2 = new Station("3", "HCM");
-//                Station station3 = new Station("4", "Hue");
-//                List<Station> stations = new ArrayList<>();
-//                stations.add(station);
-//                stations.add(station1);
-//                stations.add(station2);
-//                stations.add(station3);
-//                Intent intent = new Intent(this, FindTrainsActivity.class);
-//                intent.putExtra("station",(Serializable) stations);
-//                startActivity(intent);
                 break;
         }
     }
@@ -89,13 +79,6 @@ public class MainScreenActivity extends AppCompatActivity implements MainScreenA
     @Override
     public void getStation(List<Station> stations) {
         Toast.makeText(MainScreenActivity.this, ""+stations.size(), Toast.LENGTH_SHORT).show();
-
-//            stationList.addAll(stations);
-//            Intent intent = new  Intent(this, FindTrainsActivity.class);
-//            Bundle bundle = new Bundle();
-//            bundle.putSerializable("stations",(Serializable) stations);
-//            intent.putExtra("bundle", bundle);
-//            startActivity(intent);
             Intent intent = new Intent(this, FindTrainsActivity.class);
             intent.putExtra("station",(Serializable) stations);
             startActivity(intent);

@@ -34,7 +34,7 @@ public class MainScreenActivityPresenterImpl implements MainScreenActivityPresen
     @Override
     public void getStationFalse() {
         mMainScreenActivityView.closeProgressDialog();
-        mMainScreenActivityView.showToast("hihi");
+        mMainScreenActivityView.showToast("False");
 
     }
 }

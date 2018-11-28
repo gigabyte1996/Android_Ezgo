@@ -1,7 +1,7 @@
 package com.example.laptop88.ezgo.Utils;
 
 public class Constants {
-    public static String BASE_URL = "http://192.168.137.1:8080";
+    public static String BASE_URL = "http://10.0.12.83:8080";
 
     public class SeatStatusColor{
         public static final String PICKING = "#35950C";

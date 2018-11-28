@@ -5,7 +5,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/llFromStation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorConcept"
@@ -13,6 +12,7 @@
         android:padding="15dp">
 
         <LinearLayout
+            android:id="@+id/llFromStation"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorConcepLight"
@@ -26,6 +26,7 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icons8_marker_filled_50" />
             <TextView
+                android:id="@+id/txtFromStation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="From Station"
@@ -51,9 +52,10 @@
                 android:layout_marginLeft="10dp"
                 android:src="@drawable/icons8_marker_filled_50" />
             <TextView
+                android:id="@+id/txtToStation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From Station"
+                android:text="To Station"
                 android:textColor="@android:color/white"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
@@ -116,7 +118,7 @@
             </LinearLayout>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/llDate"
+            android:id="@+id/llDepartureDate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorConcepLight"
@@ -132,7 +134,7 @@
                 android:src="@drawable/icons8_planner_filled_50" />
 
             <TextView
-                android:id="@+id/txtDate"
+                android:id="@+id/txtDepartureDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -176,12 +178,12 @@
         <Button
             android:id="@+id/btnShow_Train"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_marginTop="20dp"
-            android:background="@color/colorButton"
+            android:background="@drawable/button_costum_border"
             android:text="SHOW TRAINS"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
+            android:textColor="@color/colorConcept"
+            android:textSize="17sp" />
 
     </LinearLayout>
 

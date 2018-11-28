@@ -6,17 +6,16 @@ public class TrainRequest {
     private String fromStation;
     private String toStation;
     private String departureTime;
-//    private Date arrivalTime;
+    private String returnTime;
 
+    public TrainRequest() {
+    }
 
-    public TrainRequest(String fromStation, String toStation, String departureTime) {
+    public TrainRequest(String fromStation, String toStation, String departureTime, String returnTime) {
         this.fromStation = fromStation;
         this.toStation = toStation;
         this.departureTime = departureTime;
-    }
-
-    public TrainRequest() {
-        super();
+        this.returnTime = returnTime;
     }
 
     public String getFromStation() {
@@ -41,5 +40,13 @@ public class TrainRequest {
 
     public void setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
+    }
+
+    public String getReturnTime() {
+        return returnTime;
+    }
+
+    public void setReturnTime(String returnTime) {
+        this.returnTime = returnTime;
     }
 }

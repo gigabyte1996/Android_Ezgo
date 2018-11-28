@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
@@ -32,9 +33,9 @@ public class ItemStationAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        row = inflater.inflate(resourceID, parent, false);
+        row = inflater.inflate(R.layout.item_station, parent, false);
 
-        TextView text = (TextView) row.findViewById(R.id.text);
+        TextView text = (TextView) row.findViewById(R.id.txtStation);
 
         text.setText(stations.get(position).getStationName());
         return row;

@@ -16,9 +16,12 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.Utils.ScreenUtils;
 import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainSchedule;
@@ -49,7 +53,7 @@ import butterknife.OnClick;
 import butterknife.OnTextChanged;
 
 
-public class FindTrainByStationFragement extends Fragment implements FindTrainByStationFragmentView {
+public class FindTrainByStationFragment extends Fragment implements FindTrainByStationFragmentView {
     public static final String TITLE = "title";
     public static final String DESCRIPTION = "description";
     public static final String BUNDLE = "bundel";
@@ -61,9 +65,12 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     private List<Station> stations;
     private FindTrainByStationFragmentPresenterImpl findTrainByStationFragmentPresenter;
     private ItemStationAdapter mItemStationAdapter;
+    private String toStation = null;
+    private String fromStation = null;
+    TrainRequest trainRequest;
 
 
-    public FindTrainByStationFragement() {
+    public FindTrainByStationFragment() {
     }
 
     @Override
@@ -77,11 +84,11 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
         super.onResume();
     }
 
-//    @BindView((R.id.edtFromStation))
-//    EditText edtFromStation;
-//
-//    @BindView(R.id.edtToStation)
-//    EditText edtToStation;
+    @BindView((R.id.txtFromStation))
+    TextView txtFromStation;
+
+    @BindView(R.id.txtToStation)
+    TextView txtToStation;
 
     @BindView(R.id.llFromStation)
     LinearLayout llFromStation;
@@ -95,11 +102,19 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     @BindView(R.id.btnShow_Train)
     Button btnShowTrain;
 
-    @BindView((R.id.llDate))
-    LinearLayout llDate;
+    @BindView((R.id.llDepartureDate))
+    LinearLayout llDepartureDate;
 
-    @BindView(R.id.txtDate)
-    TextView txtDate;
+    @BindView((R.id.llReturnDate))
+    LinearLayout llReturnDate;
+
+
+    @BindView(R.id.txtDepartureDate)
+    TextView txtDepartureDate;
+
+    @BindView(R.id.txtReturnDate)
+    TextView txtReturnDate;
+
 
     @BindView(R.id.txtSingle)
     TextView txtSingle;
@@ -107,8 +122,6 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
     @BindView(R.id.txtReturn)
     TextView txtReturn;
 
-    @BindView((R.id.llReturnDate))
-    LinearLayout llReturnDate;
 
 //    @BindView(R.id.numberOfSeat)
 //    EditText edtNumberOfSeat;
@@ -119,25 +132,19 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 
     ItemTrainScheduleAdapter mRcvAdapter;
     List<TrainSchedule> trainSchedules;
-//    List<Station> stations;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_find_train_by_station, container, false);
-        edtNumberOfSeat = (EditText) view.findViewById(R.id.numberOfSeat);
-        llDate = (LinearLayout) view.findViewById(R.id.llDate);
         ButterKnife.bind(this, view);
-//        stations = new ArrayList<>();
-//        bundle = this.getArguments();
-//        stations = (List<Station>) bundle.getSerializable("station");
-//        Log.d("AAAAAAAAAAAAAAAAA", stations.get(2).getStationName());
+        trainRequest = new TrainRequest();
         return view;
 
     }
 
 
-    public void setPopUpAdapter() {
+    public String setPopUpAdapter(final TextView textView) {
         bundle = this.getArguments();
         stations = (List<Station>) bundle.getSerializable("station");
         final Dialog dialog = new Dialog(getActivity());
@@ -146,7 +153,21 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
         ListView listStation = (ListView) dialog.findViewById(R.id.listStation);
         mItemStationAdapter = new ItemStationAdapter(getActivity(), R.layout.custom_dialog, stations);
         listStation.setAdapter(mItemStationAdapter);
+        Window window = dialog.getWindow();
+        if (window != null) {
+            window.setLayout((int) (ScreenUtils.getWithScreen(getActivity()) * 0.7), (int) (ScreenUtils.getheightScreen(getActivity()) * 0.7));
+            window.setGravity(Gravity.CENTER);
+        }
+        listStation.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                textView.setText(stations.get(position).getStationName());
+                dialog.dismiss();
+            }
+        });
+//        station = String.valueOf(textView);
         dialog.show();
+        return String.valueOf(textView);
     }
 //    public  void senndDataByBundle(){
 //        Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
@@ -161,70 +182,124 @@ public class FindTrainByStationFragement extends Fragment implements FindTrainBy
 
     @OnClick(R.id.llToStation)
     public void onClickToStation() {
-        setPopUpAdapter();
+        toStation = setPopUpAdapter(txtToStation);
 
     }
 
+    @OnClick(R.id.llFromStation)
+    public void onClickFromStation() {
+        fromStation = setPopUpAdapter(txtFromStation);
+
+    }
 
     @OnClick(R.id.btnShow_Train)
-    public void onClick(){
-//        if (edtFromStation==null||edtToStation==null||txtDate==null){
-//            btnShowTrain.setClickable(false);
-//            btnShowTrain.setBackgroundColor(getResources().getColor(R.color.colorConcepLight));
-//        }
-//        TrainRequest trainRequest = new TrainRequest();
-//        trainRequest.setFromStation(edtFromStation.getText().toString());
-//        trainRequest.setToStation(edtToStation.getText().toString());
-//        trainRequest.setDepartureTime(txtDate.getText().toString());
-//        findTrainByStationFragmentPresenter = new FindTrainByStationFragmentPresenterImpl(this);
-//        findTrainByStationFragmentPresenter.searchTrain(trainRequest);
-        TrainRequest trainRequest = new TrainRequest();
-        trainRequest.setFromStation("Da Nang");
-        trainRequest.setToStation("Ha Noi");
-        trainRequest.setDepartureTime("2018-11-18");
+    public void onClick() {
+        if ((fromStation == null || toStation == null) || (fromStation == null && toStation == null && trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null)) {
+            btnShowTrain.setClickable(false);
+        } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null) {
+            trainRequest.setFromStation(txtToStation.getText().toString());
+            trainRequest.setToStation(txtFromStation.getText().toString());
+            Log.d("From", fromStation);
+            showToast("miss both Date");
+        } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() != null) {
+            trainRequest.setFromStation(txtToStation.getText().toString());
+            trainRequest.setToStation(txtFromStation.getText().toString());
+            trainRequest.setDepartureTime(txtReturnDate.getText().toString());
+            showToast("miss departureDate");
+        } else if (trainRequest.getDepartureTime() != null && trainRequest.getReturnTime() == null) {
+            trainRequest.setFromStation(txtFromStation.getText().toString());
+            trainRequest.setToStation(txtToStation.getText().toString());
+            trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
+            showToast("miss returnDate");
+        } else {
+            trainRequest.setFromStation(txtFromStation.getText().toString());
+            trainRequest.setToStation(txtToStation.getText().toString());
+            trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
+            trainRequest.setReturnTime(txtReturnDate.getText().toString());
+            Log.d("VVVVVVVVVVV", trainRequest.getFromStation());
+            showToast("Full");
+
+        }
+        showToast("clicked");
         findTrainByStationFragmentPresenter = new FindTrainByStationFragmentPresenterImpl(this);
         findTrainByStationFragmentPresenter.searchTrain(trainRequest);
     }
 
-    @OnClick({R.id.llDate})
-    public void getDate(View view) {
-        switch (view.getId()) {
-            case R.id.llDate:
-                final Calendar calendar = Calendar.getInstance();
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
+    @OnClick({R.id.llDepartureDate})
+    public void getDepatureDate(View view) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        calendar.set(year, month, day);
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        txtDate.setText(simpleDateFormat.format(calendar.getTime()));
-                        System.out.println(simpleDateFormat.format(calendar.getTime()));
-                    }
-                };
-                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener, year, month, day);
-                datePickerDialog.show();
-                break;
-        }
+        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calendar.set(year, month, day);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                txtDepartureDate.setText(simpleDateFormat.format(calendar.getTime()));
+                System.out.println(simpleDateFormat.format(calendar.getTime()));
+            }
+        };
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener, year, month, day);
+        trainRequest.setDepartureTime(String.valueOf(txtDepartureDate));
+//        depatureDate = String.valueOf(txtDepartureDate);
+        datePickerDialog.show();
 
     }
 
-    @OnClick({R.id.txtSingle, R.id.txtReturn})
-    public void getTypeOfSchedule(View view) {
-        switch (view.getId()) {
-            case R.id.txtSingle: {
-                txtSingle.setTextColor(Color.WHITE);
-                txtReturn.setTextColor((getResources().getColor(R.color.colorConcepLight)));
-                llReturnDate.setVisibility(View.GONE);
+    @OnClick({R.id.llReturnDate})
+    public void getReturnDate(View view) {
+        final Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                calendar.set(year, month, day);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                txtReturnDate.setText(simpleDateFormat.format(calendar.getTime()));
+                System.out.println(simpleDateFormat.format(calendar.getTime()));
             }
-            case R.id.txtReturn: {
-                txtReturn.setTextColor(Color.WHITE);
-                txtSingle.setTextColor((getResources().getColor(R.color.colorConcepLight)));
-                llReturnDate.setVisibility(View.VISIBLE);
-            }
-        }
+        };
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), onDateSetListener, year, month, day);
+        trainRequest.setReturnTime(String.valueOf(txtReturnDate));
+//        returnDate = String.valueOf(txtReturnDate);
+        datePickerDialog.show();
+    }
+
+//    @OnClick({R.id.txtSingle, R.id.txtReturn})
+//    public void getTypeOfSchedule(View view) {
+//        switch (view.getId()) {
+//            case R.id.txtSingle: {
+//                showToast("click Single");
+//                txtSingle.setTextColor(Color.WHITE);
+//                txtReturn.setTextColor((getResources().getColor(R.color.colorConcepLight)));
+////                llReturnDate.setVisibility(View.GONE);
+//            }
+//            case R.id.txtReturn: {
+//                showToast("click Return");
+//                txtReturn.setTextColor(Color.WHITE);
+//                txtSingle.setTextColor((getResources().getColor(R.color.colorConcepLight)));
+////                llReturnDate.setVisibility(View.VISIBLE);
+//            }
+//        }
+//    }
+
+    @OnClick({R.id.txtSingle})
+    public void clickSingle(View view) {
+        txtSingle.setTextColor(Color.WHITE);
+        txtReturn.setTextColor((getResources().getColor(R.color.colorConcepLight)));
+        llReturnDate.setVisibility(View.GONE);
+    }
+
+    @OnClick(R.id.txtReturn)
+    public void clickReturn(View view) {
+        txtReturn.setTextColor(Color.WHITE);
+        txtSingle.setTextColor((getResources().getColor(R.color.colorConcepLight)));
+        llReturnDate.setVisibility(View.VISIBLE);
     }
 
 //    @OnTextChanged({R.id.edtFromStation, R.id.edtToStation})
