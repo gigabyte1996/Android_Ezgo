@@ -33,7 +33,7 @@ public class FindTrainByStationModelImpl implements FindTrainByStationModel {
                 int code = Integer.parseInt(trainScheduleResponse.getError().getCode());
                 switch (code) {
                     case 0:
-                        mFindTrainByStationFragmentPresenter.searchTrainSuccess(trainScheduleResponse.getTrainSchedules());
+                        mFindTrainByStationFragmentPresenter.searchTrainSuccess(trainScheduleResponse);
 
                         break;
                     default:

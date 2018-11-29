@@ -8,57 +8,56 @@ import java.io.Serializable;
 public class Seat implements Serializable {
     @SerializedName("seatID")
     @Expose
-    private int seatID;
+    private Integer seatID;
 
     @SerializedName("seatNumber")
     @Expose
-    private int seatNumber;
+    private Integer seatNumber;
 
     @SerializedName("seatType")
     @Expose
-    private int seatType;
+    private Integer seatType;
 
     @SerializedName("seatStatus")
     @Expose
-    private int seatStatus;
+    private Integer seatStatus;
 
-
-    public Seat(int seatID, int seatNumber, int seatType, int seatStatus) {
-        this.seatID = seatID;
-        this.seatNumber = seatNumber;
-        this.seatType = seatType;
-        this.seatStatus = seatStatus;
-    }
-
-    public int getSeatID() {
+    public Integer getSeatID() {
         return seatID;
     }
 
-    public void setSeatID(int seatID) {
+    public void setSeatID(Integer seatID) {
         this.seatID = seatID;
     }
 
-    public int getSeatNumber() {
+    public Integer getSeatNumber() {
         return seatNumber;
     }
 
-    public void setSeatNumber(int seatNumber) {
+    public void setSeatNumber(Integer seatNumber) {
         this.seatNumber = seatNumber;
     }
 
-    public int getSeatType() {
+    public Integer getSeatType() {
         return seatType;
     }
 
-    public void setSeatType(int seatType) {
+    public void setSeatType(Integer seatType) {
         this.seatType = seatType;
     }
 
-    public int getSeatStatus() {
+    public Integer getSeatStatus() {
         return seatStatus;
     }
 
-    public void setSeatStatus(int seatStatus) {
+    public void setSeatStatus(Integer seatStatus) {
+        this.seatStatus = seatStatus;
+    }
+
+    public Seat(Integer seatID, Integer seatNumber, Integer seatType, Integer seatStatus) {
+        this.seatID = seatID;
+        this.seatNumber = seatNumber;
+        this.seatType = seatType;
         this.seatStatus = seatStatus;
     }
 }

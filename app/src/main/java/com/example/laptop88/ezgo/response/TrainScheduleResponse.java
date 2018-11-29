@@ -12,14 +12,13 @@ public class TrainScheduleResponse {
     @Expose
     private Message error;
 
-    @SerializedName("trainSchedules")
+    @SerializedName("singleTrainSchedules")
     @Expose
-    private List<TrainSchedule> trainSchedules;
+    private List<TrainSchedule> singleTrainSchedules;
 
-    public TrainScheduleResponse(Message error, List<TrainSchedule> trainSchedules) {
-        this.error = error;
-        this.trainSchedules = trainSchedules;
-    }
+    @SerializedName("returnTrainSchedules")
+    @Expose
+    private List<TrainSchedule> returnTrainSchedules;
 
     public Message getError() {
         return error;
@@ -29,11 +28,25 @@ public class TrainScheduleResponse {
         this.error = error;
     }
 
-    public List<TrainSchedule> getTrainSchedules() {
-        return trainSchedules;
+    public List<TrainSchedule> getSingleTrainSchedules() {
+        return singleTrainSchedules;
     }
 
-    public void setTrainSchedules(List<TrainSchedule> trainSchedules) {
-        this.trainSchedules = trainSchedules;
+    public void setSingleTrainSchedules(List<TrainSchedule> singleTrainSchedules) {
+        this.singleTrainSchedules = singleTrainSchedules;
+    }
+
+    public List<TrainSchedule> getReturnTrainSchedules() {
+        return returnTrainSchedules;
+    }
+
+    public void setReturnTrainSchedules(List<TrainSchedule> returnTrainSchedules) {
+        this.returnTrainSchedules = returnTrainSchedules;
+    }
+
+    public TrainScheduleResponse(Message error, List<TrainSchedule> singleTrainSchedules, List<TrainSchedule> returnTrainSchedules) {
+        this.error = error;
+        this.singleTrainSchedules = singleTrainSchedules;
+        this.returnTrainSchedules = returnTrainSchedules;
     }
 }

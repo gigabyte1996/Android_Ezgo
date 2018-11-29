@@ -111,7 +111,7 @@ ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentV
     @Override
     public void showTrainDiagram(TrainDetailResponse trainDetailResponse) {
         TrainDetailResponse train = new TrainDetailResponse();
-        Log.d("listCarrage", trainDetailResponse.getSteamerList().size()+"");
+//        Log.d("listCarrage", trainDetailResponse.getSteamerList().size()+"");
         if (trainDetailResponse == null) {
             showToast("Couldn't find train");
         } else {
@@ -127,7 +127,7 @@ ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentV
     }
 
     @Override
-    public void onClickTrainScheduleListener(String trainID) {
+    public void onClickTrainScheduleListener(Integer trainID) {
         mShowTrainScheduleFragmentPresenterImpl = new ShowTrainScheduleFragmentPresenterImpl(this);
         mShowTrainScheduleFragmentPresenterImpl.getTrainDiagramByTrainID(trainID);
 

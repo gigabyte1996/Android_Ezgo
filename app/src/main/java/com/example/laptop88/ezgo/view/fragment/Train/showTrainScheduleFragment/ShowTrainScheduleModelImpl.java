@@ -23,7 +23,7 @@ public class ShowTrainScheduleModelImpl implements ShowTrainScheduleModel {
     }
 
     @Override
-    public void getTrainDiagramByTrainID(String trainID) {
+    public void getTrainDiagramByTrainID(Integer trainID) {
         Call<TrainDetailResponse> call = mApplicationApi.getClient().create(TrainApi.class).getTrainDiagrambyTrainId(trainID);
         call.enqueue(new Callback<TrainDetailResponse>() {
             @Override

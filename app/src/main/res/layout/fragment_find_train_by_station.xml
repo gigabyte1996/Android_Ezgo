@@ -15,7 +15,7 @@
             android:id="@+id/llFromStation"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorConcepLight"
+            android:background="@drawable/custom_linearlayout_border"
             android:orientation="horizontal"
             android:layout_marginBottom="5dp">
 
@@ -42,7 +42,7 @@
             android:id="@+id/llToStation"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorConcepLight"
+            android:background="@drawable/custom_linearlayout_border"
             android:orientation="horizontal">
 
             <ImageView
@@ -82,7 +82,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="20dp"
                     android:text="Single"
-                    android:textColor="@color/colorConcepLight"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
                 <View
@@ -121,7 +121,7 @@
             android:id="@+id/llDepartureDate"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@color/colorConcepLight"
+            android:background="@drawable/custom_linearlayout_border"
             android:clickable="true"
             >
 
@@ -147,6 +147,7 @@
         </LinearLayout>
         <LinearLayout
             android:id="@+id/llReturnDate"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:background="@color/colorConcepLight"
@@ -178,7 +179,7 @@
         <Button
             android:id="@+id/btnShow_Train"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="45dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_costum_border"
             android:text="SHOW TRAINS"

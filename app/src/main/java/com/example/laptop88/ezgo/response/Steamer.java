@@ -9,15 +9,15 @@ import java.util.List;
 public class Steamer implements Serializable {
     @SerializedName("steamerID")
     @Expose
-    private String steamerID;
+    private Integer steamerID;
 
     @SerializedName("steamerNumber")
     @Expose
-    private int steamerNumber;
+    private Integer steamerNumber;
 
     @SerializedName("steamerType")
     @Expose
-    private int  steamerType;
+    private Integer  steamerType;
 
     @SerializedName("airCondition")
     @Expose
@@ -31,35 +31,27 @@ public class Steamer implements Serializable {
 
     }
 
-    public Steamer(String steamerID, int steamerNumber, int steamerType, boolean airCondition, List<Seat> seatList) {
-        this.steamerID = steamerID;
-        this.steamerNumber = steamerNumber;
-        this.steamerType = steamerType;
-        this.airCondition = airCondition;
-        this.seatList = seatList;
-    }
-
-    public String getSteamerID() {
+    public Integer getSteamerID() {
         return steamerID;
     }
 
-    public void setSteamerID(String steamerID) {
+    public void setSteamerID(Integer steamerID) {
         this.steamerID = steamerID;
     }
 
-    public int getSteamerNumber() {
+    public Integer getSteamerNumber() {
         return steamerNumber;
     }
 
-    public void setSteamerNumber(int steamerNumber) {
+    public void setSteamerNumber(Integer steamerNumber) {
         this.steamerNumber = steamerNumber;
     }
 
-    public int getSteamerType() {
+    public Integer getSteamerType() {
         return steamerType;
     }
 
-    public void setSteamerType(int steamerType) {
+    public void setSteamerType(Integer steamerType) {
         this.steamerType = steamerType;
     }
 
@@ -76,6 +68,14 @@ public class Steamer implements Serializable {
     }
 
     public void setSeatList(List<Seat> seatList) {
+        this.seatList = seatList;
+    }
+
+    public Steamer(Integer steamerID, Integer steamerNumber, Integer steamerType, boolean airCondition, List<Seat> seatList) {
+        this.steamerID = steamerID;
+        this.steamerNumber = steamerNumber;
+        this.steamerType = steamerType;
+        this.airCondition = airCondition;
         this.seatList = seatList;
     }
 }

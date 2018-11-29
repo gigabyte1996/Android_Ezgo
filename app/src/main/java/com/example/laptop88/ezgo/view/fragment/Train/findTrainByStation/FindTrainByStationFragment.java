@@ -35,6 +35,7 @@ import com.example.laptop88.ezgo.Utils.ScreenUtils;
 import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainSchedule;
+import com.example.laptop88.ezgo.response.TrainScheduleResponse;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
 import com.example.laptop88.ezgo.view.activity.main.MainScreenActivity;
@@ -67,7 +68,7 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     private ItemStationAdapter mItemStationAdapter;
     private String toStation = null;
     private String fromStation = null;
-    TrainRequest trainRequest;
+    private TrainRequest trainRequest;
 
 
     public FindTrainByStationFragment() {
@@ -122,10 +123,6 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     @BindView(R.id.txtReturn)
     TextView txtReturn;
 
-
-//    @BindView(R.id.numberOfSeat)
-//    EditText edtNumberOfSeat;
-
     @Nullable
     @BindView(R.id.rcvListTrainSchedule)
     RecyclerView recyclerListTrainSchedule;
@@ -165,10 +162,10 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
                 dialog.dismiss();
             }
         });
-//        station = String.valueOf(textView);
         dialog.show();
         return String.valueOf(textView);
     }
+
 //    public  void senndDataByBundle(){
 //        Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
 //
@@ -199,28 +196,25 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
         } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null) {
             trainRequest.setFromStation(txtToStation.getText().toString());
             trainRequest.setToStation(txtFromStation.getText().toString());
-            Log.d("From", fromStation);
-            showToast("miss both Date");
+            btnShowTrain.setClickable(true);
         } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() != null) {
             trainRequest.setFromStation(txtToStation.getText().toString());
             trainRequest.setToStation(txtFromStation.getText().toString());
             trainRequest.setDepartureTime(txtReturnDate.getText().toString());
-            showToast("miss departureDate");
+            btnShowTrain.setClickable(true);
         } else if (trainRequest.getDepartureTime() != null && trainRequest.getReturnTime() == null) {
             trainRequest.setFromStation(txtFromStation.getText().toString());
             trainRequest.setToStation(txtToStation.getText().toString());
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
-            showToast("miss returnDate");
+            btnShowTrain.setClickable(false);
         } else {
             trainRequest.setFromStation(txtFromStation.getText().toString());
             trainRequest.setToStation(txtToStation.getText().toString());
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
             trainRequest.setReturnTime(txtReturnDate.getText().toString());
-            Log.d("VVVVVVVVVVV", trainRequest.getFromStation());
-            showToast("Full");
+            btnShowTrain.setClickable(false);
 
         }
-        showToast("clicked");
         findTrainByStationFragmentPresenter = new FindTrainByStationFragmentPresenterImpl(this);
         findTrainByStationFragmentPresenter.searchTrain(trainRequest);
     }
@@ -270,23 +264,6 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
         datePickerDialog.show();
     }
 
-//    @OnClick({R.id.txtSingle, R.id.txtReturn})
-//    public void getTypeOfSchedule(View view) {
-//        switch (view.getId()) {
-//            case R.id.txtSingle: {
-//                showToast("click Single");
-//                txtSingle.setTextColor(Color.WHITE);
-//                txtReturn.setTextColor((getResources().getColor(R.color.colorConcepLight)));
-////                llReturnDate.setVisibility(View.GONE);
-//            }
-//            case R.id.txtReturn: {
-//                showToast("click Return");
-//                txtReturn.setTextColor(Color.WHITE);
-//                txtSingle.setTextColor((getResources().getColor(R.color.colorConcepLight)));
-////                llReturnDate.setVisibility(View.VISIBLE);
-//            }
-//        }
-//    }
 
     @OnClick({R.id.txtSingle})
     public void clickSingle(View view) {
@@ -302,37 +279,7 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
         llReturnDate.setVisibility(View.VISIBLE);
     }
 
-//    @OnTextChanged({R.id.edtFromStation, R.id.edtToStation})
-//    protected void onTextChanged() {
-//
-//        String fromStation = edtFromStation.getText().toString().trim();
-//        String toStation = edtToStation.getText().toString().trim();
-//      //  int numberOfSeat = Integer.parseInt(edtNumberOfSeat.getText().toString().trim());
-//
-//
-//        if (fromStation.isEmpty() || toStation.isEmpty()) {
-//            btnShowTrain.setEnabled(false);
-//        } else {
-//            btnShowTrain.setEnabled(true);
-//        }
-//    }
 
-
-//    @OnClick({R.id.txtSingle, R.id.txtReturn})
-//    public void getTypeOfSchedule(TextView textView) {
-////        TextView textView;
-//        switch (textView.getId()) {
-//            case R.id.txtSingle: {
-//                if (textView.isClickable()) {
-//                    textView.setTextColor(getResources().getColor(R.color.colorConcepLight));
-//                    String typeOfSchedule = textView.getText().toString();
-//                }
-//            }
-//            case R.id.txtReturn: {
-//
-//            }
-//        }
-//    }
 
 //    @OnClick({R.id.btnShowShow_Train})
 //    public void sendData(View view){
@@ -377,13 +324,13 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     }
 
     @Override
-    public void showTrain(List<TrainSchedule> trainScheduleList) {
+    public void showTrain(TrainScheduleResponse trainScheduleResponse) {
         trainSchedules = new ArrayList<>();
 
-        if (trainScheduleList == null) {
+        if (trainScheduleResponse.getSingleTrainSchedules() == null) {
             showToast("We couldn’t find any train");
         } else {
-            trainSchedules.addAll(trainScheduleList);
+            trainSchedules.addAll(trainScheduleResponse.getSingleTrainSchedules());
             Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
             intent.putExtra("trainSchedule", (Serializable) trainSchedules);
             startActivity(intent);

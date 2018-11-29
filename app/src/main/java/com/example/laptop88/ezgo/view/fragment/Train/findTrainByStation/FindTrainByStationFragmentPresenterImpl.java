@@ -2,6 +2,7 @@ package com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation;
 
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainSchedule;
+import com.example.laptop88.ezgo.response.TrainScheduleResponse;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class FindTrainByStationFragmentPresenterImpl implements FindTrainByStati
     }
 
     @Override
-    public void searchTrainSuccess(List<TrainSchedule> trainSchedules) {
+    public void searchTrainSuccess(TrainScheduleResponse trainScheduleResponse) {
         mFindTrainByStationFragmentView.closeProgressDialog();
-        mFindTrainByStationFragmentView.showTrain(trainSchedules);
+        mFindTrainByStationFragmentView.showTrain(trainScheduleResponse);
     }
 
     @Override

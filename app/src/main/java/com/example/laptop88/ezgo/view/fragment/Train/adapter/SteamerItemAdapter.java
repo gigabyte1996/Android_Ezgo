@@ -50,7 +50,7 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
     @Override
     public void onBindViewHolder(@NonNull SteamerItemAdapter.RecyclerViewHolder holder, final int position) {
         final int steamerNumber = mSteamers.get(position).getSteamerNumber();
-        final String carrageID = mSteamers.get(position).getSteamerID();
+        final Integer carrageID = mSteamers.get(position).getSteamerID();
         holder.txtSteamerNumber.setText(String.valueOf(steamerNumber));
         holder.item.setOnClickListener(new View.OnClickListener(){
             @Override

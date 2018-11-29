@@ -13,28 +13,20 @@ public class TrainDetailResponse implements Serializable {
 
     @SerializedName("trainID")
     @Expose
-    private String trainID;
+    private Integer trainID;
     @SerializedName("trainName")
     @Expose
     private String trainName;
 
     @SerializedName("trainType")
     @Expose
-    private int trainType;
+    private Integer trainType;
 
     @SerializedName("steamerList")
     @Expose
     private List<Steamer> steamerList;
 
     public TrainDetailResponse() {
-    }
-
-    public TrainDetailResponse(Message error, String trainID, String trainName, int trainType, List<Steamer> steamerList) {
-        this.error = error;
-        this.trainID = trainID;
-        this.trainName = trainName;
-        this.trainType = trainType;
-        this.steamerList = steamerList;
     }
 
     public Message getError() {
@@ -45,11 +37,11 @@ public class TrainDetailResponse implements Serializable {
         this.error = error;
     }
 
-    public String getTrainID() {
+    public Integer getTrainID() {
         return trainID;
     }
 
-    public void setTrainID(String trainID) {
+    public void setTrainID(Integer trainID) {
         this.trainID = trainID;
     }
 
@@ -61,11 +53,11 @@ public class TrainDetailResponse implements Serializable {
         this.trainName = trainName;
     }
 
-    public int getTrainType() {
+    public Integer getTrainType() {
         return trainType;
     }
 
-    public void setTrainType(int trainType) {
+    public void setTrainType(Integer trainType) {
         this.trainType = trainType;
     }
 
@@ -74,6 +66,14 @@ public class TrainDetailResponse implements Serializable {
     }
 
     public void setSteamerList(List<Steamer> steamerList) {
+        this.steamerList = steamerList;
+    }
+
+    public TrainDetailResponse(Message error, Integer trainID, String trainName, Integer trainType, List<Steamer> steamerList) {
+        this.error = error;
+        this.trainID = trainID;
+        this.trainName = trainName;
+        this.trainType = trainType;
         this.steamerList = steamerList;
     }
 }

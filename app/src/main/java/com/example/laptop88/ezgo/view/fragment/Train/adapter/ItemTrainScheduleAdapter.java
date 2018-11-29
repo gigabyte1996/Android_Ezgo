@@ -80,7 +80,7 @@ public class ItemTrainScheduleAdapter extends RecyclerView.Adapter<ItemTrainSche
         holder.btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getTrainID.onClickTrainScheduleListener(String.valueOf(data.get(position).getTrainID()));
+                getTrainID.onClickTrainScheduleListener(Integer.parseInt(data.get(position).getTrainID()));
                 Log.d("position", String.valueOf(position) + data.get(position).getTrainID());
 //                ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
 //                Bundle bundle = new Bundle();
@@ -136,6 +136,6 @@ public class ItemTrainScheduleAdapter extends RecyclerView.Adapter<ItemTrainSche
         }
     }
     public interface GetTrainID{
-        void onClickTrainScheduleListener(String trainID);
+        void onClickTrainScheduleListener(Integer trainID);
     }
 }

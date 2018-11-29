@@ -1,6 +1,5 @@
 package com.example.laptop88.ezgo.response;
 
-import java.util.Date;
 
 public class TrainRequest {
     private String fromStation;

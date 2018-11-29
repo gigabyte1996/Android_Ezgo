@@ -1,15 +1,15 @@
 package com.example.laptop88.ezgo.response;
 
 public class Train {
-    private String trainID;
+    private Integer trainID;
     private String trainName;
     private int trainType;
 
-    public String getTrainID() {
+    public Integer getTrainID() {
         return trainID;
     }
 
-    public void setTrainID(String trainID) {
+    public void setTrainID(Integer trainID) {
         this.trainID = trainID;
     }
 
@@ -29,8 +29,7 @@ public class Train {
         this.trainType = trainType;
     }
 
-    public Train(String trainID, String trainName, int trainType) {
-
+    public Train(Integer trainID, String trainName, int trainType) {
         this.trainID = trainID;
         this.trainName = trainName;
         this.trainType = trainType;

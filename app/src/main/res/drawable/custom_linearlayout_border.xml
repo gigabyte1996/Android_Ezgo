@@ -5,13 +5,13 @@
 
     <!-- Set màu nền-->
     <solid
-        android:color="#ffffff" >
+        android:color="@color/colorConcepLight" >
     </solid>
 
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->
     <stroke
         android:width="4dp"
-        android:color="#ffffff" >
+        android:color="@color/colorConcepLight" >
     </stroke>
 
     <!-- các thuộc tính căn chỉnh-->

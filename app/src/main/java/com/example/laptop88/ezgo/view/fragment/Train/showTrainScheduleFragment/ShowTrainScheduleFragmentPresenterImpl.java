@@ -13,7 +13,7 @@ public class ShowTrainScheduleFragmentPresenterImpl implements ShowTrainSchedule
     }
 
     @Override
-    public void getTrainDiagramByTrainID(String id) {
+    public void getTrainDiagramByTrainID(Integer id) {
         mShowTrainScheduleFragmentView.showProgressDialog();
         mShowTrainScheduleModel.getTrainDiagramByTrainID(id);
     }
