@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.Singleton.TicketPocket;
+import com.example.laptop88.ezgo.response.SeatStorage;
 import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.Ticket;
 import com.example.laptop88.ezgo.view.activity.booking1.FindTrainsActivity;
@@ -83,7 +85,12 @@ public class MainScreenActivity extends AppCompatActivity implements MainScreenA
             intent.putExtra("station",(Serializable) stations);
             startActivity(intent);
         }
+
+    @Override
+    public void showSeatStorage(List<SeatStorage> seatStorages) {
+        TicketPocket.getInstance().setListTicket(seatStorages);
     }
+}
 
 
 

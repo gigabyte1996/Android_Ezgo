@@ -10,7 +10,7 @@ public class TrainSchedule implements Serializable {
 
     @SerializedName("trainScheduleID")
     @Expose
-    private String trainScheduleID;
+    private Integer trainScheduleID;
 
     @SerializedName("trainName")
     @Expose
@@ -38,27 +38,16 @@ public class TrainSchedule implements Serializable {
 
     @SerializedName("trainID")
     @Expose
-    private String trainID;
+    private Integer trainID;
 
     public TrainSchedule() {
     }
 
-    public TrainSchedule(String trainScheduleID,String trainName, String jouneyName, Date departureTime, Date arrivalTime, String firstStation, String lastStation, String trainID) {
-        this.trainScheduleID = trainScheduleID;
-        this.trainName = trainName;
-        this.jouneyName = jouneyName;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.firstStation = firstStation;
-        this.lastStation = lastStation;
-        this.trainID = trainID;
-    }
-
-    public String getTrainScheduleID() {
+    public Integer getTrainScheduleID() {
         return trainScheduleID;
     }
 
-    public void setTrainScheduleID(String trainScheduleID) {
+    public void setTrainScheduleID(Integer trainScheduleID) {
         this.trainScheduleID = trainScheduleID;
     }
 
@@ -110,13 +99,22 @@ public class TrainSchedule implements Serializable {
         this.lastStation = lastStation;
     }
 
-    public String getTrainID() {
+    public Integer getTrainID() {
         return trainID;
     }
 
-    public void setTrainID(String trainID) {
+    public void setTrainID(Integer trainID) {
         this.trainID = trainID;
     }
 
-
+    public TrainSchedule(Integer trainScheduleID, String trainName, String jouneyName, Date departureTime, Date arrivalTime, String firstStation, String lastStation, Integer trainID) {
+        this.trainScheduleID = trainScheduleID;
+        this.trainName = trainName;
+        this.jouneyName = jouneyName;
+        this.departureTime = departureTime;
+        this.arrivalTime = arrivalTime;
+        this.firstStation = firstStation;
+        this.lastStation = lastStation;
+        this.trainID = trainID;
+    }
 }

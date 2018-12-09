@@ -9,7 +9,7 @@
     <!-- đặt thuộc tính màu và độ rộng của đường viền -->
     <stroke
         android:width="2dp"
-        android:color="@color/colorButton" >
+        android:color="@color/colorConcept" >
     </stroke>
 
      <!--các thuộc tính căn chỉnh-->

@@ -14,6 +14,7 @@ public interface TrainApi {
     Call<TrainScheduleResponse> searchTrain(@Body TrainRequest requestTrain);
 
     @POST("/api/train/diagram")
-    Call<TrainDetailResponse> getTrainDiagrambyTrainId(@Body Integer trainID);
+    Call<TrainDetailResponse> getTrainDiagramByTrainScheduleID(@Body Integer trainID);
+
 
 }

@@ -15,10 +15,14 @@
     <color name="ColorDarkGray">#6c6c6c</color>
     <color name="Seatwall">#481769</color>
     <color name="DarkViolet">#FF21041A</color>
+    <color name="NotifyRed">#e30425</color>
+    <color name="NotifyYellow">#FD9726</color>
 
     <color name="SeatEmpty">#ffffff</color>
     <color name="SeatPicking">#40fa46</color>
     <color name="SeatReserve">#f43939</color>
     <color name="SeatTrading">#5a26de</color>
+    <color name="Black">#000000</color>
+    <color name="White">#ffffff</color>
 
 </resources>

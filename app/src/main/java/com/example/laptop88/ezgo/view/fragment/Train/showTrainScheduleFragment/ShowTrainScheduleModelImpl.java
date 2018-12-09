@@ -23,8 +23,8 @@ public class ShowTrainScheduleModelImpl implements ShowTrainScheduleModel {
     }
 
     @Override
-    public void getTrainDiagramByTrainID(Integer trainID) {
-        Call<TrainDetailResponse> call = mApplicationApi.getClient().create(TrainApi.class).getTrainDiagrambyTrainId(trainID);
+    public void getTrainDiagramByTrainScheduleID(Integer trainID) {
+        Call<TrainDetailResponse> call = mApplicationApi.getClient().create(TrainApi.class).getTrainDiagramByTrainScheduleID(trainID);
         call.enqueue(new Callback<TrainDetailResponse>() {
             @Override
             public void onResponse(Call<TrainDetailResponse> call, Response<TrainDetailResponse> response) {
@@ -35,16 +35,16 @@ public class ShowTrainScheduleModelImpl implements ShowTrainScheduleModel {
                 }
                 switch (code) {
                     case 0:
-                        mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainIDSuccess(trainDetailResponse);
+                        mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainScheduleIDSuccess(trainDetailResponse);
                         break;
                     default:
-                        mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainIDFail();
+                        mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainScheduleIDFail();
                         break;
                 }
             }
             @Override
             public void onFailure(Call<TrainDetailResponse> call, Throwable t) {
-                mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainIDFail();
+                mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainScheduleIDFail();
             }
         });
 

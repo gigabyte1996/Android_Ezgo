@@ -1,13 +1,15 @@
-//package com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment;
-//
-//import com.example.laptop88.ezgo.response.TrainDetailResponse;
-//
-//import java.util.List;
-//
-//public interface ShowTrainDiagramFragmentView {
-//    void showToast(String msg);
-//    void showProgressDialog();
-//    void closeProgressDialog();
-//
+package com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment;
+
+import com.example.laptop88.ezgo.response.SeatStorage;
+import com.example.laptop88.ezgo.response.TrainDetailResponse;
+
+import java.util.List;
+
+public interface ShowTrainDiagramFragmentView {
+    void showToast(String msg);
+    void showProgressDialog();
+    void closeProgressDialog();
+    void showSeatStorage(List<SeatStorage> seatStorages);
+
 //    void showTrainDiagram(TrainDetailResponse trainDetailResponse);
-//}
+}

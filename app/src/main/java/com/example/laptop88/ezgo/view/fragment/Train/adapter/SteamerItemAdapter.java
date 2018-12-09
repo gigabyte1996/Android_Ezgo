@@ -16,8 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.Singleton.CurrentTrainSchedule;
+import com.example.laptop88.ezgo.Singleton.TicketPocket;
 import com.example.laptop88.ezgo.response.Seat;
 import com.example.laptop88.ezgo.response.Steamer;
+import com.example.laptop88.ezgo.response.TrainSchedule;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.fragment.Steamer.ShowListSteamersDiagram.CarrageListFragment;
 import com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment.ShowTrainDiagramFragment;
@@ -31,12 +34,14 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
     private List<Steamer> mSteamers = new ArrayList<>();
     private ShowTrainDiagramFragment showTrainDiagramFragment;
     private List<Seat> mSeats = new ArrayList<>();
+    private TrainSchedule mTrainSchedule;
 
-    public SteamerItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Steamer> mSteamers, ShowTrainDiagramFragment showTrainDiagramFragment) {
+    public SteamerItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Steamer> mSteamers, ShowTrainDiagramFragment showTrainDiagramFragment, TrainSchedule mTrainSchedule) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mSteamers = mSteamers;
         this.showTrainDiagramFragment = showTrainDiagramFragment;
+        this.mTrainSchedule = mTrainSchedule;
     }
 
     @NonNull
@@ -51,12 +56,15 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
     public void onBindViewHolder(@NonNull SteamerItemAdapter.RecyclerViewHolder holder, final int position) {
         final int steamerNumber = mSteamers.get(position).getSteamerNumber();
         final Integer carrageID = mSteamers.get(position).getSteamerID();
+
+
         holder.txtSteamerNumber.setText(String.valueOf(steamerNumber));
         holder.item.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                CurrentTrainSchedule.getInstance().setSteamer(mSteamers.get(position));
+                List<Seat> seatList = new ArrayList<>();
                 mSeats = mSteamers.get(position).getSeatList();
-                Seat seat = new Seat(1,1,1,1);
                 showTrainDiagramFragment.transferDataToAdapter(mSeats);
             }
         });
@@ -103,7 +111,4 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
             e.printStackTrace();
         }
     }
-//    public interface handleCarrageItem{
-//        void onClickItemCarrageListener(String carrageID);
-//    }
 }

@@ -59,12 +59,10 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     public static final String DESCRIPTION = "description";
     public static final String BUNDLE = "bundel";
 
-    //    private EditText edtNumberOfSeat;
-////    private LinearLayout llDate;
     private ProgressDialog mProgressDialog;
     private Bundle bundle;
     private List<Station> stations;
-    private FindTrainByStationFragmentPresenterImpl findTrainByStationFragmentPresenter;
+    private FindTrainByStationFragmentPresenterImpl findTrainByStationFragmentPresenterImpl;
     private ItemStationAdapter mItemStationAdapter;
     private String toStation = null;
     private String fromStation = null;
@@ -128,7 +126,8 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     RecyclerView recyclerListTrainSchedule;
 
     ItemTrainScheduleAdapter mRcvAdapter;
-    List<TrainSchedule> trainSchedules;
+    List<TrainSchedule> singleTrainSchedules;
+    List<TrainSchedule> returnTrainSchedules;
 
 
     @Override
@@ -166,16 +165,6 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
         return String.valueOf(textView);
     }
 
-//    public  void senndDataByBundle(){
-//        Intent intent new Intent(FindTrainByStationActivity.this, ShowListTrainActivity.class);
-//
-//        Intent intent = new Intent(ActivityA.this,ActivityB.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putString(TITLE,edtTitle.getText().toString());
-//        bundle.putString(DESCRIPTION,edtDescription.getText().toString());
-//        intent.putExtra(BUNDLE,bundle);
-//        startActivity(intent);
-//    }
 
     @OnClick(R.id.llToStation)
     public void onClickToStation() {
@@ -215,8 +204,8 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
             btnShowTrain.setClickable(false);
 
         }
-        findTrainByStationFragmentPresenter = new FindTrainByStationFragmentPresenterImpl(this);
-        findTrainByStationFragmentPresenter.searchTrain(trainRequest);
+        findTrainByStationFragmentPresenterImpl = new FindTrainByStationFragmentPresenterImpl(this);
+        findTrainByStationFragmentPresenterImpl.searchTrain(trainRequest);
     }
 
     @OnClick({R.id.llDepartureDate})
@@ -325,18 +314,25 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
 
     @Override
     public void showTrain(TrainScheduleResponse trainScheduleResponse) {
-        trainSchedules = new ArrayList<>();
-
+        singleTrainSchedules = new ArrayList<>();
+        returnTrainSchedules = new ArrayList<>();
+        //
         if (trainScheduleResponse.getSingleTrainSchedules() == null) {
             showToast("We couldn’t find any train");
-        } else {
-            trainSchedules.addAll(trainScheduleResponse.getSingleTrainSchedules());
+        } else if (trainScheduleResponse.getReturnTrainSchedules() == null){
+            singleTrainSchedules.addAll(trainScheduleResponse.getSingleTrainSchedules());
             Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
-            intent.putExtra("trainSchedule", (Serializable) trainSchedules);
+            intent.putExtra("trainSchedule", (Serializable) singleTrainSchedules);
+            startActivity(intent);
+        } else {
+            singleTrainSchedules.addAll(trainScheduleResponse.getSingleTrainSchedules());
+            returnTrainSchedules.addAll(trainScheduleResponse.getReturnTrainSchedules());
+            Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
+            Log.d("ABCDE", "showTrain: not null");
+            intent.putExtra("singleTrainSchedules", (Serializable) singleTrainSchedules);
+            intent.putExtra("returnTrainSchedules", (Serializable) returnTrainSchedules);
             startActivity(intent);
         }
-
-
     }
 
     @Override

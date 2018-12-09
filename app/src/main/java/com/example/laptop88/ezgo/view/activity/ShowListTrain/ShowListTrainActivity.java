@@ -15,7 +15,7 @@ public class ShowListTrainActivity extends AppCompatActivity {
         @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
-                setContentView(R.layout.fragment_list_train_schedules);
+                setContentView(R.layout.fragment_list_single_train_schedules);
                 Intent intent = getIntent();
                 if (intent != null) {
                         Bundle bundle = intent.getBundleExtra(FindTrainByStationFragment.BUNDLE);

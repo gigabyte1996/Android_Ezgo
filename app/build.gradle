@@ -45,4 +45,7 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:2.2.0'
 
+    //GSON dependency
+    implementation 'com.google.code.gson:gson:2.8.5'
+
 }

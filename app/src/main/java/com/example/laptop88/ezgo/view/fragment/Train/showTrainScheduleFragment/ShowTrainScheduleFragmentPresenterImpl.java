@@ -13,19 +13,19 @@ public class ShowTrainScheduleFragmentPresenterImpl implements ShowTrainSchedule
     }
 
     @Override
-    public void getTrainDiagramByTrainID(Integer id) {
+    public void getTrainDiagramByTrainScheduleID(Integer id) {
         mShowTrainScheduleFragmentView.showProgressDialog();
-        mShowTrainScheduleModel.getTrainDiagramByTrainID(id);
+        mShowTrainScheduleModel.getTrainDiagramByTrainScheduleID(id);
     }
 
     @Override
-    public void getTrainDiagramByTrainIDSuccess(TrainDetailResponse trainDetailResponse) {
+    public void getTrainDiagramByTrainScheduleIDSuccess(TrainDetailResponse trainDetailResponse) {
         mShowTrainScheduleFragmentView.closeProgressDialog();
         mShowTrainScheduleFragmentView.showTrainDiagram(trainDetailResponse);
     }
 
     @Override
-    public void getTrainDiagramByTrainIDFail() {
+    public void getTrainDiagramByTrainScheduleIDFail() {
 //        mShowTrainScheduleFragmentView.closeProgressDialog();
         mShowTrainScheduleFragmentView.showToast("FAIL");
 

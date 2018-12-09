@@ -1,6 +1,7 @@
 package com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation;
 
 import android.content.Intent;
+import android.util.Log;
 
 import com.example.laptop88.ezgo.response.TrainRequest;
 import com.example.laptop88.ezgo.response.TrainScheduleResponse;
@@ -30,6 +31,9 @@ public class FindTrainByStationModelImpl implements FindTrainByStationModel {
             @Override
             public void onResponse(Call<TrainScheduleResponse> call, Response<TrainScheduleResponse> response) {
                 TrainScheduleResponse trainScheduleResponse = response.body();
+                if (trainScheduleResponse.getReturnTrainSchedules() != null){
+                    Log.d("ABCD", "onResponse: Not null");
+                }
                 int code = Integer.parseInt(trainScheduleResponse.getError().getCode());
                 switch (code) {
                     case 0:

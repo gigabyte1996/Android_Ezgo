@@ -52,19 +52,20 @@ public class ItemTrainScheduleAdapter extends RecyclerView.Adapter<ItemTrainSche
 
     @Override
     public void onBindViewHolder(@NonNull ItemTrainScheduleAdapter.RecyclerViewHolder holder, final int position) {
-        final String trainScheduleID = data.get(position).getTrainScheduleID();
+        final Integer trainScheduleID = data.get(position).getTrainScheduleID();
         final String trainName = data.get(position).getTrainName();
         final String jouneyName = data.get(position).getJouneyName();
         final Date departureTime = data.get(position).getDepartureTime();
         final Date arrivalTime = data.get(position).getArrivalTime();
         final String firstStation = data.get(position).getFirstStation();
         final String lastStation = data.get(position).getLastStation();
-        final String trainID = data.get(position).getTrainID();
+        final Integer trainID = data.get(position).getTrainID();
 
 
         DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         final String departuteTimeSt = formatter.format(departureTime);
         final String arrivalTimeSt = formatter.format(arrivalTime);
+
 
         holder.txtTrainName.setText(trainName);
         holder.txtJouneyName.setText(jouneyName);
@@ -80,14 +81,8 @@ public class ItemTrainScheduleAdapter extends RecyclerView.Adapter<ItemTrainSche
         holder.btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getTrainID.onClickTrainScheduleListener(Integer.parseInt(data.get(position).getTrainID()));
+                getTrainID.onClickTrainScheduleListener(data.get(position));
                 Log.d("position", String.valueOf(position) + data.get(position).getTrainID());
-//                ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
-//                Bundle bundle = new Bundle();
-//                bundle.putString("trainID", String.valueOf(data.get(position).getTrainID()));
-//                mFragment.setArguments(bundle);
-//                pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
-
             }
         });
     }
@@ -117,25 +112,7 @@ public class ItemTrainScheduleAdapter extends RecyclerView.Adapter<ItemTrainSche
             ticketDetail = itemView.findViewById(R.id.ticketDetail);
         }
     }
-    public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
-        try {
-            FragmentTransaction ft = mFragmentManager.beginTransaction();
-            ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);
-            if (type == BookingActivity.PushFrgType.REPLACE) {
-                ft.replace(mContainerId, fragment, tag);
-                ft.addToBackStack(fragment.getTag());
-                ft.commitAllowingStateLoss();
-            } else if (type == BookingActivity.PushFrgType.ADD) {
-                ft.add(mContainerId, fragment, tag);
-                ft.addToBackStack(fragment.getTag());
-                ft.commit();
-            }
-            mFragmentManager.executePendingTransactions();
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-        }
-    }
     public interface GetTrainID{
-        void onClickTrainScheduleListener(Integer trainID);
+        void onClickTrainScheduleListener(TrainSchedule trainSchedule);
     }
 }

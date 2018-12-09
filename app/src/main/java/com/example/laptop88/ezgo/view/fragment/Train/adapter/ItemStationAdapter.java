@@ -18,17 +18,19 @@ public class ItemStationAdapter extends ArrayAdapter {
     Context mContext;
     int resourceID;
     List<Station> stations;
+
     public ItemStationAdapter(Context context, int resource, List<Station> stations) {
         super(context, resource, stations);
         this.mContext = context;
-        this.resourceID=resource;
-        this.stations= stations;
+        this.resourceID = resource;
+        this.stations = stations;
     }
 
     @Override
     public Station getItem(int position) {
         return stations.get(position);
     }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View row = convertView;

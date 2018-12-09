@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.Singleton.CurrentTrainSchedule;
+import com.example.laptop88.ezgo.Utils.Constants;
 import com.example.laptop88.ezgo.response.TrainDetailResponse;
 import com.example.laptop88.ezgo.response.TrainSchedule;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
@@ -27,6 +28,7 @@ import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemTrainScheduleAd
 import com.example.laptop88.ezgo.view.fragment.Train.showTrainDiagramFragment.ShowTrainDiagramFragment;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,35 +38,40 @@ import butterknife.ButterKnife;
 public class
 ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentView, ItemTrainScheduleAdapter.GetTrainID {
     private ProgressDialog mProgressDialog;
-    private ShowTrainScheduleFragmentPresenter mShowTrainScheduleFragmentPresenter;
     private ShowTrainScheduleFragmentPresenterImpl mShowTrainScheduleFragmentPresenterImpl;
-    private FragmentManager mFragmentManager;
+
 
     @Nullable
     @BindView(R.id.rcvListTrainSchedule)
     RecyclerView rcvListTrainSchedule;
 
-
     private ItemTrainScheduleAdapter mRcvAdapter;
     private List<TrainSchedule> trainSchedules;
+    private List<TrainSchedule> trainSchedules123;
+    private sendDataTofragment sendDataTofragment;
+
+    public void setInterface(sendDataTofragment sendDataTofragment) {
+        this.sendDataTofragment = sendDataTofragment;
+    }
 
     public ShowTrainScheduleFragment() {
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list_train_schedules, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_single_train_schedules, container, false);
         ButterKnife.bind(this, view);
         Bundle bundle = this.getArguments();
         trainSchedules = new ArrayList<>();
-        trainSchedules = (List<TrainSchedule>) bundle.getSerializable("trainSchedule");
-        Log.d("aaaaaaaaaaa", trainSchedules.toString());
+        trainSchedules123 = new ArrayList<>();
+        trainSchedules = (List<TrainSchedule>) bundle.getSerializable("singleTrainSchedules");
+        trainSchedules123 = (List<TrainSchedule>) bundle.getSerializable("returnTrainSchedules");
+        CurrentTrainSchedule.getInstance().setListReturn(trainSchedules123);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         mRcvAdapter = new ItemTrainScheduleAdapter(getActivity(), fragmentManager, trainSchedules, this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayout.VERTICAL);
-
         rcvListTrainSchedule.setLayoutManager(layoutManager);
         rcvListTrainSchedule.setAdapter(mRcvAdapter);
         Toolbar toolbar = view.findViewById(R.id.toolbar);
@@ -75,10 +82,11 @@ ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentV
                 ((BookingActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(true);
             }
         }
+        ((BookingActivity) getActivity()).setTitleToolBar("Single Schedule");
+        ((BookingActivity) getActivity()).setVisiblePaymentBar(Constants.VisibilityType.GONE);
         showToast("Success");
         return view;
     }
-
 
 
     @Override
@@ -111,14 +119,15 @@ ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentV
     @Override
     public void showTrainDiagram(TrainDetailResponse trainDetailResponse) {
         TrainDetailResponse train = new TrainDetailResponse();
-//        Log.d("listCarrage", trainDetailResponse.getSteamerList().size()+"");
         if (trainDetailResponse == null) {
             showToast("Couldn't find train");
         } else {
             train = trainDetailResponse;
         }
         Bundle bundle = new Bundle();
-        bundle.putSerializable("trainDetailResponse",  train);
+//        bundle.putSerializable("trainSchedule", singleTrainSchedule);
+
+        bundle.putSerializable("trainDetailResponse", train);
         ShowTrainDiagramFragment mFragment = new ShowTrainDiagramFragment();
         mFragment.setArguments(bundle);
         pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
@@ -127,11 +136,19 @@ ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentV
     }
 
     @Override
-    public void onClickTrainScheduleListener(Integer trainID) {
+    public void onClickTrainScheduleListener(TrainSchedule trainSchedule) {
+        CurrentTrainSchedule.getInstance().setDepartureSchedule(trainSchedule);
         mShowTrainScheduleFragmentPresenterImpl = new ShowTrainScheduleFragmentPresenterImpl(this);
-        mShowTrainScheduleFragmentPresenterImpl.getTrainDiagramByTrainID(trainID);
+        mShowTrainScheduleFragmentPresenterImpl.getTrainDiagramByTrainScheduleID(trainSchedule.getTrainScheduleID());
 
     }
+
+    public List<TrainSchedule> searchByFilter(List<TrainSchedule> trainScheduleList){
+        List<TrainSchedule> result = new ArrayList<>();
+
+        return result;
+    }
+
     public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
         try {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -149,5 +166,9 @@ ShowTrainScheduleFragment extends Fragment implements ShowTrainScheduleFragmentV
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
+    }
+
+    public interface sendDataTofragment {
+        void sendData(List<TrainSchedule> trainSchedules);
     }
 }
