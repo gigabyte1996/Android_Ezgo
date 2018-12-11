@@ -202,7 +202,6 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
             trainRequest.setReturnTime(txtReturnDate.getText().toString());
             btnShowTrain.setEnabled(false);
-
         }
         findTrainByStationFragmentPresenterImpl = new FindTrainByStationFragmentPresenterImpl(this);
         findTrainByStationFragmentPresenterImpl.searchTrain(trainRequest);

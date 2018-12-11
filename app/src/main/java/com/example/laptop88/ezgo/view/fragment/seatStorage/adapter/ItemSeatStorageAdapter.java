@@ -1,18 +1,13 @@
 package com.example.laptop88.ezgo.view.fragment.seatStorage.adapter;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,27 +16,20 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
-import com.example.laptop88.ezgo.Singleton.TicketRequest;
 import com.example.laptop88.ezgo.Utils.Constants;
 import com.example.laptop88.ezgo.response.SeatStorage;
 import com.example.laptop88.ezgo.response.Ticket;
-import com.example.laptop88.ezgo.view.EzgoApplication;
-import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
-import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemTrainScheduleAdapter;
 import com.example.laptop88.ezgo.view.fragment.seatStorage.PaymentFragment.PaymentFragment;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorageAdapter.RecyclerViewHolder>{
+public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorageAdapter.RecyclerViewHolder> {
     private Context mContext;
     private FragmentManager mFragmentManager;
     private List<SeatStorage> data;
@@ -49,21 +37,21 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
     private List<Ticket> ticketList;
     private PaymentFragment paymentFragment;
     private SendData sendData;
+    private OnEditTextChanged onEditTextChanged;
 
-
-    public ItemSeatStorageAdapter(Context mContext, FragmentManager mFragmentManager, List<SeatStorage> data, String[] passengerObjectType, SendData sendData) {
+    public ItemSeatStorageAdapter(Context mContext, FragmentManager mFragmentManager, List<SeatStorage> data, String[] passengerObjectType, List<Ticket> ticketList ) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.data = data;
         this.passengerObjectType = passengerObjectType;
-        this.sendData = sendData;
+        this.ticketList = ticketList;
     }
 
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.item_ticket, parent, false);
+        View view = inflater.inflate(R.layout.item_seat_storage, parent, false);
         return new RecyclerViewHolder(view);
     }
 
@@ -83,22 +71,22 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
 
         holder.txtTrainName.setText(String.valueOf(trainName));
         holder.txtTrainScheduleName.setText(trainScheduleName);
-        holder.txtTicketFare.setText(String.valueOf(ticketFare)+" VND");
+        holder.txtTicketFare.setText(String.valueOf(ticketFare) + " VND");
         holder.txtDepartureTime.setText(departureTime);
-        switch (carrageType){
-            case Constants.CarrageType.SOFT_SEAT:{
+        switch (carrageType) {
+            case Constants.CarrageType.SOFT_SEAT: {
                 holder.txtCarrageType.setText("Soft seat");
                 break;
             }
-            case Constants.CarrageType.HARD_BED:{
+            case Constants.CarrageType.HARD_BED: {
                 holder.txtCarrageType.setText("Hard bed");
                 break;
             }
-            case Constants.CarrageType.SOFT_BED:{
+            case Constants.CarrageType.SOFT_BED: {
                 holder.txtCarrageType.setText("Soft bed");
                 break;
             }
-            case Constants.CarrageType.HARD_SEAT:{
+            case Constants.CarrageType.HARD_SEAT: {
                 holder.txtCarrageType.setText("Hard seat");
                 break;
             }
@@ -109,7 +97,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         holder.spObject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
+                switch (i) {
                     case (0):
                         holder.tilDateOfBirth.setVisibility(View.GONE);
                         holder.tilIdentification.setVisibility(View.VISIBLE);
@@ -147,14 +135,79 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
                 datePickerDialog.show();
             }
         });
-        holder.txtCarrageNumber.setText("Carrage number: "+String.valueOf(carrageNumber));
-        holder.txtSeatNumber.setText("Seat : "+String.valueOf(seatNumber));
+        holder.txtCarrageNumber.setText("Carrage number: " + String.valueOf(carrageNumber));
+        holder.txtSeatNumber.setText("Seat : " + String.valueOf(seatNumber));
         holder.imgDelete.setVisibility(View.INVISIBLE);
+        holder.edtFullName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-//        final String passengerName = String.valueOf(holder.edtFullName.getText());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                final String passengerName = String.valueOf(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        holder.edtIdentification.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String identificationNumber = "";
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String identificationNumber = String.valueOf(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        holder.edtDateOfBirth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String dateOfBirth = "";
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String dateOfBirth = String.valueOf(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        final String ticketType = holder.spObject.getSelectedItem().toString();
+
+        ticketList.get(position).setUserID(1);
+        ticketList.get(position).setFromStation(fromStation);
+        ticketList.get(position).setToStation(toStation);
+        ticketList.get(position).setTrainScheduleID(trainScheduleID);
+        ticketList.get(position).setTrainName(trainName);
+        ticketList.get(position).setDepartureTime(departureTime);
+        ticketList.get(position).setSeatNumber(seatNumber);
+        ticketList.get(position).setCarrageNumber(carrageNumber);
+        ticketList.get(position).setCarrageType(carrageType);
+        ticketList.get(position).setTicketType(ticketType);
+        ticketList.get(position).setFare(ticketFare);
+        ticketList.get(position).setPassengerName(holder.edtFullName.getText().toString());
+        ticketList.get(position).setIdentificationNumber(holder.edtIdentification.getText().toString());
+        ticketList.get(position).setDateOfBirth(holder.edtDateOfBirth.getText().toString());
+
+
+        //        final String passengerName = String.valueOf(holder.edtFullName.getText());
 //        final String identificationNumber = String.valueOf(holder.edtIdentification.getText());
 //        final String dateOfBirth = String.valueOf(holder.edtDateOfBirth.getText());
-//        final String ticketType = holder.spObject.getSelectedItem().toString();
+
 //        Ticket ticket =new Ticket();
 //        ticket.setUserID(1);
 //        ticket.setFromStation(fromStation);
@@ -180,8 +233,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         return data.size();
     }
 
-
-    public class RecyclerViewHolder extends RecyclerView.ViewHolder{
+    public class RecyclerViewHolder extends RecyclerView.ViewHolder {
         TextView txtTrainName;
         TextView txtTrainScheduleName;
         TextView txtTicketFare;
@@ -196,6 +248,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         EditText edtDateOfBirth;
         TextInputLayout tilIdentification;
         TextInputLayout tilDateOfBirth;
+
         public RecyclerViewHolder(View itemView) {
             super(itemView);
             txtCarrageNumber = itemView.findViewById(R.id.txtCarrageNumber);
@@ -216,9 +269,12 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         }
     }
 
-    public interface SendData{
+    public interface SendData {
         void sendDataToFragment(List<Ticket> tickets);
     }
 
-
+    public interface OnEditTextChanged {
+        void onTextChanged(int position, String charSeq);
+    }
 }
+

@@ -103,6 +103,8 @@ public class FindTrainsActivity extends AppCompatActivity {
     public void synchronizeTabData(String synchronizedTicketNumber) {
 //        this.getSupportFragmentManager().findFragmentById(R.).setTicketNumber(synchronizedTicketNumber);
         this.findTrainByNumberFragment.setTicketNumber(synchronizedTicketNumber);
+        // thang cha ni lien quan gi day ?
+        //ddaays là chị cố thử lấy list dữ liệu gủi qua, nó vô dụng :)
     }
 
     public void transferDataToTab(List<Station> stationList) {
