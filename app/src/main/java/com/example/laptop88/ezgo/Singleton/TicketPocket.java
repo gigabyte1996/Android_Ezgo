@@ -5,10 +5,10 @@ import com.example.laptop88.ezgo.response.Ticket;
 
 import java.util.ArrayList;
 import java.util.List;
-// ta tao mot cai bien static cho ni de dễ lấy dữ liệu nè
 public class TicketPocket {
     public static TicketPocket ticketPocket;
     public List<SeatStorage> listTicket = new ArrayList<>();
+    public Integer sumFare = 0;
 
     public static TicketPocket getInstance(){
         if(ticketPocket==null)
@@ -30,5 +30,13 @@ public class TicketPocket {
 
     public void setListTicket(List<SeatStorage> listTicket) {
         this.listTicket = listTicket;
+    }
+
+    public Integer getSumFare() {
+        return sumFare;
+    }
+
+    public void setSumFare(Integer sumFare) {
+        this.sumFare = sumFare;
     }
 }

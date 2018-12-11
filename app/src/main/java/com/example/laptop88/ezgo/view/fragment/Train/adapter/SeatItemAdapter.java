@@ -105,6 +105,8 @@ public class SeatItemAdapter extends RecyclerView.Adapter<SeatItemAdapter.Recycl
                         seatStorage.setSeatID(seatID);
                         seatStorage.setTrainScheduleID(trainSchedule.getTrainScheduleID());
                         seatStorage.setSeatNumber(seatNumber);
+                        seatStorage.setFromStation(trainSchedule.getFirstStation());
+                        seatStorage.setToStation(trainSchedule.getLastStation());
                         showTrainDiagramFragment.addSeat(seatStorage);
 
                         holder.cardView.setBackgroundColor(Color.parseColor(Constants.SeatStatusColor.PICKING));

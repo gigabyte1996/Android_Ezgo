@@ -54,6 +54,14 @@ public class SeatStorage {
     @Expose
     private Integer fare;
 
+    @SerializedName("fromStation")
+    @Expose
+    private String fromStation;
+
+    @SerializedName("toStation")
+    @Expose
+    private String toStation;
+
 
 
     public Integer getFare() {
@@ -152,10 +160,26 @@ public class SeatStorage {
         this.trainScheduleID = trainScheduleID;
     }
 
+    public String getFromStation() {
+        return fromStation;
+    }
+
+    public void setFromStation(String fromStation) {
+        this.fromStation = fromStation;
+    }
+
+    public String getToStation() {
+        return toStation;
+    }
+
+    public void setToStation(String toStation) {
+        this.toStation = toStation;
+    }
+
     public SeatStorage() {
     }
 
-    public SeatStorage(Integer userID, String trainName, String scheduleName, String departureTime, Integer carrageNumber, Integer seatStorageID, Integer seatID, Integer trainScheduleID, Integer seatNumber, Integer carrageType, Integer seatLocation, Integer fare) {
+    public SeatStorage(Integer userID, String trainName, String scheduleName, String departureTime, Integer carrageNumber, Integer seatStorageID, Integer seatID, Integer trainScheduleID, Integer seatNumber, Integer carrageType, Integer seatLocation, Integer fare, String fromStation, String toStation) {
         this.userID = userID;
         this.trainName = trainName;
         this.scheduleName = scheduleName;
@@ -168,5 +192,7 @@ public class SeatStorage {
         this.carrageType = carrageType;
         this.seatLocation = seatLocation;
         this.fare = fare;
+        this.fromStation = fromStation;
+        this.toStation = toStation;
     }
 }

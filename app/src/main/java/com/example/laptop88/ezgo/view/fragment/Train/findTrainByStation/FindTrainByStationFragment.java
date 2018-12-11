@@ -181,27 +181,27 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     @OnClick(R.id.btnShow_Train)
     public void onClick() {
         if ((fromStation == null || toStation == null) || (fromStation == null && toStation == null && trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null)) {
-            btnShowTrain.setClickable(false);
+            btnShowTrain.setEnabled(false);
         } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null) {
             trainRequest.setFromStation(txtToStation.getText().toString());
             trainRequest.setToStation(txtFromStation.getText().toString());
-            btnShowTrain.setClickable(true);
+            btnShowTrain.setEnabled(true);
         } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() != null) {
             trainRequest.setFromStation(txtToStation.getText().toString());
             trainRequest.setToStation(txtFromStation.getText().toString());
             trainRequest.setDepartureTime(txtReturnDate.getText().toString());
-            btnShowTrain.setClickable(true);
+            btnShowTrain.setEnabled(true);
         } else if (trainRequest.getDepartureTime() != null && trainRequest.getReturnTime() == null) {
             trainRequest.setFromStation(txtFromStation.getText().toString());
             trainRequest.setToStation(txtToStation.getText().toString());
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
-            btnShowTrain.setClickable(false);
+            btnShowTrain.setEnabled(false);
         } else {
             trainRequest.setFromStation(txtFromStation.getText().toString());
             trainRequest.setToStation(txtToStation.getText().toString());
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
             trainRequest.setReturnTime(txtReturnDate.getText().toString());
-            btnShowTrain.setClickable(false);
+            btnShowTrain.setEnabled(false);
 
         }
         findTrainByStationFragmentPresenterImpl = new FindTrainByStationFragmentPresenterImpl(this);

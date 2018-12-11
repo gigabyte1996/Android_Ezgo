@@ -28,6 +28,7 @@ import com.example.laptop88.ezgo.Utils.ScreenUtils;
 import com.example.laptop88.ezgo.response.SeatStorage;
 import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.TrainSchedule;
+import com.example.laptop88.ezgo.view.fragment.ShowTicketPocket.ShowTicketPocketFragment;
 import com.example.laptop88.ezgo.view.fragment.Train.adapter.ItemStationAdapter;
 import com.example.laptop88.ezgo.view.fragment.Train.showTrainScheduleFragment.ShowTrainScheduleFragment;
 import com.example.laptop88.ezgo.view.fragment.seatStorage.ShowSeatStorageFragment.ShowSeatStorageFragment;
@@ -49,6 +50,7 @@ public class BookingActivity extends AppCompatActivity  {
     ShowSeatStoragePresenterImpl showSeatStoragePresenterImpl;
     private ItemSeatStorageAdapter mItemSeatStorageAdapter;
 
+
     @BindView(R.id.tvTitle)
     TextView mTvTitle;
 
@@ -63,6 +65,8 @@ public class BookingActivity extends AppCompatActivity  {
 
     @BindView(R.id.llPayment)
     LinearLayout llPayment;
+
+
 
 
     @Override
@@ -119,6 +123,10 @@ public class BookingActivity extends AppCompatActivity  {
 
     public void setVisiblePaymentBar(int visibilityType){ mLlPaymentBar.setVisibility(visibilityType);}
 
+//    public void setVisibleSubmitButton(int visibilityType){llSubmit.setVisibility(visibilityType);}
+
+//    public void setTitleSubmit(String titleSubmit ){txtSubmit.setText(titleSubmit);}
+
     @OnClick(R.id.llSeatStorage)
     public void showSeatStorage(){
         List<SeatStorage> seatStorages = new ArrayList<>();
@@ -131,6 +139,7 @@ public class BookingActivity extends AppCompatActivity  {
         Fragment mFragment = new ShowSeatStorageFragment();
         pushPaymentFragment(PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
     }
+
 
     public void pushPaymentFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
         try {
@@ -151,6 +160,7 @@ public class BookingActivity extends AppCompatActivity  {
             e.printStackTrace();
         }
     }
+
 
 
 }
