@@ -284,32 +284,32 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
 //    }
 
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        EditText editTextNumberOfTicket = this.getActivity().findViewById(R.id.edtNumberOfTicket);
-        editTextNumberOfTicket.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (getActivity() instanceof FindTrainsActivity) {
-                    ((FindTrainsActivity) getActivity()).synchronizeTabData(s.toString());
-                }
-//
-//                if (getActivity() instanceof ListStationActivity) {
-//                    ((ListStationActivity)getActivity()).UpdateListView(s.toString());
+//    @Override
+//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//        EditText editTextNumberOfTicket = this.getActivity().findViewById(R.id.edtNumberOfTicket);
+//        editTextNumberOfTicket.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                if (getActivity() instanceof FindTrainsActivity) {
+//                    ((FindTrainsActivity) getActivity()).synchronizeTabData(s.toString());
 //                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        });
-    }
+////
+////                if (getActivity() instanceof ListStationActivity) {
+////                    ((ListStationActivity)getActivity()).UpdateListView(s.toString());
+////                }
+//            }
+//
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                // TODO Auto-generated method stub
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//        });
+//    }
 
     @Override
     public void showTrain(TrainScheduleResponse trainScheduleResponse) {

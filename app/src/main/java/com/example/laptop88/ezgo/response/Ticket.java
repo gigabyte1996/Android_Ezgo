@@ -1,28 +1,111 @@
 package com.example.laptop88.ezgo.response;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class Ticket implements Serializable {
+    @SerializedName("ticketID")
+    @Expose
     private Integer ticketID;
+
+    @SerializedName("userID")
+    @Expose
     private Integer userID;
+
+    @SerializedName("fromStation")
+    @Expose
     private String fromStation;
+
+    @SerializedName("toStation")
+    @Expose
     private String toStation;
+
+    @SerializedName("trainScheduleID")
+    @Expose
     private Integer trainScheduleID;
+
+    @SerializedName("trainName")
+    @Expose
     private String trainName;
+
+    @SerializedName("departureTime")
+    @Expose
     private String departureTime;
+//
+//    @SerializedName("createDate")
+//    @Expose
+//    private Date dateCreate;
+
+    @SerializedName("seatNumber")
+    @Expose
     private Integer seatNumber;
+
+    @SerializedName("carrageNumber")
+    @Expose
     private Integer carrageNumber;
+
+    @SerializedName("carrageType")
+    @Expose
     private Integer carrageType;
+
+    @SerializedName("ticketType")
+    @Expose
     private String ticketType;
+
+    @SerializedName("fare")
+    @Expose
     private Integer fare;
+
+    @SerializedName("passengerName")
+    @Expose
     private String passengerName;
+
+    @SerializedName("identificationNumber")
+    @Expose
     private String identificationNumber;
+
+    @SerializedName("dateOfBirth")
+    @Expose
     private String dateOfBirth;
+
+    @SerializedName("trainScheduleCode")
+    @Expose
+    private String trainScheduleCode;
+
+    @SerializedName("ticketStatus")
+    @Expose
+    private Integer ticketStatus;
+
 
     public Ticket() {
     }
 
+    public Integer getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(Integer ticketStatus) {
+        this.ticketStatus = ticketStatus;
+    }
+
+    public String getTrainScheduleCode() {
+        return trainScheduleCode;
+    }
+
+    public void setTrainScheduleCode(String trainScheduleCode) {
+        this.trainScheduleCode = trainScheduleCode;
+    }
+
+//    public Date getDateCreate() {
+//        return dateCreate;
+//    }
+//
+//    public void setDateCreate(Date dateCreate) {
+//        this.dateCreate = dateCreate;
+//    }
 
     public Integer getTicketID() {
         return ticketID;
@@ -144,7 +227,7 @@ public class Ticket implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Ticket(Integer ticketID, Integer userID, String fromStation, String toStation, Integer trainScheduleID, String trainName, String departureTime, Integer seatNumber, Integer carrageNumber, Integer carrageType, String ticketType, Integer fare, String passengerName, String identificationNumber, String dateOfBirth) {
+    public Ticket(Integer ticketID, Integer userID, String fromStation, String toStation, Integer trainScheduleID, String trainName, String departureTime, Integer seatNumber, Integer carrageNumber, Integer carrageType, String ticketType, Integer fare, String passengerName, String identificationNumber, String dateOfBirth, String trainScheduleCode, Integer ticketStatus) {
         this.ticketID = ticketID;
         this.userID = userID;
         this.fromStation = fromStation;
@@ -160,5 +243,7 @@ public class Ticket implements Serializable {
         this.passengerName = passengerName;
         this.identificationNumber = identificationNumber;
         this.dateOfBirth = dateOfBirth;
+        this.trainScheduleCode = trainScheduleCode;
+        this.ticketStatus = ticketStatus;
     }
 }

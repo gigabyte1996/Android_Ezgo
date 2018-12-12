@@ -3,7 +3,7 @@ package com.example.laptop88.ezgo.Utils;
 import retrofit2.http.PUT;
 
 public class Constants {
-    public static String BASE_URL = "http://10.0.1.37:8080";
+    public static String BASE_URL = "http://10.0.129.56:8080";
 
     public static String SHARED_PREFERENCES_NAME = "ticket";
 
@@ -32,6 +32,8 @@ public class Constants {
         public static final int INVISIBLE = 4;
         public static final int VISIBLE = 0;
     }
+
+
 
     public class CarrageType{
         public static final int SOFT_SEAT = 0;

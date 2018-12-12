@@ -21,8 +21,10 @@ import android.widget.Toast;
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.Singleton.TicketPocket;
 import com.example.laptop88.ezgo.Utils.Constants;
+import com.example.laptop88.ezgo.response.Passenger;
 import com.example.laptop88.ezgo.response.SeatStorage;
 import com.example.laptop88.ezgo.response.Ticket;
+import com.example.laptop88.ezgo.response.TicketRequest;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.fragment.seatStorage.PaymentFragment.PaymentFragment;
 import com.example.laptop88.ezgo.view.fragment.seatStorage.adapter.ItemSeatStorageAdapter;
@@ -35,7 +37,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-// này
 public class ShowSeatStorageFragment extends Fragment {
     private ShowSeatStoragePresenterImpl showSeatStoragePresenterImpl;
     private List<SeatStorage> seatStorageList;
@@ -62,15 +63,17 @@ public class ShowSeatStorageFragment extends Fragment {
         ((BookingActivity) getActivity()).setVisiblePaymentBar(Constants.VisibilityType.GONE);
         String passengerObjectType[] = getResources().getStringArray(R.array.passenger_object_type);
 
+
         seatStorageList = TicketPocket.getInstance().getListTicket();
+        List<Passenger> passengers = populateList(seatStorageList);
+        List<TicketRequest> ticketRequests = populateTickerRequestList(seatStorageList);
         int sum = 0;
         for (SeatStorage item : seatStorageList) {
             sum += item.getFare();
         }
         TicketPocket.getInstance().setSumFare(sum);
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        ticketList = getListTicketRequest();
-        mRcvAdapter = new ItemSeatStorageAdapter(getActivity(), fragmentManager, seatStorageList, passengerObjectType, ticketList);
+        mRcvAdapter = new ItemSeatStorageAdapter(getActivity(), fragmentManager, seatStorageList, passengerObjectType, passengers, ticketRequests);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayout.VERTICAL);
         recyclerListSeatStorage.setLayoutManager(layoutManager);
@@ -81,43 +84,38 @@ public class ShowSeatStorageFragment extends Fragment {
         return view;
     }
 
+    private List<Passenger> populateList(List<SeatStorage> seatStorages) {
+
+        List<Passenger> list = new ArrayList<>();
+        for (int i = 0; i < seatStorages.size(); ++i) {
+            list.add(new Passenger("", "", "", ""));
+        }
+
+        return list;
+    }
+
+    private List<TicketRequest> populateTickerRequestList(List<SeatStorage> seatStorages) {
+
+        List<TicketRequest> list = new ArrayList<>();
+        for (int i = 0; i < seatStorageList.size(); ++i) {
+            list.add(new TicketRequest(new SeatStorage(), new Passenger()));
+        }
+
+        return list;
+    }
+
+
+
     @OnClick(R.id.btnSubmit)
     public void sendPaymentRequest() {
-        for (int i = 0; i < mRcvAdapter.getItemCount(); i++) {
-            View itemView = recyclerListSeatStorage.getLayoutManager().findViewByPosition(i);
-            EditText editTextNumber = itemView.findViewById(R.id.edtIdenfiticationNumber);
-            Toast.makeText(getContext(), "" + editTextNumber.getText().toString(), Toast.LENGTH_SHORT).show();
-        }
-     /*   Bundle bundle = new Bundle();
-        bundle.putSerializable("ticketRequest", (Serializable) ticketList);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ticketRequestList",(Serializable) mRcvAdapter.retrieveData());
         PaymentFragment mFragment = new PaymentFragment();
         mFragment.setArguments(bundle);
         pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
-*/
+
     }
 
-    public List<Ticket> getListTicketRequest() {
-        List<Ticket> tickets = new ArrayList<>();
-        for (int i = 0; i < seatStorageList.size(); i++) {
-            Ticket ticket = new Ticket();
-            ticket.setUserID(tickets.get(i).getUserID());
-            ticket.setFromStation(tickets.get(i).getFromStation());
-            ticket.setToStation(tickets.get(i).getToStation());
-            ticket.setTrainScheduleID(tickets.get(i).getTrainScheduleID());
-            ticket.setCarrageType(tickets.get(i).getCarrageType());
-            ticket.setTrainName(tickets.get(i).getTrainName());
-            ticket.setCarrageNumber(tickets.get(i).getCarrageNumber());
-            ticket.setSeatNumber(tickets.get(i).getSeatNumber());
-            ticket.setDepartureTime(tickets.get(i).getDepartureTime());
-            ticket.setFare(tickets.get(i).getFare());
-            ticket.setTicketType(tickets.get(i).getTicketType());
-            ticket.setPassengerName(tickets.get(i).getPassengerName());
-            ticket.setIdentificationNumber(tickets.get(i).getIdentificationNumber());
-            ticket.setDateOfBirth(tickets.get(i).getDateOfBirth());
-            tickets.add(ticket);
-        }
-        return tickets;
-    }
 
     public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
         try {

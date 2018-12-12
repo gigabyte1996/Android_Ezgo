@@ -12,6 +12,11 @@ public class ShowTrainScheduleFragmentPresenterImpl implements ShowTrainSchedule
         mShowTrainScheduleModel = new ShowTrainScheduleModelImpl(this);
     }
 
+//    public GenealogyFragmentPresenterImpl(GenealogyFragmentView genealogyFragmentView) {
+//        mGenealogyFragmentView = genealogyFragmentView;
+//        mGenealogyModel = new GenealogyModelImpl(this);
+//    }
+
     @Override
     public void getTrainDiagramByTrainScheduleID(Integer id) {
         mShowTrainScheduleFragmentView.showProgressDialog();

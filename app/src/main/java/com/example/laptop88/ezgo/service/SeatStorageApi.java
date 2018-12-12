@@ -21,4 +21,5 @@ public interface SeatStorageApi {
 
     @HTTP(method = "DELETE", path = "/api/seatStorage",  hasBody = true)
     Call<SeatStorageResponse> deleteSeatStorage(@Body SeatStorageDeleteRequest seatStorageDeleteRequest);
+
 }

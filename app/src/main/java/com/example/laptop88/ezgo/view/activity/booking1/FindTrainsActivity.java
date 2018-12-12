@@ -100,12 +100,10 @@ public class FindTrainsActivity extends AppCompatActivity {
         appToolBar.setTitle(newTitle);
     }
 
-    public void synchronizeTabData(String synchronizedTicketNumber) {
-//        this.getSupportFragmentManager().findFragmentById(R.).setTicketNumber(synchronizedTicketNumber);
-        this.findTrainByNumberFragment.setTicketNumber(synchronizedTicketNumber);
-        // thang cha ni lien quan gi day ?
-        //ddaays là chị cố thử lấy list dữ liệu gủi qua, nó vô dụng :)
-    }
+//    public void synchronizeTabData(String synchronizedTicketNumber) {
+//        this.getSupportFragmentManager().findFragmentById(R.layout.f).setTicketNumber(synchronizedTicketNumber);
+//        this.findTrainByNumberFragment.setTicketNumber(synchronizedTicketNumber);
+//    }
 
     public void transferDataToTab(List<Station> stationList) {
 //        this.findTrainByStationFragement.setPopUpAdapter(stationList);

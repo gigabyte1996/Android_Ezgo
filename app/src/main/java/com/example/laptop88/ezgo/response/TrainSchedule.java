@@ -36,6 +36,10 @@ public class TrainSchedule implements Serializable {
     @Expose
     private String lastStation;
 
+    @SerializedName("trainScheduleCode")
+    @Expose
+    private String trainScheduleCode;
+
     @SerializedName("trainID")
     @Expose
     private Integer trainID;
@@ -107,7 +111,15 @@ public class TrainSchedule implements Serializable {
         this.trainID = trainID;
     }
 
-    public TrainSchedule(Integer trainScheduleID, String trainName, String jouneyName, Date departureTime, Date arrivalTime, String firstStation, String lastStation, Integer trainID) {
+    public String getTrainScheduleCode() {
+        return trainScheduleCode;
+    }
+
+    public void setTrainScheduleCode(String trainScheduleCode) {
+        this.trainScheduleCode = trainScheduleCode;
+    }
+
+    public TrainSchedule(Integer trainScheduleID, String trainName, String jouneyName, Date departureTime, Date arrivalTime, String firstStation, String lastStation, String trainScheduleCode, Integer trainID) {
         this.trainScheduleID = trainScheduleID;
         this.trainName = trainName;
         this.jouneyName = jouneyName;
@@ -115,6 +127,7 @@ public class TrainSchedule implements Serializable {
         this.arrivalTime = arrivalTime;
         this.firstStation = firstStation;
         this.lastStation = lastStation;
+        this.trainScheduleCode = trainScheduleCode;
         this.trainID = trainID;
     }
 }

@@ -21,11 +21,13 @@ import android.widget.TextView;
 
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.Utils.Constants;
+import com.example.laptop88.ezgo.response.Passenger;
 import com.example.laptop88.ezgo.response.SeatStorage;
 import com.example.laptop88.ezgo.response.Ticket;
-import com.example.laptop88.ezgo.view.fragment.seatStorage.PaymentFragment.PaymentFragment;
+import com.example.laptop88.ezgo.response.TicketRequest;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,16 +37,17 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
     private List<SeatStorage> data;
     private String passengerObjectType[];
     private List<Ticket> ticketList;
-    private PaymentFragment paymentFragment;
-    private SendData sendData;
-    private OnEditTextChanged onEditTextChanged;
+    private List<Passenger> passengers;
+    private List<TicketRequest> ticketRequestList;
 
-    public ItemSeatStorageAdapter(Context mContext, FragmentManager mFragmentManager, List<SeatStorage> data, String[] passengerObjectType, List<Ticket> ticketList ) {
+
+    public ItemSeatStorageAdapter(Context mContext, FragmentManager mFragmentManager, List<SeatStorage> data, String[] passengerObjectType, List<Passenger> passengers, List<TicketRequest> ticketRequestList ) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.data = data;
         this.passengerObjectType = passengerObjectType;
-        this.ticketList = ticketList;
+        this.passengers = passengers;
+        this.ticketRequestList = ticketRequestList;
     }
 
     @NonNull
@@ -106,6 +109,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
                         holder.tilDateOfBirth.setVisibility(View.VISIBLE);
                         holder.tilIdentification.setVisibility(View.GONE);
                 }
+                passengers.get(position).ticketType = (holder.spObject.getSelectedItem().toString());
             }
 
             @Override
@@ -146,7 +150,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                final String passengerName = String.valueOf(charSequence);
+                passengers.get(position).passengerName = charSequence.toString();
             }
 
             @Override
@@ -157,12 +161,11 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         holder.edtIdentification.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String identificationNumber = "";
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String identificationNumber = String.valueOf(charSequence);
+                passengers.get(position).identificationNumber = (charSequence.toString());
             }
 
             @Override
@@ -173,12 +176,11 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         holder.edtDateOfBirth.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String dateOfBirth = "";
             }
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                String dateOfBirth = String.valueOf(charSequence);
+                passengers.get(position).dateOfBirth = (charSequence.toString());
             }
 
             @Override
@@ -186,46 +188,8 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
 
             }
         });
-        final String ticketType = holder.spObject.getSelectedItem().toString();
-
-        ticketList.get(position).setUserID(1);
-        ticketList.get(position).setFromStation(fromStation);
-        ticketList.get(position).setToStation(toStation);
-        ticketList.get(position).setTrainScheduleID(trainScheduleID);
-        ticketList.get(position).setTrainName(trainName);
-        ticketList.get(position).setDepartureTime(departureTime);
-        ticketList.get(position).setSeatNumber(seatNumber);
-        ticketList.get(position).setCarrageNumber(carrageNumber);
-        ticketList.get(position).setCarrageType(carrageType);
-        ticketList.get(position).setTicketType(ticketType);
-        ticketList.get(position).setFare(ticketFare);
-        ticketList.get(position).setPassengerName(holder.edtFullName.getText().toString());
-        ticketList.get(position).setIdentificationNumber(holder.edtIdentification.getText().toString());
-        ticketList.get(position).setDateOfBirth(holder.edtDateOfBirth.getText().toString());
-
-
-        //        final String passengerName = String.valueOf(holder.edtFullName.getText());
-//        final String identificationNumber = String.valueOf(holder.edtIdentification.getText());
-//        final String dateOfBirth = String.valueOf(holder.edtDateOfBirth.getText());
-
-//        Ticket ticket =new Ticket();
-//        ticket.setUserID(1);
-//        ticket.setFromStation(fromStation);
-//        ticket.setToStation(toStation);
-//        ticket.setTrainScheduleID(trainScheduleID);
-//        ticket.setTrainName(trainName);
-//        ticket.setDepartureTime(departureTime);
-//        ticket.setSeatNumber(seatNumber);
-//        ticket.setCarrageNumber(carrageNumber);
-//        ticket.setCarrageType(carrageType);
-//        ticket.setTicketType(ticketType);
-//        ticket.setFare(ticketFare);
-//        ticket.setPassengerName(passengerName);
-//        ticket.setIdentificationNumber(identificationNumber);
-//        ticket.setDateOfBirth(dateOfBirth);
-//        ticketList.add(ticket);
-//        sendData.sendDataToFragment(ticketList);
-
+        ticketRequestList.get(position).seatStorage = (data.get(position));
+        ticketRequestList.get(position).passenger = (passengers.get(position));
     }
 
     @Override
@@ -265,16 +229,13 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
             edtDateOfBirth = itemView.findViewById(R.id.edtDateOfBirth);
             tilIdentification = itemView.findViewById(R.id.ipIdenfiticationNumber);
             tilDateOfBirth = itemView.findViewById(R.id.ipDateOfBirth);
-
         }
     }
 
-    public interface SendData {
-        void sendDataToFragment(List<Ticket> tickets);
+    public List<TicketRequest> retrieveData()
+    {
+        return ticketRequestList;
     }
 
-    public interface OnEditTextChanged {
-        void onTextChanged(int position, String charSeq);
-    }
 }
 
