@@ -31,6 +31,7 @@
             android:layout_weight="6"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Da Nang - Hue"
             android:textSize="20sp"
             android:textColor="@android:color/black"
@@ -45,9 +46,11 @@
             android:src="@drawable/icons8_restaurant_filled_50"
             />
         <TextView
+            android:id="@+id/txtSchedule"
             android:layout_weight="3"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:gravity="center"
             android:text="Schedule"
             android:textSize="17sp"
             android:textColor="@color/colorConcept"
@@ -59,14 +62,31 @@
         android:weightSum="12"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp">
-        <TextView
-            android:id="@+id/txtDepartureTime"
+        <LinearLayout
             android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="13:00"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
+            android:orientation="vertical">
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtDepartureTime"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="13:00"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtDepartureDate"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="13:00"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_weight="3"
             android:layout_width="0dp"
@@ -80,7 +100,7 @@
                 android:src="@drawable/icons8_long_arrow_up_50"
                 />
             <TextView
-                android:id="@+id/tripLasting"
+                android:id="@+id/duration"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -89,14 +109,30 @@
                 android:text="18:00 hr"
                 android:gravity="center_horizontal"/>
         </LinearLayout>
-        <TextView
-            android:id="@+id/txtArrivalTime"
-            android:layout_weight="5"
+        <LinearLayout
+            android:layout_weight="4"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="7:00"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
+            android:orientation="vertical">
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtArrivalTime"
+                android:layout_weight="2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="13:00"
+                android:textColor="@android:color/black"
+                android:textSize="20sp" />
+            <TextView
+                android:gravity="center"
+                android:id="@+id/txtArrivalDate"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="13:00"
+                android:textColor="@android:color/black"
+                android:textSize="15sp" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,12 +144,13 @@
             android:text="Ticket Detail"
             android:textColor="@color/colorConcept"
             android:textSize="15sp"
-            android:layout_marginRight="170dp"/>
+            android:layout_marginRight="190dp"/>
         <Button
             android:id="@+id/btnBoooking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="70dp"
+            android:layout_height="40dp"
             android:text="Book"
+            android:textSize="15dp"
             android:textColor="@color/colorConcept"
             android:background="@drawable/small_button_costum_border"/>
     </LinearLayout>

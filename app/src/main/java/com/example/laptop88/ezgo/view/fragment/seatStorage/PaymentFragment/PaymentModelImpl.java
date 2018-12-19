@@ -1,5 +1,6 @@
 package com.example.laptop88.ezgo.view.fragment.seatStorage.PaymentFragment;
 
+import com.example.laptop88.ezgo.Singleton.TicketPocket;
 import com.example.laptop88.ezgo.Utils.Constants;
 import com.example.laptop88.ezgo.response.Ticket;
 import com.example.laptop88.ezgo.response.TicketRequest;
@@ -34,6 +35,7 @@ public class PaymentModelImpl implements PaymentModel {
                 switch (code){
                     case Constants.HTTPCodeResponse.SUCCESS:
                         paymentPresenter.sendPaymentRequestDSuccess(ticketResponse);
+                        TicketPocket.getInstance().setListTicket(null);
                         break;
                     default:
                         paymentPresenter.sendPaymentRequestFalse();

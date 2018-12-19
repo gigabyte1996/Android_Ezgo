@@ -29,10 +29,10 @@ public class ShowTrainScheduleModelImpl implements ShowTrainScheduleModel {
             @Override
             public void onResponse(Call<TrainDetailResponse> call, Response<TrainDetailResponse> response) {
                 TrainDetailResponse trainDetailResponse = response.body();
-//                if (trainDetailResponse != null) {
-//                    int code = Integer.parseInt(trainDetailResponse.getError().getCode());
-//                }
-                int code = Integer.parseInt(trainDetailResponse.getError().getCode());
+                int code =1;
+                if (trainDetailResponse != null) {
+                    code = Integer.parseInt(trainDetailResponse.getError().getCode());
+                }
                 switch (code) {
                     case 0:
                         mShowTrainScheduleFragmentPresenter.getTrainDiagramByTrainScheduleIDSuccess(trainDetailResponse);

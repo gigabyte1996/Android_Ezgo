@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         android:background="@color/colorBackgroundGray"
         android:layout_below="@+id/toolbar"
-        android:layout_weight="9"/>
+        android:layout_weight="10"/>
     <LinearLayout
         android:id="@+id/payment_bar"
         android:layout_width="match_parent"

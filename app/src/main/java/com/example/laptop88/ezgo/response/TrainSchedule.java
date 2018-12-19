@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class TrainSchedule implements Serializable {
 
@@ -22,11 +23,11 @@ public class TrainSchedule implements Serializable {
 
     @SerializedName("departureTime")
     @Expose
-    private Date departureTime;
+    private String departureTime;
 
     @SerializedName("arrivalTime")
     @Expose
-    private Date arrivalTime;
+    private String arrivalTime;
 
     @SerializedName("firstStation")
     @Expose
@@ -40,11 +41,31 @@ public class TrainSchedule implements Serializable {
     @Expose
     private String trainScheduleCode;
 
+    @SerializedName("administratorName")
+    @Expose
+    private String administratorName;
+
+    @SerializedName("adminPhoneNumb")
+    @Expose
+    private String adminPhoneNumb;
+
+    @SerializedName("stationPerJourneys")
+    @Expose
+    private List<StationPerJourney> stationPerJourneys;
+
     @SerializedName("trainID")
     @Expose
     private Integer trainID;
 
     public TrainSchedule() {
+    }
+
+    public List<StationPerJourney> getStationPerJourneys() {
+        return stationPerJourneys;
+    }
+
+    public void setStationPerJourneys(List<StationPerJourney> stationPerJourneys) {
+        this.stationPerJourneys = stationPerJourneys;
     }
 
     public Integer getTrainScheduleID() {
@@ -71,19 +92,19 @@ public class TrainSchedule implements Serializable {
         this.jouneyName = jouneyName;
     }
 
-    public Date getDepartureTime() {
+    public String getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(Date departureTime) {
+    public void setDepartureTime(String departureTime) {
         this.departureTime = departureTime;
     }
 
-    public Date getArrivalTime() {
+    public String getArrivalTime() {
         return arrivalTime;
     }
 
-    public void setArrivalTime(Date arrivalTime) {
+    public void setArrivalTime(String arrivalTime) {
         this.arrivalTime = arrivalTime;
     }
 
@@ -119,15 +140,21 @@ public class TrainSchedule implements Serializable {
         this.trainScheduleCode = trainScheduleCode;
     }
 
-    public TrainSchedule(Integer trainScheduleID, String trainName, String jouneyName, Date departureTime, Date arrivalTime, String firstStation, String lastStation, String trainScheduleCode, Integer trainID) {
-        this.trainScheduleID = trainScheduleID;
-        this.trainName = trainName;
-        this.jouneyName = jouneyName;
-        this.departureTime = departureTime;
-        this.arrivalTime = arrivalTime;
-        this.firstStation = firstStation;
-        this.lastStation = lastStation;
-        this.trainScheduleCode = trainScheduleCode;
-        this.trainID = trainID;
+    public String getAdministratorName() {
+        return administratorName;
+    }
+
+    public void setAdministratorName(String administratorName) {
+        this.administratorName = administratorName;
+    }
+
+    public String getAdminPhoneNumb() {
+        return adminPhoneNumb;
+    }
+
+    public void setAdminPhoneNumb(String adminPhoneNumb) {
+        this.adminPhoneNumb = adminPhoneNumb;
     }
 }
+
+

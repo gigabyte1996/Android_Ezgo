@@ -75,9 +75,17 @@ public class Ticket implements Serializable {
     @Expose
     private String trainScheduleCode;
 
+    @SerializedName("trainScheduleName")
+    @Expose
+    private String trainScheduleName;
+
     @SerializedName("ticketStatus")
     @Expose
     private Integer ticketStatus;
+
+    @SerializedName("ticketCode")
+    @Expose
+    private String ticketCode;
 
 
     public Ticket() {
@@ -106,6 +114,15 @@ public class Ticket implements Serializable {
 //    public void setDateCreate(Date dateCreate) {
 //        this.dateCreate = dateCreate;
 //    }
+
+
+    public String getTicketCode() {
+        return ticketCode;
+    }
+
+    public void setTicketCode(String ticketCode) {
+        this.ticketCode = ticketCode;
+    }
 
     public Integer getTicketID() {
         return ticketID;
@@ -227,23 +244,11 @@ public class Ticket implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Ticket(Integer ticketID, Integer userID, String fromStation, String toStation, Integer trainScheduleID, String trainName, String departureTime, Integer seatNumber, Integer carrageNumber, Integer carrageType, String ticketType, Integer fare, String passengerName, String identificationNumber, String dateOfBirth, String trainScheduleCode, Integer ticketStatus) {
-        this.ticketID = ticketID;
-        this.userID = userID;
-        this.fromStation = fromStation;
-        this.toStation = toStation;
-        this.trainScheduleID = trainScheduleID;
-        this.trainName = trainName;
-        this.departureTime = departureTime;
-        this.seatNumber = seatNumber;
-        this.carrageNumber = carrageNumber;
-        this.carrageType = carrageType;
-        this.ticketType = ticketType;
-        this.fare = fare;
-        this.passengerName = passengerName;
-        this.identificationNumber = identificationNumber;
-        this.dateOfBirth = dateOfBirth;
-        this.trainScheduleCode = trainScheduleCode;
-        this.ticketStatus = ticketStatus;
+    public String getTrainScheduleName() {
+        return trainScheduleName;
+    }
+
+    public void setTrainScheduleName(String trainScheduleName) {
+        this.trainScheduleName = trainScheduleName;
     }
 }

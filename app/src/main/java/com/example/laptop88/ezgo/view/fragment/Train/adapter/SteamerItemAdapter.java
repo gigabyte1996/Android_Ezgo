@@ -36,12 +36,11 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
     private List<Seat> mSeats = new ArrayList<>();
     private TrainSchedule mTrainSchedule;
 
-    public SteamerItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Steamer> mSteamers, ShowTrainDiagramFragment showTrainDiagramFragment, TrainSchedule mTrainSchedule) {
+    public SteamerItemAdapter(Context mContext, FragmentManager mFragmentManager, List<Steamer> mSteamers, ShowTrainDiagramFragment showTrainDiagramFragment) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.mSteamers = mSteamers;
         this.showTrainDiagramFragment = showTrainDiagramFragment;
-        this.mTrainSchedule = mTrainSchedule;
     }
 
     @NonNull
@@ -57,7 +56,6 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
         final int steamerNumber = mSteamers.get(position).getSteamerNumber();
         final Integer carrageID = mSteamers.get(position).getSteamerID();
 
-
         holder.txtSteamerNumber.setText(String.valueOf(steamerNumber));
         holder.item.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -68,7 +66,7 @@ public class SteamerItemAdapter extends RecyclerView.Adapter<SteamerItemAdapter.
                 showTrainDiagramFragment.transferDataToAdapter(mSeats);
             }
         });
-
+//
     }
 
     @Override

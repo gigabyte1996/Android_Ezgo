@@ -11,6 +11,7 @@ import android.util.Log;
 import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.view.fragment.Train.findTrainByStation.FindTrainByStationFragment;
+import com.example.laptop88.ezgo.view.fragment.Train.findTrainByTrainScheduleCode.FindTrainByTrainScheduleCode;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class FindTrainsActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FindTrainByStationFragment findTrainByStationFragement;
-    private FindTrainByNumber findTrainByNumberFragment;
+    private FindTrainByTrainScheduleCode findTrainByNumberFragment;
     private List<Station> stations;
     private ViewPagerAdapter adapter;
 
@@ -40,7 +41,7 @@ public class FindTrainsActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable("station", (Serializable) stations);
         FindTrainByStationFragment frg = new FindTrainByStationFragment();
-        FindTrainByNumber frg1 = new FindTrainByNumber();
+        FindTrainByTrainScheduleCode frg1 = new FindTrainByTrainScheduleCode();
 
         frg.setArguments(bundle);
         frg1.setArguments(bundle);
@@ -57,7 +58,7 @@ public class FindTrainsActivity extends AppCompatActivity {
 
 //    private void initializeFragments() {
 //        this.findTrainByStationFragement = new FindTrainByStationFragment();
-//        this.findTrainByNumberFragment = new FindTrainByNumber();
+//        this.findTrainByNumberFragment = new FindTrainByTrainScheduleCode();
 //    }
 
     private void addFragmentsToTabLayout() {

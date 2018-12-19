@@ -3,10 +3,11 @@ package com.example.laptop88.ezgo.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class TrainScheduleResponse {
+public class TrainScheduleResponse implements Serializable {
 
     @SerializedName("error")
     @Expose

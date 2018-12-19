@@ -53,8 +53,9 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
     private TrainDetailResponse trainDetailResponse;
     private TrainSchedule trainSchedule;
     private SteamerItemAdapter mRcvCarrageAdapter;
-    private SeatItemAdapter mRcvSeatAdapter=null;
+    private SeatItemAdapter mRcvSeatAdapter = null;
     private List<Seat> mListSeat;
+    //    private List<TrainSchedule> trainSchedules;
     private ShowTrainDiagramPresenterImpl mShowTrainDiagramPresenterImpl;
     GridLayoutManager gridLayoutManager;
     List<TrainSchedule> returnTrainSchedules = new ArrayList<>();
@@ -83,30 +84,34 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
     }
 
     private void initialOnCreateCarrageRcvAdapter() {
-        ((BookingActivity)getActivity()).setTitleToolBar("Show Train Diagram");
-        ((BookingActivity)getActivity()).setVisiblePaymentBar(Constants.VisibilityType.VISIBLE);
-        if (TicketPocket.getInstance().getListTicket() ==null){
-            ((BookingActivity)getActivity()).setNumberOfTicket(0);
-        }else {
-            ((BookingActivity)getActivity()).setNumberOfTicket(TicketPocket.getInstance().getListTicket().size());
+        ((BookingActivity) getActivity()).setTitleToolBar("Show Train Diagram");
+        ((BookingActivity) getActivity()).setVisiblePaymentBar(Constants.VisibilityType.VISIBLE);
+        if (TicketPocket.getInstance().getListTicket() == null) {
+            ((BookingActivity) getActivity()).setNumberOfTicket(0);
+        } else {
+            ((BookingActivity) getActivity()).setNumberOfTicket(TicketPocket.getInstance().getListTicket().size());
         }
 
         Bundle bundle = this.getArguments();
         trainDetailResponse = new TrainDetailResponse();
         trainDetailResponse = (TrainDetailResponse) bundle.getSerializable("trainDetailResponse");
+
+//        returnTrainSchedules = (List<TrainSchedule>) bundle.getSerializable("returnTrainSchedules");
+        if (CurrentTrainSchedule.getInstance().getListReturn()== null){
+            showReturnSchedules.setVisibility(View.INVISIBLE);
+        }else {
+            showReturnSchedules.setVisibility(View.VISIBLE);
+        }
 //        trainSchedule = new TrainSchedule();
 //        trainSchedule = (TrainSchedule) bundle.getSerializable("trainSchedule");
         fragmentManager = getActivity().getSupportFragmentManager();
-        mRcvCarrageAdapter = new SteamerItemAdapter(getActivity(), fragmentManager, trainDetailResponse.getSteamerList(), this, trainSchedule);
+        mRcvCarrageAdapter = new SteamerItemAdapter(getActivity(), fragmentManager, trainDetailResponse.getSteamerList(), this);
         mRcvCarrageAdapter.notifyDataSetChanged();
-
-
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(LinearLayout.VERTICAL);
         rcvListCarrage.setLayoutManager(layoutManager);
         rcvListCarrage.setAdapter(mRcvCarrageAdapter);
 
-        //set list ban dau
         CurrentTrainSchedule.getInstance().setSteamer(trainDetailResponse.getSteamerList().get(0));
         mListSeat = trainDetailResponse.getSteamerList().get(0).getSeatList();
         mRcvSeatAdapter = new SeatItemAdapter(getContext(), fragmentManager, mListSeat, this);
@@ -116,13 +121,11 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
         mRcvSeatAdapter.notifyDataSetChanged();
     }
 
-
-    public void transferDataToAdapter(List<Seat> seatList){
-        Log.d(TAG, "transferDataToAdapter: "+ seatList.size());
-        if( seatList.size()>0) {
+    public void transferDataToAdapter(List<Seat> seatList) {
+        Log.d(TAG, "transferDataToAdapter: " + seatList.size());
+        if (seatList.size() > 0) {
             mRcvSeatAdapter.updateList(seatList);
-        }
-        else Toast.makeText(getActivity(), "Không có ghế", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getActivity(), "Không có ghế", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -171,10 +174,9 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
 //    }
 
     @OnClick(R.id.llShowReturnTrainSchedules)
-    public void onClickShowReturnSchedules(){
-         returnTrainSchedules = new ArrayList<>();
-         returnTrainSchedules = CurrentTrainSchedule.getInstance().getListReturn();
-
+    public void onClickShowReturnSchedules() {
+//         returnTrainSchedules = new ArrayList<>();
+        returnTrainSchedules = CurrentTrainSchedule.getInstance().getListReturn();
         Bundle bundle = new Bundle();
         bundle.putSerializable("returnTrainDetailResponse", (Serializable) returnTrainSchedules);
         Fragment mFragment = new ShowReturnTrainScheduleFragment();
@@ -182,6 +184,7 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
 
         pushFragment(BookingActivity.PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
     }
+
     public void pushFragment(BookingActivity.PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
         try {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -224,6 +227,7 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
     public ShowTrainDiagramFragment() {
 
     }
+
     @Override
     public void sendData(List<TrainSchedule> trainSchedules) {
         if (trainSchedules != null) {
@@ -234,14 +238,14 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
     public void addSeat(SeatStorage seatStorage) {
         mShowTrainDiagramPresenterImpl = new ShowTrainDiagramPresenterImpl(this);
         mShowTrainDiagramPresenterImpl.addSeatStorage(seatStorage);
-        if (TicketPocket.getInstance().getListTicket() ==null){
-            ((BookingActivity)getActivity()).setNumberOfTicket(0);
-        }else {
-            ((BookingActivity)getActivity()).setNumberOfTicket(TicketPocket.getInstance().getListTicket().size());
+        if (TicketPocket.getInstance().getListTicket() == null) {
+            ((BookingActivity) getActivity()).setNumberOfTicket(0);
+        } else {
+            ((BookingActivity) getActivity()).setNumberOfTicket(TicketPocket.getInstance().getListTicket().size());
         }
     }
 
-    public void deleteSeat(SeatStorageDeleteRequest seatStorageDeleteRequest){
+    public void deleteSeat(SeatStorageDeleteRequest seatStorageDeleteRequest) {
         mShowTrainDiagramPresenterImpl = new ShowTrainDiagramPresenterImpl(this);
         mShowTrainDiagramPresenterImpl.deleteSeatStorage(seatStorageDeleteRequest);
     }
@@ -283,10 +287,10 @@ public class ShowTrainDiagramFragment extends Fragment implements ShowTrainSched
     @Override
     public void showSeatStorage(List<SeatStorage> seatStorages) {
         TicketPocket.getInstance().setListTicket(seatStorages);
-        if (TicketPocket.getInstance().getListTicket() ==null){
-            ((BookingActivity)getActivity()).setNumberOfTicket(0);
-        }else {
-            ((BookingActivity)getActivity()).setNumberOfTicket(TicketPocket.getInstance().getListTicket().size());
+        if (TicketPocket.getInstance().getListTicket() == null) {
+            ((BookingActivity) getActivity()).setNumberOfTicket(0);
+        } else {
+            ((BookingActivity) getActivity()).setNumberOfTicket(TicketPocket.getInstance().getListTicket().size());
         }
     }
 }

@@ -5,8 +5,11 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,7 +19,8 @@
         android:name=".view.EzgoApplication"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity"></activity>
-        <activity android:name=".view.activity.main.MainScreenActivity">
+        <activity android:name=".view.activity.main.MainScreenActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

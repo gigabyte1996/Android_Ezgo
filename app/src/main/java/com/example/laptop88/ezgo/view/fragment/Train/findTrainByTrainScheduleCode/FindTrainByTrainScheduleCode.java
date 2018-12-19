@@ -1,4 +1,4 @@
-package com.example.laptop88.ezgo.view.activity.booking1;
+package com.example.laptop88.ezgo.view.fragment.Train.findTrainByTrainScheduleCode;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,7 +14,7 @@ import com.example.laptop88.ezgo.response.Station;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FindTrainByNumber extends Fragment {
+public class FindTrainByTrainScheduleCode extends Fragment {
     private List<Station> stations;
     private Bundle bundle;
     @Override

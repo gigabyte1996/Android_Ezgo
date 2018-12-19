@@ -80,17 +80,17 @@ public class BookingActivity extends AppCompatActivity  {
         returnTrainSchedules = new ArrayList<>();
         returnTrainSchedules = (List<TrainSchedule>) intent.getSerializableExtra("returnTrainSchedules");
         Fragment mFragment = new ShowTrainScheduleFragment();
-        pushFragment(PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container, singleTrainSchedules);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("singleTrainSchedules", (Serializable) singleTrainSchedules);
+        bundle.putSerializable("returnTrainSchedules", (Serializable) returnTrainSchedules);
+        mFragment.setArguments(bundle);
+        pushFragment(PushFrgType.REPLACE, mFragment, mFragment.getTag(), R.id.home_container);
 
 
     }
 
-    public void pushFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId, List<TrainSchedule> singleTrainSchedules) {
+    public void pushFragment(PushFrgType type, Fragment fragment, String tag, @IdRes int mContainerId) {
         try {
-            Bundle bundle = new Bundle();
-            bundle.putSerializable("singleTrainSchedules", (Serializable) singleTrainSchedules);
-            bundle.putSerializable("returnTrainSchedules", (Serializable) returnTrainSchedules);
-            fragment.setArguments(bundle);
             FragmentManager manager = getSupportFragmentManager();
             FragmentTransaction ft = manager.beginTransaction();
             ft.setCustomAnimations(R.anim.fadein, R.anim.fadeout);

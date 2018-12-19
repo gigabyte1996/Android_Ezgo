@@ -63,21 +63,20 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         final String trainName = data.get(position).getTrainName();
         final String trainScheduleName = data.get(position).getScheduleName();
         final String departureTime = data.get(position).getDepartureTime();
-        final Integer carrageType = data.get(position).getCarrageType();
-        final Integer carrageNumber = data.get(position).getCarrageNumber();
+        final Integer carrageType = data.get(position).getCarrageType();//
+        final Integer carrageNumber = data.get(position).getCarrageNumber();// null, còn lại ko null :) cái líst vào có null ko
         final Integer seatNumber = data.get(position).getSeatNumber();
         final Integer ticketFare = data.get(position).getFare();
-        final Integer trainScheduleID = data.get(position).getTrainScheduleID();
+        final Integer trainScheduleID = data.get(position).getTrainScheduleID();// ko có dữ liệu nhiều đâu :v quan trọng là hiểu cái ci đã :))) , đang ở công ty ko nói chuyện đc :) em đâu phải siêu nhân :v nhìn vô hiêủ c đặt như răng đc  ừ, ý c là
         final String fromStation = data.get(position).getFromStation();
-        final String toStation = data.get(position).getToStation();
-
+        final String toStation = data.get(position).getToStation(); // cái máy ảo ? nó đứng roài :) bật chrome ci cho nó đứng?
 
         holder.txtTrainName.setText(String.valueOf(trainName));
         holder.txtTrainScheduleName.setText(trainScheduleName);
         holder.txtTicketFare.setText(String.valueOf(ticketFare) + " VND");
         holder.txtDepartureTime.setText(departureTime);
-        switch (carrageType) {
-            case Constants.CarrageType.SOFT_SEAT: {
+        switch (carrageType) {// này bị null , dmd tìm mãi :( :)) loạn quá ko hiểu cái gì
+            case Constants.CarrageType.SOFT_SEAT: {// null cần làm lun trường hợp chạy ko null ko :v, quan trọng là em chưa hiểu cái biến đó liên qan gì ?, ah, nếu bấm payment thì nó sẽ lấy cái biến đó để show lên trong cái fragment kế tiếp, như này
                 holder.txtCarrageType.setText("Soft seat");
                 break;
             }
@@ -88,7 +87,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
             case Constants.CarrageType.SOFT_BED: {
                 holder.txtCarrageType.setText("Soft bed");
                 break;
-            }
+            }// nó lỗi đấy, nó sẽ báo null ngay chỗ carageType này, vì chưa set đc list ban đầu, nhấn vô ghế là null à, nhấn cô gết vẫn lấy đc dữ liệu của ghê, nhưng ko có dữ liệu của toa
             case Constants.CarrageType.HARD_SEAT: {
                 holder.txtCarrageType.setText("Hard seat");
                 break;
@@ -97,6 +96,11 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
         ArrayAdapter adapter = new ArrayAdapter(mContext, android.R.layout.simple_spinner_item, passengerObjectType);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.spObject.setAdapter(adapter);
+        String type = "Adult"; //the value you want the position for
+
+//        ArrayAdapter myAdap = (ArrayAdapter) holder.spObject.getAdapter(); //cast to an ArrayAdapter
+
+        final int spinnerPosition = adapter.getPosition(type);
         holder.spObject.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -116,6 +120,7 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
             public void onNothingSelected(AdapterView<?> adapterView) {
                 holder.tilDateOfBirth.setVisibility(View.GONE);
                 holder.tilIdentification.setVisibility(View.VISIBLE);
+                passengers.get(position).ticketType = (holder.spObject.getItemAtPosition(spinnerPosition).toString());
             }
         });
 
@@ -155,7 +160,6 @@ public class ItemSeatStorageAdapter extends  RecyclerView.Adapter<ItemSeatStorag
 
             @Override
             public void afterTextChanged(Editable editable) {
-
             }
         });
         holder.edtIdentification.addTextChangedListener(new TextWatcher() {

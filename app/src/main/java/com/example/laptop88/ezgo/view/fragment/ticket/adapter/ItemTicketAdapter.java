@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,8 @@ import com.example.laptop88.ezgo.R;
 import com.example.laptop88.ezgo.Utils.Constants;
 import com.example.laptop88.ezgo.response.Ticket;
 import com.example.laptop88.ezgo.view.fragment.ticket.ShowTicketFragment.ShowTicketFragment;
+import com.example.laptop88.ezgo.view.fragment.ticket.ShowTicketFragment.ShowTicketPresenter;
+import com.example.laptop88.ezgo.view.fragment.ticket.ShowticketDetailFragment.ShowticketDetailFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,11 +28,18 @@ public class ItemTicketAdapter extends RecyclerView.Adapter<ItemTicketAdapter.Re
     private FragmentManager mFragmentManager;
     private List<Ticket> data;
     private ShowTicketFragment mShowTicketFragment;
+    public setTicketCallback mSetTicketCallback;
+    public void setCallback(setTicketCallback mSetTicketCallback)
+    {
+        this.mSetTicketCallback=mSetTicketCallback;
+    }
 
-    public ItemTicketAdapter(Context mContext, FragmentManager mFragmentManager, List<Ticket> data) {
+    public ItemTicketAdapter(Context mContext, FragmentManager mFragmentManager, List<Ticket> data, ShowTicketFragment showTicketFragment) {
         this.mContext = mContext;
         this.mFragmentManager = mFragmentManager;
         this.data = data;
+        this.mShowTicketFragment = showTicketFragment;
+
     }
 
     @NonNull
@@ -78,16 +88,21 @@ public class ItemTicketAdapter extends RecyclerView.Adapter<ItemTicketAdapter.Re
                 break;
             }
         }
-        holder.txtCarrageNumber.setText(String.valueOf(carrageNumber));
-        holder.txtSeatNumber.setText(String.valueOf(seatNumber));
+        holder.txtCarrageNumber.setText("Carrage : "+String.valueOf(carrageNumber));
+        holder.txtSeatNumber.setText("Seat : "+String.valueOf(seatNumber));
 
         holder.llTicketItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mShowTicketFragment.showTicketDetail(data.get(position).getTicketID());
-
+                mShowTicketFragment.getTicketByUserID(data.get(position).getTicketID());
+//               ItemTicketAdapter.this.mSetTicketCallback.getTicketByUserID(data.get(position).getTicketID());
             }
         });
+    }
+    public interface setTicketCallback
+    {
+        void getTicketByUserID(int ticketID);
+
     }
 
     @Override
@@ -106,6 +121,7 @@ public class ItemTicketAdapter extends RecyclerView.Adapter<ItemTicketAdapter.Re
         TextView txtSeatNumber;
         TextView txtTicketStatus;
         LinearLayout llTicketItem;
+        Button btnTest;
         public RecyclerViewHolder(View itemView) {
             super(itemView);
             txtTrainScheduleCode = itemView.findViewById(R.id.txtTrainScheduleCode);
@@ -118,6 +134,7 @@ public class ItemTicketAdapter extends RecyclerView.Adapter<ItemTicketAdapter.Re
             txtSeatNumber = itemView.findViewById(R.id.txtSeatNumber);
             txtTicketStatus = itemView.findViewById(R.id.txtTicketStatus);
             llTicketItem = itemView.findViewById(R.id.llTicketItem);
+//            btnTest = itemView.findViewById(R.id.btnTest);
         }
     }
 }

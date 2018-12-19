@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.Utils.Utils;
 import com.example.laptop88.ezgo.response.TrainSchedule;
 import com.example.laptop88.ezgo.view.activity.booking.BookingActivity;
 import com.example.laptop88.ezgo.view.fragment.Train.ShowReturnTrainDiagramFragment.ShowReturnTrainDiagramFragment;
@@ -55,26 +56,32 @@ public class ItemReturnTrainScheduleAdapter extends RecyclerView.Adapter<ItemRet
         final Integer trainScheduleID = data.get(position).getTrainScheduleID();
         final String trainName = data.get(position).getTrainName();
         final String jouneyName = data.get(position).getJouneyName();
-        final Date departureTime = data.get(position).getDepartureTime();
-        final Date arrivalTime = data.get(position).getArrivalTime();
+        final String departureDate = Utils.splitDate(data.get(position).getDepartureTime())[0];
+        final String arrivalDate = Utils.splitDate(data.get(position).getArrivalTime())[0];
         final String firstStation = data.get(position).getFirstStation();
         final String lastStation = data.get(position).getLastStation();
         final Integer trainID = data.get(position).getTrainID();
-
-
-        DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        final String departuteTimeSt = formatter.format(departureTime);
-        final String arrivalTimeSt = formatter.format(arrivalTime);
+        final String departureTime = Utils.splitDate(data.get(position).getDepartureTime())[1];
+        final  String arrivalTime = Utils.splitDate(data.get(position).getArrivalTime())[1];
 
         holder.txtTrainName.setText(trainName);
         holder.txtJouneyName.setText(jouneyName);
-        holder.txtDepatureTime.setText(departuteTimeSt);
-        holder.txtArrivalTime.setText(arrivalTimeSt);
+        holder.txtDepartureTime.setText(departureDate);
+        holder.txtArrivalDate.setText(arrivalDate);
+        holder.txtArrivalTime.setText(arrivalTime);
+        holder.txtDepartureTime.setText(departureTime);
 
         holder.ticketDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext, String.valueOf(data.get(position).getTrainID()), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        holder.btnSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mShowReturnTrainScheduleFragment.setPopUpAdapter(data.get(position).getStationPerJourneys());
             }
         });
         holder.btnBooking.setOnClickListener(new View.OnClickListener() {
@@ -96,20 +103,26 @@ public class ItemReturnTrainScheduleAdapter extends RecyclerView.Adapter<ItemRet
         TextView txtTrainName;
         TextView txtJouneyName;
         ImageView imgPantryCar;
-        TextView txtDepatureTime;
+        TextView txtDepartureTime;
         TextView txtArrivalTime;
+        TextView txtDepartureDate;
+        TextView txtArrivalDate;
         TextView ticketDetail;
         Button btnBooking;
+        TextView btnSchedule;
 
         public RecyclerViewHolder(View itemView) {
             super(itemView);
-            btnBooking = itemView.findViewById(R.id.btnBoookingReturn);
+            btnBooking = itemView.findViewById(R.id.btnBoooking);
             txtTrainName = itemView.findViewById(R.id.txtTrainName);
             txtJouneyName = itemView.findViewById(R.id.txtjouneyName);
             imgPantryCar = itemView.findViewById(R.id.imgPantryCar);
-            txtDepatureTime = itemView.findViewById(R.id.txtDepartureTime);
+            txtDepartureTime = itemView.findViewById(R.id.txtDepartureTime);
             txtArrivalTime = itemView.findViewById(R.id.txtArrivalTime);
+            txtDepartureDate = itemView.findViewById(R.id.txtDepartureDate);
+            txtArrivalDate = itemView.findViewById(R.id.txtArrivalDate);
             ticketDetail = itemView.findViewById(R.id.ticketDetail);
+            btnSchedule = itemView.findViewById(R.id.btnSchedule);
         }
     }
 }

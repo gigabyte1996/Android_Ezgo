@@ -31,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.laptop88.ezgo.R;
+import com.example.laptop88.ezgo.Singleton.CurrentTrainSchedule;
 import com.example.laptop88.ezgo.Utils.ScreenUtils;
 import com.example.laptop88.ezgo.response.Station;
 import com.example.laptop88.ezgo.response.TrainRequest;
@@ -183,25 +184,26 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
         if ((fromStation == null || toStation == null) || (fromStation == null && toStation == null && trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null)) {
             btnShowTrain.setEnabled(false);
         } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() == null) {
+            btnShowTrain.setEnabled(true);
             trainRequest.setFromStation(txtToStation.getText().toString());
             trainRequest.setToStation(txtFromStation.getText().toString());
-            btnShowTrain.setEnabled(true);
+
         } else if (trainRequest.getDepartureTime() == null && trainRequest.getReturnTime() != null) {
+            btnShowTrain.setEnabled(true);
             trainRequest.setFromStation(txtToStation.getText().toString());
             trainRequest.setToStation(txtFromStation.getText().toString());
             trainRequest.setDepartureTime(txtReturnDate.getText().toString());
-            btnShowTrain.setEnabled(true);
         } else if (trainRequest.getDepartureTime() != null && trainRequest.getReturnTime() == null) {
+            btnShowTrain.setEnabled(true);
             trainRequest.setFromStation(txtFromStation.getText().toString());
             trainRequest.setToStation(txtToStation.getText().toString());
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
-            btnShowTrain.setEnabled(false);
         } else {
+            btnShowTrain.setEnabled(true);
             trainRequest.setFromStation(txtFromStation.getText().toString());
             trainRequest.setToStation(txtToStation.getText().toString());
             trainRequest.setDepartureTime(txtDepartureDate.getText().toString());
             trainRequest.setReturnTime(txtReturnDate.getText().toString());
-            btnShowTrain.setEnabled(false);
         }
         findTrainByStationFragmentPresenterImpl = new FindTrainByStationFragmentPresenterImpl(this);
         findTrainByStationFragmentPresenterImpl.searchTrain(trainRequest);
@@ -268,49 +270,6 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
     }
 
 
-
-//    @OnClick({R.id.btnShowShow_Train})
-//    public void sendData(View view){
-//
-//        byExtra();
-//    }
-//
-//    public void byExtra(){
-//        Intent intent = new Intent(FindTrainByStationActivity.this.getActivity(), ShowListTrainActivity.class);
-//        intent.putExtra(TITLE, txtDate.getText().toString());
-//        intent.putExtra(DESCRIPTION, "aaaa");
-//        System.out.println("button click");
-//        startActivity(intent);
-//    }
-
-
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        EditText editTextNumberOfTicket = this.getActivity().findViewById(R.id.edtNumberOfTicket);
-//        editTextNumberOfTicket.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                if (getActivity() instanceof FindTrainsActivity) {
-//                    ((FindTrainsActivity) getActivity()).synchronizeTabData(s.toString());
-//                }
-////
-////                if (getActivity() instanceof ListStationActivity) {
-////                    ((ListStationActivity)getActivity()).UpdateListView(s.toString());
-////                }
-//            }
-//
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // TODO Auto-generated method stub
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//            }
-//        });
-//    }
-
     @Override
     public void showTrain(TrainScheduleResponse trainScheduleResponse) {
         singleTrainSchedules = new ArrayList<>();
@@ -321,13 +280,16 @@ public class FindTrainByStationFragment extends Fragment implements FindTrainByS
         } else if (trainScheduleResponse.getReturnTrainSchedules() == null){
             singleTrainSchedules.addAll(trainScheduleResponse.getSingleTrainSchedules());
             Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
-            intent.putExtra("trainSchedule", (Serializable) singleTrainSchedules);
+//            CurrentTrainSchedule.getInstance().setListSingle(singleTrainSchedules);
+            intent.putExtra("singleTrainSchedules", (Serializable) singleTrainSchedules);
             startActivity(intent);
         } else {
             singleTrainSchedules.addAll(trainScheduleResponse.getSingleTrainSchedules());
             returnTrainSchedules.addAll(trainScheduleResponse.getReturnTrainSchedules());
             Intent intent = new Intent(getActivity().getBaseContext(), BookingActivity.class);
             Log.d("ABCDE", "showTrain: not null");
+//            CurrentTrainSchedule.getInstance().setListSingle(singleTrainSchedules);
+//            CurrentTrainSchedule.getInstance().setListReturn(returnTrainSchedules);
             intent.putExtra("singleTrainSchedules", (Serializable) singleTrainSchedules);
             intent.putExtra("returnTrainSchedules", (Serializable) returnTrainSchedules);
             startActivity(intent);

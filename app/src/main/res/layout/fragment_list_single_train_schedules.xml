@@ -29,6 +29,7 @@
         android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/btnTrainType"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -79,6 +80,7 @@
                 android:layout_weight="1" />
 
             <LinearLayout
+                android:id="@+id/btnSorting"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -105,6 +107,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btnFilter"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
